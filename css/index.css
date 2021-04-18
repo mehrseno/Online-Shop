@@ -16,30 +16,39 @@ body {
 a{
     text-decoration: none;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1280px;
+    width: 100%;
+}
+
 /* ------------------------------------------------- */
 /* HEADER */
 
 .main-header{
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
+    background-color: black;
     height: 65px;
-    /* border: black solid 1px; */
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row-reverse
+    /* align-items: center; */
+    justify-content: flex-end;
+    /* flex-direction: row-reverse */
   }
   
-  ul{
+  .main-header ul{
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-around;
   }
   
-  .header-Login{
+  .main-header_button{
     padding-left: 40px;
   }
   
-  .header-menu-item {
+  .main-header ul li {
       list-style-type: none;
       cursor: pointer;
       transition: color .2s ease-in-out ;
@@ -49,38 +58,27 @@ a{
       /* margin: 0; */
   }
   
-  .header-menu-item a{
+  .main-header ul li a{
     color: rgb(144, 144, 144);
     font-size: 16px;
   }
   
-  .header-menu-logo{
+  .header-menu__logo{
     list-style: none;
     justify-content: space-around;
     padding-left: 50px;
     padding-right: 40px; 
-    
-  }
-  
-  .header-menu-logo-link{
     font-size: 19.2px;
     color: rgb(14,186,197);
     font-weight:600;
   }
-  
-  ul li a.header-menu-item-link:hover{
+  .main-header ul li a:hover{
     color: rgb(14,186,197);
   }
+  
 
   /* Header */
  /* ------------------------------------------  */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 1280px;
-    width: 100%;
-}
 
 .hero-nav {
     background-color: #F9583B;
