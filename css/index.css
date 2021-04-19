@@ -8,7 +8,13 @@
 body {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
+}
+
+a {
+    text-decoration: none;
 }
 
 .container {
@@ -18,6 +24,39 @@ body {
     max-width: 1280px;
     width: 100%;
 }
+
+/* ---------------------------------------------------------------------------------- */
+
+/* HEADER */
+
+.main-header {
+    height: 65px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.main-header__item {
+    color: rgb(144, 144, 144);
+    margin: 25px;
+}
+
+.main-header__button {
+    margin-right: auto; /* for justify self to right side */
+}
+
+.main-header__logo {
+    padding-right: 40px;
+    font-size: 120%;
+    color: rgb(14, 186, 197);
+    font-weight: bold;
+}
+
+.main-header__item:hover {
+    color: rgb(14, 186, 197);
+}
+
+/* -------------------------------------------------------------------------------  */
 
 .hero-nav {
     background-color: #F9583B;
@@ -32,6 +71,7 @@ body {
     color: #FAFAF7;
     font-size: 200%;
     margin-bottom: 40px;
+    text-align: center;
 }
 
 .search-wrapper {
@@ -39,7 +79,6 @@ body {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100%;
 }
 
 .search-wrapper__input {
@@ -108,3 +147,5 @@ body {
     margin-bottom: 0px;
     padding-bottom: 0px;
 }
+
+/* ------------------------------------------------------------------------------- */
