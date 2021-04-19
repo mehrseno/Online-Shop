@@ -25,17 +25,22 @@ a{
     width: 100%;
 }
 
-/* ------------------------------------------------- */
+/* ---------------------------------------------------------------------------------- */
 /* HEADER */
 
 .main-header{
-    /* background-color: #ffffff; */
+   /* background-color: #ccb7b7; */
     background-color: black;
     height: 65px;
     display: flex;
-    /* align-items: center; */
-    justify-content: flex-end;
-    /* flex-direction: row-reverse */
+    flex-direction:row-reverse;
+    width: 100%;
+    /* padding-top: 60px; */
+    align-items: center;
+    justify-content:flex-end;
+    flex-direction: row-reverse;
+
+    /* float: right */
   }
   
   .main-header ul{
@@ -44,8 +49,15 @@ a{
     justify-content: space-around;
   }
   
-  .main-header_button{
+  .main-header__button {
     padding-left: 40px;
+    /* float: left; */
+    align-self:center;
+    /* display: flex; */
+    /* justify-content: flex-start; */
+    background-color: blue;
+    /* color: blue; */
+    /* position: relative; */
   }
   
   .main-header ul li {
@@ -61,24 +73,27 @@ a{
   .main-header ul li a{
     color: rgb(144, 144, 144);
     font-size: 16px;
+    padding-right: 40px;
+
   }
   
-  .header-menu__logo{
+.main-header__logo a{
     list-style: none;
     justify-content: space-around;
     padding-left: 50px;
     padding-right: 40px; 
     font-size: 19.2px;
-    color: rgb(14,186,197);
+    color: rgb(14,186,197)!;
     font-weight:600;
   }
+
   .main-header ul li a:hover{
     color: rgb(14,186,197);
   }
   
 
   /* Header */
- /* ------------------------------------------  */
+ /* -------------------------------------------------------------------------------  */
 
 .hero-nav {
     background-color: #F9583B;
@@ -169,3 +184,4 @@ a{
     margin-bottom: 0px;
     padding-bottom: 0px;
 }
+/* ------------------------------------------------------------------------------- */
