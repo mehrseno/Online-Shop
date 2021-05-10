@@ -3,18 +3,21 @@
 
   <div class="container">
     <Header/>
+    <HeroNav/>
     <Footer/>
   </div>
 </template>
   
 <script>
 import Header from './components/Header'
+import HeroNav from './components/HeroNav'
 import Footer from './components/Footer'
 
 export default {
   name: 'App',
   components: {
     Header,
+    HeroNav,
     Footer
   }
 }
@@ -26,6 +29,7 @@ export default {
   padding: 0;
   font-family: BYekan, 'BYekan', tahoma;
   font-size: 16px;
+  box-sizing: border-box;
 }
 
 body {
@@ -36,13 +40,16 @@ body {
   width: 100%;
 }
 
+.container {
+  width: 100%;
+}
+
 a {
   text-decoration: none;
   color: white;
 }
 
-.container {
-  background-color: brown;
+#app{
   display: flex;
   flex-direction: column;
   align-items: center;
