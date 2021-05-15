@@ -4,6 +4,7 @@
   <div class="container">
     <Header/>
     <HeroNav/>
+    <sort-box/>
     <Footer/>
   </div>
 </template>
@@ -12,13 +13,15 @@
 import Header from './components/Header'
 import HeroNav from './components/HeroNav'
 import Footer from './components/Footer'
+import SortBox from './components/SortBox.vue'
 
 export default {
   name: 'App',
   components: {
     Header,
     HeroNav,
-    Footer
+    Footer,
+    SortBox
   }
 }
 </script>
