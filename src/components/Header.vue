@@ -1,7 +1,7 @@
 <template>
     <header class="main-header">
         <a href="#" class="main-header__item main-header__logo">فروشگاه</a>
-        <a href="#" class="main-header__item main-header__home">صفحه اول</a>
+        <router-link to="/" class="main-header__item main-header__home">صفحه اول</router-link>
         <a href="#" class="main-header__item main-header__contact-us">تماس با ما </a>
         <a href="#" class="main-header__item main-header__support">پشتیبانی</a>
         <a href="#" class="main-header__item main-header__products">محصولات</a>

@@ -7,7 +7,8 @@
         class="search-wrapper__input"
         placeholder="نام محصول خود را وارد کنید..."
       />
-      <SubmitButton class="search-wrapper__submit" submit="جستجو کنید" />
+      <SubmitButton type="button" class="search-wrapper__submit" submit="جستجو کنید" />
+        <!-- remove type="button" from button to reload page -->
     </form>
     <img src="@/assets/images/clock.png" class="hero-nav__image" />
   </div>

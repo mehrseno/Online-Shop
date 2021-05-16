@@ -9,7 +9,8 @@ export default {
         submit: String,
     },
     methods: {
-        onClick() {
+        onClick(e) {
+            e.preventDefault();
             console.log(`clicked on ${this.submit}`);
         },
     }
