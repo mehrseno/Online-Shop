@@ -34,21 +34,24 @@ export default {
 </script>
 
 <style>
+
+  @import './assets/styles/variable.css';
+
 * {
   margin: 0;
   padding: 0;
   font-family: BYekan, "BYekan", tahoma;
-  font-size: 16px;
+  font-size: var(--default-font-size);
   box-sizing: border-box;
 }
 
 body {
+  background: var(--primary-background);
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background-color: #e7e9e8;
 }
 
 .container {
@@ -65,7 +68,17 @@ a {
 
 #app {
   display: flex;
-  max-width: 1280px;
+  max-width: var(--max-width);
   width: 100%;
+}
+
+/* global styles */
+
+.is_active  {
+    background:var(--simple-button-background);
+    color: white !important;
+    padding: 5px 10px 5px 10px;
+    border-radius: 30px;
+    box-shadow: 1px 1px 2px black, 3px 2px 5px #8DD2FA;
 }
 </style>

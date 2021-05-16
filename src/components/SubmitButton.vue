@@ -18,24 +18,21 @@ export default {
 <style scoped>
 
 button {
-    width: 18%;
-    height: 3rem;
-    color: black;
+    color: var(--text-dark-color);
     border-radius: 24px;
-    padding: 0;
+    padding: 10px;
     font-weight: bold;
-    background: #FFC70E;
+    background: var(--complementary-color);
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
     display: inline-block;
     outline: none;
-    margin-bottom: 30px;
 }
 
 button:hover {
-    color: white;
+    color: var(--text-light-color);
     background: transparent;
     box-shadow: none;
 }
@@ -47,7 +44,7 @@ button:before, button:after {
     right: 0;
     height: 2px;
     width: 0;
-    background: #FFC70E;
+    background: var(--complementary-color);
     box-shadow: -1px -1px 5px 0px #fff, 7px 7px 20px 0px #0003, 4px 4px 5px 0px #0002;
     transition: 400ms ease all;
 }

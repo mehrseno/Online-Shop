@@ -22,26 +22,17 @@ export default {
     align-items: center;
     height: 50px;
     width: 98%;
-    background-color: white;
+    background: var(--element-background);
     margin-top: 10px;
     box-shadow: -1px -1px 5px 0px #fff, 7px 7px 20px 0px #0003, 4px 4px 5px 0px #0002;
+}
+.sort-box .sort-box__item.sort-box__header {
+  color: var(--text-dark-color);
 }
 
 .sort-box .sort-box__item {
     margin: 20px;
-    color: #7B7B7B;
-}
-
-</style>
-
-<style>
-
-.is_active  {
-    background-color: #009FFF;
-    color: white !important;
-    padding: 5px 10px 5px 10px;
-    border-radius: 30px;
-    box-shadow: 1px 1px 2px black, 3px 2px 5px #8DD2FA;
+    color: var(--subtext-dark-color);
 }
 
 </style>

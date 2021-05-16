@@ -27,31 +27,31 @@ export default {
     this.products = [
       {
         id: 1,
-        image: "pet-shop.png",
+        image: "products/pet-shop.png",
         title: "کیف سگی",
         category: "سگ",
-        price: 1000,
+        price: 1500,
       },
       {
         id: 2,
-        image: "pet-shop.png",
-        title: "کیف سگی",
-        category: "سگ",
-        price: 1000,
+        image: "products/cigarette.png",
+        title: "سیگار صورتی",
+        category: "سیگار",
+        price: 1385,
       },
       {
         id: 3,
-        image: "pet-shop.png",
-        title: "کیف سگی",
-        category: "سگ",
-        price: 1000,
+        image: "products/bag.jpg",
+        title: "کیف پسرکش",
+        category: "کیف",
+        price: 3200,
       },
       {
         id: 4,
-        image: "pet-shop.png",
-        title: "کیف سگی",
-        category: "سگ",
-        price: 1000,
+        image: "products/dad.png",
+        title: "بابا پلاستیکی",
+        category: "بابا",
+        price: 100,
       },
     ];
   },
@@ -64,7 +64,7 @@ export default {
   width: 98%;
   justify-content: space-between;
   align-items: flex-start; /* for diffrent size of childrens*/
-  margin-bottom: 100px;
+  margin-bottom: 79px;
 }
 
 .page__aside {
@@ -72,12 +72,11 @@ export default {
 }
 
 .page_content {
-  margin: 15px;
   flex-basis: 75%;
-  display: grid;
+  margin: 15px;
+
+display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 15px;
-  grid-row-gap: 15px;
-  
+  grid-gap: 15px;
 }
 </style>

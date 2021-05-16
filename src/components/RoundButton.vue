@@ -13,14 +13,15 @@ export default {
 
 <style scoped>
     button {
-        background-color: white;
-        border: 2px solid #FFC70E;
+        background-color: var(--element-background);
+        border: 2px solid var(--complementary-color);
         text-align: center;
         padding: 10px 20px;
-        border-radius: 24px
+        border-radius: 24px;
+        color: var(--text-dark-color);
     }
 
     button:hover {
-        background: #FFC70E;
+        background: var(--complementary-color);
     }
 </style>

@@ -1,7 +1,7 @@
 <template>
 <footer>
     <p>
-   تمامی حقوق برای توسعه‌دهندگان این سایت،  <a href="https://www.github.com/mrakhgari">اخگری</a>  و  <a href="https://github.com/mehrseno">صنوبری</a>،  محفوظ است.
+   تمامی حقوق برای توسعه‌دهندگان این سایت،  <a target="_blank" href="https://www.github.com/mrakhgari">اخگری</a>  و  <a target="_blank" href="https://github.com/mehrseno">صنوبری</a>،  محفوظ است.
     </p>
 </footer>
 </template>
@@ -14,14 +14,17 @@ export default {
 </script>
 
 <style scoped>
+    a {
+        color: var(--text-light-color);
+    }
+    
     footer {
         z-index: 100;
         bottom: 0;
-        background-color: #313436;
-        color: #878E93;
-        text-align: center;
+        background-color: var(--dark-background);
+        color: var(--subtext-dark-color);
         position: fixed;
-        max-width: 1280px;
+        max-width: var(--max-width);
         width: 100%;
         height: 3rem;
         display: flex;

@@ -23,10 +23,10 @@ export default {
 <style scoped>
 .main-header {
     width: 100%;
-    max-width: 1280px;
+    max-width: var(--max-width);
     height: 65px;
     
-    background-color: #ffff;
+    background-color: var(--element-background);
     display: flex;
     align-items: center;
     
@@ -35,7 +35,7 @@ export default {
 }
 
 .main-header__item {
-    color: rgb(144, 144, 144);
+    color: var(--subtext-dark-color);
     margin: 25px;
 }
 
@@ -48,12 +48,12 @@ export default {
 .main-header__logo {
     margin: 25px;
     font-size: 120%;
-    color: rgb(14, 186, 197);
+    color: var(--text-hover-color);
     font-weight: bold;
 }
 
 .main-header__item:hover {
-    color: rgb(14, 186, 197);
+    color: var(--text-hover-color);
 }
 
 </style>
