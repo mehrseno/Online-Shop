@@ -22,14 +22,16 @@ export default {
 
 <style scoped>
 .main-header {
-    z-index: 100;
-    background-color: #ffff;
-    height: 65px;
-    display: flex;
-    align-items: center;
     width: 100%;
     max-width: 1280px;
+    height: 65px;
+    
+    background-color: #ffff;
+    display: flex;
+    align-items: center;
+    
     position: fixed;
+    z-index: 100;
 }
 
 .main-header__item {

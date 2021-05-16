@@ -32,9 +32,13 @@ export default {
     color: #7B7B7B;
 }
 
-.sort-box .sort-box__item.is_active {
+</style>
+
+<style>
+
+.is_active  {
     background-color: #009FFF;
-    color: white;
+    color: white !important;
     padding: 5px 10px 5px 10px;
     border-radius: 30px;
     box-shadow: 1px 1px 2px black, 3px 2px 5px #8DD2FA;

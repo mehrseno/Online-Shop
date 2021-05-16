@@ -56,7 +56,7 @@ export default {
     border: .1em solid  #b7b8b7;
     box-shadow: -1px -1px 5px 0px #fff, 7px 7px 20px 0px #0003, 4px 4px 5px 0px #0002;
     overflow-y: auto; /* for automatic scrollbar */ 
-    margin-top: 10px;
+    margin-top: 15px;
   }
   
   .card__header {
