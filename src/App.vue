@@ -7,35 +7,26 @@
 
   <div class="container">
     <Header />
-    <HeroNav />
-    <sort-box />
-    <maincontainer />
+    <router-view></router-view>
     <Footer />
   </div>
 </template>
 
 <script>
 import Header from "./components/Header";
-import HeroNav from "./components/HeroNav";
 import Footer from "./components/Footer";
-import SortBox from "./components/SortBox.vue";
-import Maincontainer from "./components/MainContainer.vue";
 
 export default {
   name: "App",
   components: {
     Header,
-    HeroNav,
     Footer,
-    SortBox,
-    Maincontainer,
   },
 };
 </script>
 
 <style>
-
-  @import './assets/styles/variable.css';
+@import "./assets/styles/variable.css";
 
 * {
   margin: 0;
@@ -74,11 +65,11 @@ a {
 
 /* global styles */
 
-.is_active  {
-    background:var(--simple-button-background);
-    color: white !important;
-    padding: 5px 10px 5px 10px;
-    border-radius: 30px;
-    box-shadow: 1px 1px 2px black, 3px 2px 5px #8DD2FA;
+.is_active {
+  background: var(--simple-button-background);
+  color: white !important;
+  padding: 5px 10px 5px 10px;
+  border-radius: 30px;
+  box-shadow: 1px 1px 2px black, 3px 2px 5px #8dd2fa;
 }
 </style>
