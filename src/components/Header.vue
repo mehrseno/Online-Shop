@@ -22,6 +22,7 @@ export default {
 
 <style scoped>
 .main-header {
+    z-index: 100;
     background-color: #ffff;
     height: 65px;
     display: flex;

@@ -5,7 +5,7 @@
             <input type="text" class="search-wrapper__input" placeholder="نام محصول خود را وارد کنید...">
             <SubmitButton submit="جستجو کنید"/>
         </form>
-        <img src="./../../images/clock.png" class="hero-nav__image">
+        <img src="@/assets/images/clock.png" class="hero-nav__image">
     </div>
       
 </template>
