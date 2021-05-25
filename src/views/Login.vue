@@ -16,7 +16,7 @@ export default {
     LoginForm,
   },
 };
-</script> -->
+</script> 
 
 <style scoped>
 h2 {
@@ -29,12 +29,11 @@ h2 {
 div {
   background-color: rgb(231, 232, 236);
   color: #fff;
-  /* padding-top: 65px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-content: stretch; */
   text-align: center;
+  align-content: center;
   width: 100%;
   gap: 30px;
   /* height: 100%; */

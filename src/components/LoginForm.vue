@@ -1,15 +1,15 @@
 <template>
   <div class="container">
-    <LoginSubform type="email" name="ایمیل" inputPlaceholder="ایمیل خود را وارد کنید..." />
-    <LoginSubform type="text" name="رمز عبور" inputPlaceholder="رمز عبور خود را وارد کنید..." />
+    <Subform type="email" name="ایمیل" inputPlaceholder="ایمیل خود را وارد کنید..." />
+    <Subform type="password" name="رمز عبور" inputPlaceholder="رمز عبور خود را وارد کنید..." />
   </div>
 </template>
 
 <script>
-import LoginSubform from "./Subform.vue";
+import Subform from "./Subform.vue";
 export default {
   name: "LoginForm",
-  components: { LoginSubform },
+  components: { Subform },
 };
 </script>
 
