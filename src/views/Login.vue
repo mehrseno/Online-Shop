@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>فروشگاه-ورود</h1>
+    <h2>فروشگاه-ورود</h2>
     <LoginForm />
     <SubmitButton type="button" class="search-wrapper__submit" submit="ورود" />
   </div>
@@ -19,13 +19,25 @@ export default {
 </script> -->
 
 <style scoped>
-    div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        gap: 30px;
-    }
+h2{
+    color: #FFC70E;
+    margin-top: 150px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center
+}
+div {
+  background-color: rgb(231, 232, 236);
+  color: #fff;
+  padding-top: 65px;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  /* margin-top: 30px; */
+}
 </style>
 
