@@ -1,36 +1,61 @@
 <template>
   <div class="container">
-    <Subform
-      class="name"
-      type="text"
-      name="نام"
-      inputPlaceholder="نام خود را وارد کنید..."
-    />
-    <Subform
-      class="familyName"
-      type="text"
-      name="نام خانوادگی"
-      inputPlaceholder="نام خانوادگی خود را وارد کنید..."
-    />
-
-    <Subform
-      class="mail"
-      type="email"
-      name="ایمیل"
-      inputPlaceholder="ایمیل خود را وارد کنید..."
-    />
-    <Subform
-      class="pass"
-      type="password"
-      name="رمز عبور"
-      inputPlaceholder="رمز عبور خود را وارد کنید..."
-    />
-    <Subform
-      class="address"
-      type="text"
-      name="آدرس"
-      inputPlaceholder="آدرس خود را وارد کنید..."
-    />
+    <div class="row__container">
+      <Subform
+        class="name"
+        inputType="text"
+        name="نام"
+        inputPlaceholder="نام خود را وارد کنید..."
+        input__heightSize=" 2.6"
+        input__widthSize=" 17.5"
+        label__widthSize="5.3"
+        label__heightSize="2.6"
+      />
+      <Subform
+        class="familyName"
+        inputType="text"
+        name="نام خانوادگی"
+        inputPlaceholder="نام خانوادگی خود را وارد کنید..."
+        input__heightSize=" 2.6"
+        input__widthSize=" 17.5"
+        label__widthSize="5.3"
+        label__heightSize="2.6"
+      />
+    </div>
+    <div class="row__container">
+      <Subform
+        class="mail"
+        inputType="email"
+        name="ایمیل"
+        inputPlaceholder="ایمیل خود را وارد کنید..."
+        input__heightSize=" 2.6"
+        input__widthSize=" 17.5"
+        label__widthSize="5.3"
+        label__heightSize="2.6"
+      />
+      <Subform
+        class="pass"
+        inputType="password"
+        name="رمز عبور"
+        inputPlaceholder="رمز عبور خود را وارد کنید..."
+        input__heightSize=" 2.6"
+        input__widthSize=" 17.5"
+        label__widthSize="5.3"
+        label__heightSize="2.6"
+      />
+    </div>
+    <div class="row__container">
+      <Subform
+        class="address"
+        inputType="text"
+        name="آدرس"
+        inputPlaceholder="آدرس خود را وارد کنید..."
+        input__heightSize=" 4.6"
+        input__widthSize="41.5"
+        label__widthSize="5.3"
+        label__heightSize="4.6"
+      />
+    </div>
   </div>
 </template>
 
@@ -43,7 +68,7 @@ export default {
 </script>
 
 <style scoped>
-.name {
+/* .name {
   grid-area: first;
 }
 .familyName {
@@ -55,20 +80,30 @@ export default {
 .pass {
   grid-area: fourth;
 }
-.address{
+.address {
   grid-area: fifth;
-}
+} */
 
-.container {
-   display: grid;
+/* .container {
+  display: grid;
   grid-template-areas:
-   "first second"
-   "third fourth"
-   "fifth fifth";
-  grid-template-rows:auto;
+    "first second"
+    "third fourth"
+    "fifth fifth";
+  grid-template-rows: auto;
   row-gap: 1.3rem;
   column-gap: 1.3rem;
   grid-template-columns: auto;
+} */
+.row__container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
 }
 </style>
 
