@@ -2,7 +2,7 @@
   <div>
     <h2>فروشگاه - ثبت‌نام</h2>
     <RegisterForm />
-    <SubmitButton type="button" class="search-wrapper__submit" submit="&nbsp &nbsp &nbsp&nbspثبت‌نام &nbsp &nbsp &nbsp" />
+    <SubmitButton type="submit" class="search-wrapper__submit" submit="&nbsp &nbsp &nbsp&nbspثبت‌نام &nbsp &nbsp &nbsp" />
   </div>
 </template>
 

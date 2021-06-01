@@ -14,6 +14,8 @@
         height: input__heightSize + 'rem',
         width: input__widthSize + 'rem',
       }"
+      required
+      :pattern= inputPattern
       class="subformInput"
       :class="inputClass"
       :type="inputType"
@@ -32,6 +34,7 @@ export default {
     inputPlaceholder: String,
     labelClass: String,
     inpuClass: String,
+    inputPattern:String,
     input__heightSize: String,
     input__widthSize: String,
     label__heightSize: String,
@@ -54,7 +57,9 @@ input {
   border-radius: 0.3rem 0rem 0rem 0.3rem;
   padding: 10x 20px;
 }
-
+input:invalid {
+  border: 2px solid red;
+}
 ::placeholder {
   color: rgb(181, 183, 189);
   font-size: 15px;
@@ -71,6 +76,5 @@ label {
   color: #fff;
   border-radius: 0rem 0.3rem 0.3rem 0rem;
 }
-
 </style>
 

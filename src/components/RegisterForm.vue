@@ -32,16 +32,20 @@
         input__widthSize=" 17.5"
         label__widthSize="5.3"
         label__heightSize="2.6"
+        
       />
       <Subform
         class="pass"
         inputType="password"
+        inputPattern=".{6,}"
+        title="six or more"
         name="رمز عبور"
         inputPlaceholder="رمز عبور خود را وارد کنید..."
         input__heightSize=" 2.6"
         input__widthSize=" 17.5"
         label__widthSize="5.3"
         label__heightSize="2.6"
+        
       />
     </div>
     <div class="row__container">
