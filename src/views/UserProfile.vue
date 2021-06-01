@@ -1,20 +1,22 @@
 <template>
   <div>
     <h2>هادی عزیز خوش آمدی</h2>
-    <Receipt-Profile/>
-    <UserProfileForm />
+    <!-- <ReceiptProfile/> -->
+    <!-- <UserProfileForm /> -->
     <SubmitButton type="submit" class="search-wrapper__submit" submit="&nbsp &nbsp &nbsp&nbspویراش اطلاعات &nbsp &nbsp &nbsp" />
   </div>
 </template>
 <script>
 import SubmitButton from "../components/SubmitButton.vue";
 import UserProfileForm from "../components/UserProfileForm.vue";
+// import ReceiptProfile from "../components/ReceiptProfile.vue"
 export default {
-  name: "Register",
+  name: "UserProfile",
   components: {
     SubmitButton,
     UserProfileForm,
-  },
+    // ReceiptProfile
+  }
 };
 </script> 
 

@@ -13,7 +13,9 @@
       :style="{
         height: input__heightSize + 'rem',
         width: input__widthSize + 'rem',
+        
       }"
+      
       required
       :pattern= inputPattern
       class="subformInput"
@@ -39,6 +41,7 @@ export default {
     input__widthSize: String,
     label__heightSize: String,
     label__widthSize: String,
+    input__align: String
   },
 };
 </script>
@@ -53,18 +56,22 @@ input {
   background-color: #fff;
   color: black;
   border: none;
-  align-items: center;
+  /* align-items: center; */
   border-radius: 0.3rem 0rem 0rem 0.3rem;
-  padding: 10x 20px;
 }
-input:invalid {
+
+input:invalid:hover {
   border: 2px solid red;
 }
 ::placeholder {
   color: rgb(181, 183, 189);
   font-size: 15px;
-  margin: 0 10px;
-  padding-right: 10px;
+  padding-right: 10px ;
+  width: 100%;
+  height: 100%;
+  background-color: blue;
+  text-align: right;
+
 }
 
 label {

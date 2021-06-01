@@ -5,7 +5,6 @@
     <SubmitButton type="submit" class="search-wrapper__submit" submit="&nbsp &nbsp &nbsp&nbspثبت‌نام &nbsp &nbsp &nbsp" />
   </div>
 </template>
-
 <script>
 import SubmitButton from "../components/SubmitButton.vue";
 import RegisterForm from "../components/RegisterForm.vue";
