@@ -20,6 +20,11 @@ const routes = [
         path: '/register',
         name: 'Register',
         component: Register,
+    },
+    {
+        path: '/userProfile',
+        name: 'UserProfile',
+        component: UserProfile
     }
 ]
 
