@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="UserProfileForm__container">
     <Subform
       class="name"
       inputType="text"
@@ -29,7 +29,7 @@
       name="رمز عبور"
       inputPlaceholder="رمز عبور خود را وارد کنید..."
       input__heightSize=" 4.6"
-      input__widthSize="42"
+      input__widthSize="41.5"
       label__widthSize="5.3"
       label__heightSize="4.6"
     />
@@ -38,9 +38,9 @@
       class="address"
       inputType="text"
       name="آدرس"
-      inputPlaceholder="آدرس خود را وارد کنید..."
+      inputPlaceholder="تهران، تهران، امیرکبیر"
       input__heightSize=" 4.6"
-      input__widthSize="42"
+      input__widthSize="41.5"
       label__widthSize="5.3"
       label__heightSize="4.6"
     />
@@ -48,8 +48,9 @@
 </template>
 
 <script>
+import Subform from "./Subform.vue";
 export default {
-    name : UserProfileForm,
+  name : "UserProfileForm",
   components: { Subform }
     }
 
@@ -69,8 +70,12 @@ export default {
   grid-area: fourth;
 }
 
-.container {
+.UserProfileForm__container {
+  justify-items: center;
+  align-content: center;
   display: grid;
+  row-gap: 10px;
+  column-gap: 10px;
   grid-template-areas:
     "first second"
     "third third"

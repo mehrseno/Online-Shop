@@ -1,9 +1,13 @@
 <template>
-  <div>
+  <div class="userProfile__container">
     <h2>هادی عزیز خوش آمدی</h2>
-    <!-- <ReceiptProfile/> -->
-    <!-- <UserProfileForm /> -->
-    <SubmitButton type="submit" class="search-wrapper__submit" submit="&nbsp &nbsp &nbsp&nbspویراش اطلاعات &nbsp &nbsp &nbsp" />
+    <h1>تب</h1>
+    <UserProfileForm />
+    <SubmitButton
+      type="submit"
+      class="search-wrapper__submit"
+      submit="&nbsp &nbsp &nbsp&nbspویراش اطلاعات &nbsp &nbsp &nbsp"
+    />
   </div>
 </template>
 <script>
@@ -16,31 +20,29 @@ export default {
     SubmitButton,
     UserProfileForm,
     // ReceiptProfile
-  }
+  },
 };
 </script> 
 
 <style scoped>
 h2 {
   color: rgb(14, 186, 197);
-  margin-top: 150px;
   font-size: 1.5rem;
   font-weight: bold;
-  text-align: center;
+  padding-top: 50px;
 }
-div {
+
+.userProfile__container {
   background-color: rgb(231, 232, 236);
   color: #fff;
   display: flex;
+  align-self: center;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
-  align-content: center;
   width: 100%;
   gap: 30px;
-  /* height: 100%; */
   align-items: center;
-  /* margin-top: 30px; */
+  margin-top: 65px;
 }
 </style>
 
