@@ -4,57 +4,44 @@
       class="name"
       name="نام"
       input__type="text"
+      input__class="small__input"
+      label__class="small__label"
       input__placeholder="نام خود را وارد کنید..."
-      input__heightSize=" 2.6"
-      input__widthSize=" 17.5"
-      label__widthSize="5.3"
-      label__heightSize="2.6"
     />
     <Subform
       class="familyName"
       name="نام خانوادگی"
       input__type="text"
+      input__class="small__input"
+      label__class="small__label"
       input__placeholder="نام خانوادگی خود را وارد کنید..."
-      input__heightSize=" 2.6"
-      input__widthSize=" 17.5"
-      label__widthSize="5.3"
-      label__heightSize="2.6"
     />
 
     <Subform
       class="mail"
       name="ایمیل"
       input__type="email"
+      input__class="small__input ltr__input"
+      label__class="small__label"
       input__placeholder="...ایمیل خود را وارد کنید"
-      input__direction="ltr"
-      input__heightSize=" 2.6"
-      input__widthSize=" 17.5"
-      label__widthSize="5.3"
-      label__heightSize="2.6"
     />
     <Subform
       class="pass"
       name="رمز عبور"
-      title="six or more"
+      input__class="small__input ltr__input "
+      label__class="small__label"
       input__type="password"
       input__pattern=".{6,}"
       input__placeholder="...رمز عبور خود را وارد کنید"
-      input__direction="ltr"
-      input__heightSize=" 2.6"
-      input__widthSize=" 17.5"
-      label__widthSize="5.3"
-      label__heightSize="2.6"
     />
 
     <Subform
       class="address"
       input__type="text"
       name="آدرس"
+      input__class="large__input"
+      label__class="large__label extra__padding "
       input__placeholder="آدرس خود را وارد کنید..."
-      input__heightSize=" 4.6"
-      input__widthSize="41"
-      label__widthSize="5.3"
-      label__heightSize="4.6"
     />
   </div>
 </template>

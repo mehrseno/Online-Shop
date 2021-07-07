@@ -2,8 +2,8 @@
   <div class="userProfile__container">
     <h2>هادی عزیز، خوش آمدید</h2>
     <h1>تب</h1>
-    <UserProfileReceipt />
-    <!-- <UserProfileForm/> -->
+    <!-- <UserProfileReceipt /> -->
+    <UserProfileForm/>
     <!-- <SubmitButton
       type="submit"
       class="search-wrapper__submit"
@@ -22,7 +22,7 @@ export default {
   components: {
     SubmitButton,
     UserProfileForm,
-    UserProfileReceipt
+    UserProfileReceipt,
     // ReceiptProfile
   },
 };
@@ -49,4 +49,3 @@ h2 {
   margin-top: 65px;
 }
 </style>
-
