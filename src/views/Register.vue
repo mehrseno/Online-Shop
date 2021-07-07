@@ -2,7 +2,7 @@
   <div class="register__container">
     <h2>فروشگاه - ثبت‌نام</h2>
     <RegisterForm />
-    <SubmitButton type="submit" class="search-wrapper__submit" submit="&nbsp &nbsp &nbsp &nbsp &nbsp&nbspثبت‌نام &nbsp &nbsp &nbsp &nbsp &nbsp" />
+    <SubmitButton type="submit" class="search-wrapper__submit" submit="ثبت‌نام" />
   </div>
 </template>
 <script>
@@ -20,7 +20,6 @@ export default {
 <style scoped>
 h2 {
   color: rgb(14, 186, 197);
-  margin-top: 150px;
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
@@ -35,7 +34,7 @@ h2 {
   align-content: center;
   width: 100%;
   gap: 30px;
-  /* height: 100%; */
+  height: 100vh;
   align-items: center;
   /* margin-top: 30px; */
 }

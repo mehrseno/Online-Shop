@@ -30,6 +30,8 @@ button {
     position: relative;
     display: inline-block;
     outline: none;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 button:hover {
