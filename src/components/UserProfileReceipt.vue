@@ -11,55 +11,55 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in items" :key="item.id">
-          <td>{{ item.code }}</td>
-          <td>{{ item.name }}</td>
-          <td>{{ item.price }}تومان</td>
-          <td>{{ item.address }}</td>
-        </tr>
+        <receipts :receipts="receipts" />
       </tbody>
     </table>
   </div>
 </template>
 
 <script>
+import Receipts from "./Reciepts.vue";
 export default {
-  data() {
+  components: { Receipts },
+ data() {
     return {
-      items: [
-        {
-          code: "SHOP102030",
-          name: "موس گیمینگ ریز",
-          price: "10/000",
-          address: "تهران، تهران، امیرکبیر",
-        },
-        {
-          code: "SHOP102030",
-          name: "موس گیمینگ ریز",
-          price: "10/000",
-          address: "تهران، تهران، امیرکبیر",
-        },
-        {
-          code: "SHOP102030",
-          name: "موس گیمینگ ریز",
-          price: "10/000",
-          address: "تهران، تهران، امیرکبیر",
-        },
-        {
-          code: "SHOP102030",
-          name: "موس گیمینگ ریز",
-          price: "10/000",
-          address: "تهران، تهران، امیرکبیر",
-        },
-        {
-          code: "SHOP102030",
-          name: "موس گیمینگ ریز",
-          price: "10/000",
-          address: "تهران، تهران، امیرکبیر",
-        },
-      ],
+      receipts: [],
     };
   },
+  created() {
+    this.receipts = [
+        {
+          code: "SHOP102030",
+          name: "موس گیمینگ ریز",
+          price: "10/000",
+          address: "تهران، تهران، امیرکبیر",
+        },
+        {
+          code: "SHOP102030",
+          name: "موس گیمینگ ریز",
+          price: "10/000",
+          address: "تهران، تهران، امیرکبیر",
+        },
+        {
+          code: "SHOP102030",
+          name: "موس گیمینگ ریز",
+          price: "10/000",
+          address: "تهران، تهران، امیرکبیر",
+        },
+        {
+          code: "SHOP102030",
+          name: "موس گیمینگ ریز",
+          price: "10/000",
+          address: "تهران، تهران، امیرکبیر",
+        },
+        {
+          code: "SHOP102030",
+          name: "موس گیمینگ ریز",
+          price: "10/000",
+          address: "تهران، تهران، امیرکبیر",
+        },
+      ];
+    },
 };
 </script>
 
@@ -83,15 +83,6 @@ export default {
   height: 50%;
 }
 
-.Receipt td {
-  padding: 10px 0px;
-  background-color: var(--element-background);
-  color: var(--subtext-dark-color);
-  text-align: justify;
-  border-bottom: 2px solid var(--primary-background);
-  font-size: 14px;
-  padding-right:50px ;
-}
 .Receipt th {
   padding: 20px 0px;
   background-color: var(--element-background);
