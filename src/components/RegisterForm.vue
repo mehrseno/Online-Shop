@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="register-form__container">
     <Subform
       class="name"
       name="نام"
@@ -52,7 +52,7 @@
       name="آدرس"
       input__placeholder="آدرس خود را وارد کنید..."
       input__heightSize=" 4.6"
-      input__widthSize="42"
+      input__widthSize="41"
       label__widthSize="5.3"
       label__heightSize="4.6"
     />
@@ -84,8 +84,9 @@ export default {
   grid-area: fifth;
 }
 
-.container {
+.register-form__container {
   display: grid;
+  gap: 10px;
   grid-template-areas:
     "first second"
     "third fourth"

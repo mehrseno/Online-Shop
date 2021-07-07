@@ -57,7 +57,6 @@ input {
   color: black;
   border: none;
   padding : 0px 10px;
-  /* align-items: center; */
   border-radius: 0.3rem 0rem 0rem 0.3rem;
 }
 
@@ -77,10 +76,9 @@ input:invalid:hover {
 label {
   background-color: rgb(14, 186, 197);
   line-height: 2.8rem;
-  text-align: center;
-  align-content: center;
   font-size: 1rem;
   color: #fff;
+  text-align:center;
   border-radius: 0rem 0.3rem 0.3rem 0rem;
 }
 </style>

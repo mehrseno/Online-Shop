@@ -1,5 +1,5 @@
 <template>
-  <div class="login__container">
+  <div class="login-form__container">
     <Subform
       class="mail"
       name="ایمیل"
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style scoped>
-.login__container {
+.login-form__container {
   display: flex;
   flex-direction: column;
   gap: 1.3em;

@@ -67,6 +67,7 @@ export default {
 
 <style scoped>
 .Receipt__container {
+  /* background-color: var(--element-background); */
   background-color: var(--element-background);
   padding-top: 10px;
   padding-bottom: 50px;

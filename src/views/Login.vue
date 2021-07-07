@@ -28,7 +28,6 @@ h2 {
 }
 div {
   background-color: rgb(231, 232, 236);
-  /* background-color: blue; */
   color: #fff;
   display: flex;
   flex-direction: column;

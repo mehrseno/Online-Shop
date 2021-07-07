@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="register__container">
     <h2>فروشگاه - ثبت‌نام</h2>
     <RegisterForm />
-    <SubmitButton type="submit" class="search-wrapper__submit" submit="&nbsp &nbsp &nbsp&nbspثبت‌نام &nbsp &nbsp &nbsp" />
+    <SubmitButton type="submit" class="search-wrapper__submit" submit="&nbsp &nbsp &nbsp &nbsp &nbsp&nbspثبت‌نام &nbsp &nbsp &nbsp &nbsp &nbsp" />
   </div>
 </template>
 <script>
@@ -25,7 +25,7 @@ h2 {
   font-weight: bold;
   text-align: center;
 }
-div {
+.register__container {
   background-color: rgb(231, 232, 236);
   color: #fff;
   display: flex;
