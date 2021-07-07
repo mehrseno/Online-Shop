@@ -1,19 +1,19 @@
 <template>
   <div>
-    <h2>فروشگاه - ورود</h2>
-    <LoginForm />
-    <SubmitButton type="button" class="search-wrapper__submit" submit="&nbsp &nbsp &nbsp&nbspورود &nbsp &nbsp &nbsp" />
+    <h2>فروشگاه - ثبت‌نام</h2>
+    <RegisterForm />
+    <SubmitButton type="submit" class="search-wrapper__submit" submit="&nbsp &nbsp &nbsp&nbspثبت‌نام &nbsp &nbsp &nbsp" />
   </div>
 </template>
 
 <script>
 import SubmitButton from "../components/SubmitButton.vue";
-import LoginForm from "../components/LoginForm.vue";
+import RegisterForm from "../components/RegisterForm.vue";
 export default {
-  name: "Login",
+  name: "Register",
   components: {
     SubmitButton,
-    LoginForm,
+    RegisterForm,
   },
 };
 </script> 
