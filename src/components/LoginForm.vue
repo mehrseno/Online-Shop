@@ -1,7 +1,28 @@
 <template>
-  <div class="container">
-    <Subform type="email" name="ایمیل" inputPlaceholder="ایمیل خود را وارد کنید..." />
-    <Subform type="password" name="رمز عبور" inputPlaceholder="رمز عبور خود را وارد کنید..." />
+  <div class="login-form__container">
+    <Subform
+      class="mail"
+      name="ایمیل"
+      input__type="email"
+      input__placeholder="...ایمیل خود را وارد کنید"
+      input__direction="ltr"
+      input__heightSize=" 2.6"
+      input__widthSize=" 17.5"
+      label__widthSize="5.3"
+      label__heightSize="2.6"
+    />
+    <Subform
+      class="name"
+      name="رمز عبور"
+      input__type="password"
+      input__placeholder="...رمز عبور خود را وارد کنید"
+      input__direction="ltr"
+      input__pattern=".{6,}"
+      input__heightSize=" 2.6"
+      input__widthSize=" 17.5"
+      label__widthSize="5.3"
+      label__heightSize="2.6"
+    />
   </div>
 </template>
 
@@ -14,10 +35,10 @@ export default {
 </script>
 
 <style scoped>
-.container{
+.login-form__container {
   display: flex;
   flex-direction: column;
-  gap: 1.3em; 
+  gap: 1.3em;
   justify-content: center;
 }
 </style>

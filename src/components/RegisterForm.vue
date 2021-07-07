@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
+  <div class="register-form__container">
     <Subform
       class="name"
-      inputType="text"
       name="نام"
-      inputPlaceholder="نام خود را وارد کنید..."
+      input__type="text"
+      input__placeholder="نام خود را وارد کنید..."
       input__heightSize=" 2.6"
       input__widthSize=" 17.5"
       label__widthSize="5.3"
@@ -12,9 +12,9 @@
     />
     <Subform
       class="familyName"
-      inputType="text"
       name="نام خانوادگی"
-      inputPlaceholder="نام خانوادگی خود را وارد کنید..."
+      input__type="text"
+      input__placeholder="نام خانوادگی خود را وارد کنید..."
       input__heightSize=" 2.6"
       input__widthSize=" 17.5"
       label__widthSize="5.3"
@@ -23,9 +23,10 @@
 
     <Subform
       class="mail"
-      inputType="email"
       name="ایمیل"
-      inputPlaceholder="ایمیل خود را وارد کنید..."
+      input__type="email"
+      input__placeholder="...ایمیل خود را وارد کنید"
+      input__direction="ltr"
       input__heightSize=" 2.6"
       input__widthSize=" 17.5"
       label__widthSize="5.3"
@@ -33,24 +34,25 @@
     />
     <Subform
       class="pass"
-      inputType="password"
-      inputPattern=".{6,}"
-      title="six or more"
       name="رمز عبور"
-      inputPlaceholder="رمز عبور خود را وارد کنید..."
+      title="six or more"
+      input__type="password"
+      input__pattern=".{6,}"
+      input__placeholder="...رمز عبور خود را وارد کنید"
+      input__direction="ltr"
       input__heightSize=" 2.6"
       input__widthSize=" 17.5"
       label__widthSize="5.3"
       label__heightSize="2.6"
     />
-  
+
     <Subform
       class="address"
-      inputType="text"
+      input__type="text"
       name="آدرس"
-      inputPlaceholder="آدرس خود را وارد کنید..."
+      input__placeholder="آدرس خود را وارد کنید..."
       input__heightSize=" 4.6"
-      input__widthSize="42"
+      input__widthSize="41"
       label__widthSize="5.3"
       label__heightSize="4.6"
     />
@@ -82,12 +84,13 @@ export default {
   grid-area: fifth;
 }
 
-.container {
+.register-form__container {
   display: grid;
+  gap: 10px;
   grid-template-areas:
     "first second"
     "third fourth"
     "fifth fifth";
-  }
+}
 </style>
 

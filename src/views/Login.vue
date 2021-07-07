@@ -2,7 +2,7 @@
   <div>
     <h2>فروشگاه - ورود</h2>
     <LoginForm />
-    <SubmitButton type="button" class="search-wrapper__submit" submit="&nbsp &nbsp &nbsp&nbspورود &nbsp &nbsp &nbsp" />
+    <SubmitButton type="button" class="search-wrapper__submit" submit="&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbspورود &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp" />
   </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
 <style scoped>
 h2 {
   color: rgb(14, 186, 197);
-  margin-top: 150px;
+  margin-top: 200px;
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
@@ -32,13 +32,9 @@ div {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
-  align-content: center;
   width: 100%;
   gap: 30px;
-  /* height: 100%; */
   align-items: center;
-  /* margin-top: 30px; */
 }
 </style>
 
