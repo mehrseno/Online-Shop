@@ -2,8 +2,8 @@
   <div class="container">
     <Subform
       class="name"
-      input__type="text"
       name="نام"
+      input__type="text"
       input__placeholder="نام خود را وارد کنید..."
       input__heightSize=" 2.6"
       input__widthSize=" 17.5"
@@ -12,8 +12,8 @@
     />
     <Subform
       class="familyName"
-      input__type="text"
       name="نام خانوادگی"
+      input__type="text"
       input__placeholder="نام خانوادگی خود را وارد کنید..."
       input__heightSize=" 2.6"
       input__widthSize=" 17.5"
@@ -23,9 +23,10 @@
 
     <Subform
       class="mail"
-      input__type="email"
       name="ایمیل"
-      input__placeholder="ایمیل خود را وارد کنید..."
+      input__type="email"
+      input__placeholder="...ایمیل خود را وارد کنید"
+      input__direction="ltr"
       input__heightSize=" 2.6"
       input__widthSize=" 17.5"
       label__widthSize="5.3"
@@ -33,17 +34,18 @@
     />
     <Subform
       class="pass"
+      name="رمز عبور"
+      title="six or more"
       input__type="password"
       input__pattern=".{6,}"
-      title="six or more"
-      name="رمز عبور"
-      input__placeholder="رمز عبور خود را وارد کنید..."
+      input__placeholder="...رمز عبور خود را وارد کنید"
+      input__direction="ltr"
       input__heightSize=" 2.6"
       input__widthSize=" 17.5"
       label__widthSize="5.3"
       label__heightSize="2.6"
     />
-  
+
     <Subform
       class="address"
       input__type="text"
@@ -88,6 +90,6 @@ export default {
     "first second"
     "third fourth"
     "fifth fifth";
-  }
+}
 </style>
 

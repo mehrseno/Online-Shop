@@ -1,20 +1,23 @@
 <template>
   <div class="login__container">
     <Subform
-      input__type="email"
-      name="ایمیل"
-      input__placeholder="ایمیل خود را وارد کنید..."
       class="mail"
+      name="ایمیل"
+      input__type="email"
+      input__placeholder="...ایمیل خود را وارد کنید"
+      input__direction="ltr"
       input__heightSize=" 2.6"
       input__widthSize=" 17.5"
       label__widthSize="5.3"
       label__heightSize="2.6"
     />
     <Subform
-      input__type="password"
-      name="رمز عبور"
-      input__placeholder="رمز عبور خود را وارد کنید..."
       class="name"
+      name="رمز عبور"
+      input__type="password"
+      input__placeholder="...رمز عبور خود را وارد کنید"
+      input__direction="ltr"
+      input__pattern=".{6,}"
       input__heightSize=" 2.6"
       input__widthSize=" 17.5"
       label__widthSize="5.3"

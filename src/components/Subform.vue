@@ -13,10 +13,11 @@
       :style="{
         height: input__heightSize + 'rem',
         width: input__widthSize + 'rem',
+        direction : input__direction
       }"
       required
-      :pattern="input__pattern"
       class="subformInput"
+      :pattern="input__pattern"
       :class="input__class"
       :type="input__type"
       :placeholder="input__placeholder"
@@ -37,6 +38,7 @@ export default {
     input__heightSize: String,
     input__widthSize: String,
     input__align: String,
+    input__direction: String,
     label__heightSize: String,
     label__widthSize: String,
     label__class: String,
@@ -54,6 +56,7 @@ input {
   background-color: #fff;
   color: black;
   border: none;
+  padding : 0px 10px;
   /* align-items: center; */
   border-radius: 0.3rem 0rem 0rem 0.3rem;
 }
