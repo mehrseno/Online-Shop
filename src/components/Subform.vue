@@ -6,22 +6,20 @@
         width: label__widthSize + 'rem',
       }"
       for="subformInput"
-      :class="labelClass"
+      :class="label__class"
       >{{ name }}</label
     >
     <input
       :style="{
         height: input__heightSize + 'rem',
         width: input__widthSize + 'rem',
-        
       }"
-      
       required
-      :pattern= inputPattern
+      :pattern="input__pattern"
       class="subformInput"
-      :class="inputClass"
-      :type="inputType"
-      :placeholder="inputPlaceholder"
+      :class="input__class"
+      :type="input__type"
+      :placeholder="input__placeholder"
     />
   </div>
 </template>
@@ -32,16 +30,16 @@ export default {
 
   props: {
     name: String,
-    inputType: String,
-    inputPlaceholder: String,
-    labelClass: String,
-    inpuClass: String,
-    inputPattern:String,
+    input__type: String,
+    input__placeholder: String,
+    input__class: String,
+    input__pattern: String,
     input__heightSize: String,
     input__widthSize: String,
+    input__align: String,
     label__heightSize: String,
     label__widthSize: String,
-    input__align: String
+    label__class: String,
   },
 };
 </script>
@@ -66,12 +64,11 @@ input:invalid:hover {
 ::placeholder {
   color: rgb(181, 183, 189);
   font-size: 15px;
-  padding-right: 10px ;
+  padding-right: 10px;
   width: 100%;
   height: 100%;
   /* background-color: blue; */
   text-align: right;
-
 }
 
 label {

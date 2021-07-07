@@ -1,24 +1,28 @@
 <template>
   <div class="userProfile__container">
-    <h2>هادی عزیز خوش آمدی</h2>
+    <h2>هادی عزیز، خوش آمدید</h2>
     <h1>تب</h1>
-    <UserProfileForm />
-    <SubmitButton
+    <UserProfileReceipt />
+    <!-- <UserProfileForm/> -->
+    <!-- <SubmitButton
       type="submit"
       class="search-wrapper__submit"
       submit="&nbsp &nbsp &nbsp&nbspویراش اطلاعات &nbsp &nbsp &nbsp"
-    />
+    /> -->
   </div>
 </template>
 <script>
 import SubmitButton from "../components/SubmitButton.vue";
 import UserProfileForm from "../components/UserProfileForm.vue";
+import UserProfileReceipt from "../components/UserProfileReceipt.vue";
+
 // import ReceiptProfile from "../components/ReceiptProfile.vue"
 export default {
   name: "UserProfile",
   components: {
     SubmitButton,
     UserProfileForm,
+    UserProfileReceipt
     // ReceiptProfile
   },
 };
@@ -26,15 +30,15 @@ export default {
 
 <style scoped>
 h2 {
-  color: rgb(14, 186, 197);
+  color: var(--text-dark-color);
   font-size: 1.5rem;
   font-weight: bold;
   padding-top: 50px;
 }
 
 .userProfile__container {
-  background-color: rgb(231, 232, 236);
-  color: #fff;
+  background-color: var(--primary-background);
+  /* color: #fff; */
   display: flex;
   align-self: center;
   flex-direction: column;

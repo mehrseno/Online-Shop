@@ -50,7 +50,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+ }
 
 a {
   text-decoration: none;
