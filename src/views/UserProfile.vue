@@ -6,7 +6,7 @@
         <UserProfileForm />
       </tab>
       <tab title="رسیدها">
-        <UserProfileReceipt />
+        <UsProfileReceipt />
       </tab>
     </Tabs>
   </div>
@@ -17,7 +17,7 @@ import Tabs from "../components/Tabs.vue";
 import SubmitButton from "../components/SubmitButton.vue";
 import UserProfileForm from "../components/UserProfileForm.vue";
 import UserProfileReceipt from "../components/UserProfileReceipt.vue";
-
+import UsProfileReceipt from "../components/UsProfileReceipt.vue";
 // import ReceiptProfile from "../components/ReceiptProfile.vue"
 export default {
   name: "UserProfile",
@@ -25,6 +25,7 @@ export default {
     SubmitButton,
     UserProfileForm,
     UserProfileReceipt,
+    UsProfileReceipt,
     Tabs,
     Tab,
   },
@@ -32,9 +33,7 @@ export default {
 </script>
 
 <style scoped>
-
 Tabs {
-
 }
 h2 {
   color: var(--text-dark-color);
