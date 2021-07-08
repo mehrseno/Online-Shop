@@ -35,7 +35,7 @@ export default {
   padding-top: 10px;
   padding-bottom: 50px;
   width: 1000px;
-  height: 320px;
+  /* height: 320px; */
   display: flex;
   justify-content: center;
   margin-bottom: 10px;

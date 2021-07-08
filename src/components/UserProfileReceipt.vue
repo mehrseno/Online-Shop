@@ -6,7 +6,7 @@
 import ReceiptTable from "./ReceiptTable.vue"
 
 export default {
-  name: "App",
+  name: "UserProfileReceipt",
   components: {
     ReceiptTable,
   },
