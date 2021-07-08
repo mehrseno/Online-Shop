@@ -1,20 +1,7 @@
 <template>
   <div>
-    <label
-      :style="{
-        height: label__heightSize + 'rem',
-        width: label__widthSize + 'rem',
-      }"
-      for="subformInput"
-      :class="label__class"
-      >{{ name }}</label
-    >
+    <label for="subformInput" :class="label__class">{{ name }}</label>
     <input
-      :style="{
-        height: input__heightSize + 'rem',
-        width: input__widthSize + 'rem',
-        direction : input__direction
-      }"
       required
       class="subformInput"
       :pattern="input__pattern"
@@ -35,12 +22,7 @@ export default {
     input__placeholder: String,
     input__class: String,
     input__pattern: String,
-    input__heightSize: String,
-    input__widthSize: String,
-    input__align: String,
     input__direction: String,
-    label__heightSize: String,
-    label__widthSize: String,
     label__class: String,
   },
 };
@@ -56,8 +38,25 @@ input {
   background-color: #fff;
   color: black;
   border: none;
-  padding : 0px 10px;
+  padding: 0px 10px;
   border-radius: 0.3rem 0rem 0rem 0.3rem;
+}
+
+.large__input {
+  height: 4.6rem;
+  width: 41rem;
+}
+.medium__input {
+  height: 2.6rem;
+  width: 41rem;
+}
+.small__input {
+  height: 2.6rem;
+  width: 17.5rem;
+}
+
+.ltr__input {
+  direction: ltr;
 }
 
 input:invalid:hover {
@@ -69,7 +68,6 @@ input:invalid:hover {
   padding-right: 10px;
   width: 100%;
   height: 100%;
-  /* background-color: blue; */
   text-align: right;
 }
 
@@ -78,8 +76,22 @@ label {
   line-height: 2.8rem;
   font-size: 1rem;
   color: #fff;
-  text-align:center;
+  text-align: center;
   border-radius: 0rem 0.3rem 0.3rem 0rem;
+}
+
+.large__label {
+  width: 5.3rem;
+  height: 4.6rem;
+}
+
+.small__label {
+  width: 5.3rem;
+  height: 2.6rem;
+}
+
+.extra__padding {
+  padding-top: 11px;
 }
 </style>
 

@@ -1,48 +1,39 @@
 <template>
-  <div class="UserProfileForm__container">
+  <div class="UserProfile-form__container">
     <Subform
       class="name"
-      inputType="text"
+      input__type="text"
       name="نام"
-      inputPlaceholder="هادی"
-      input__heightSize=" 2.6"
-      input__widthSize=" 17.5"
-      label__widthSize="5.3"
-      label__heightSize="2.6"
+      input__placeholder="هادی"
+      input__class="small__input"
+      label__class="small__label"
     />
     <Subform
       class="familyName"
-      inputType="text"
+      input__type="text"
       name="نام خانوادگی"
-      inputPlaceholder="طباطبایی"
-      input__heightSize=" 2.6"
-      input__widthSize=" 17.5"
-      label__widthSize="5.3"
-      label__heightSize="2.6"
+      input__placeholder="طباطبایی"
+      input__class="small__input"
+      label__class="small__label"
     />
 
     <Subform
       class="pass"
-      inputType="password"
-      inputPattern=".{6,}"
-      title="six or more"
+      input__type="password"
+      input__pattern=".{6,}"
       name="رمز عبور"
-      inputPlaceholder="رمز عبور خود را وارد کنید..."
-      input__heightSize=" 4.6"
-      input__widthSize="41.5"
-      label__widthSize="5.3"
-      label__heightSize="4.6"
+      input__placeholder="رمز عبور خود را وارد کنید..."
+     input__class="medium__input"
+     label__class="small__label"
     />
 
     <Subform
       class="address"
-      inputType="text"
+      input__type="text"
       name="آدرس"
-      inputPlaceholder="تهران، تهران، امیرکبیر"
-      input__heightSize=" 4.6"
-      input__widthSize="41.5"
-      label__widthSize="5.3"
-      label__heightSize="4.6"
+      input__class="large__input"
+      label__class="large__label"
+      input__placeholder="تهران، تهران، امیرکبیر"
     />
   </div>
 </template>
@@ -50,10 +41,9 @@
 <script>
 import Subform from "./Subform.vue";
 export default {
-  name : "UserProfileForm",
-  components: { Subform }
-    }
-
+  name: "UserProfileForm",
+  components: { Subform },
+};
 </script>
 <style scoped>
 .name {
@@ -70,7 +60,7 @@ export default {
   grid-area: fourth;
 }
 
-.UserProfileForm__container {
+.UserProfile-form__container {
   justify-items: center;
   align-content: center;
   display: grid;
@@ -80,5 +70,5 @@ export default {
     "first second"
     "third third"
     "fourth fourth";
-  }
+}
 </style>
