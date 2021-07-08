@@ -3,6 +3,9 @@
     <h2>فروشگاه - ورود</h2>
     <LoginForm />
     <SubmitButton type="button" class="search-wrapper__submit" submit="ورود" />
+    <router-link to="/register" class="register_now"
+      >اگر حسابی ثبت نکرده‌اید در اینجا ثبت کنید.</router-link
+    >
   </div>
 </template>
 
@@ -16,9 +19,12 @@ export default {
     LoginForm,
   },
 };
-</script> 
+</script>
 
 <style scoped>
+.register_now {
+  color: rgb(14, 186, 197);
+}
 h2 {
   color: rgb(14, 186, 197);
   font-size: 1.5rem;
@@ -37,4 +43,3 @@ h2 {
   align-items: center;
 }
 </style>
-

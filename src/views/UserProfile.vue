@@ -1,6 +1,10 @@
 <template>
   <div class="userProfile__container">
-    <h2>هادی عزیز، خوش آمدید</h2>
+    <div class="header">
+      <span class="welcome">هادی عزیز، خوش آمدید|</span>
+      <span>  موجودی حساب شما {{ amount }}</span>
+      <span class="inc_amount">افزایش موجودی</span>
+    </div>
     <Tabs>
       <tab title="پروفایل">
         <UserProfileForm />
@@ -27,13 +31,29 @@ export default {
     Tabs,
     Tab,
   },
+  data() {
+    return {
+      amount: 10000,
+    };
+  },
 };
 </script>
 
 <style scoped>
-Tabs {
+
+.inc_amount {
+  font-weight: bold;
+  padding: 10px;
+  background: var(--complementary-color);
+  border-radius: 30px;
+  margin-right: 10px;
 }
-h2 {
+
+.header {
+  margin-top: 100px;
+}
+
+.welcome {
   color: var(--text-dark-color);
   font-size: 1.5rem;
   font-weight: bold;
