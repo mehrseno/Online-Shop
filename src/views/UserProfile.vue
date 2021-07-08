@@ -6,7 +6,7 @@
         <UserProfileForm />
       </tab>
       <tab title="رسیدها">
-        <UsProfileReceipt />
+        <UserProfileReceipt />
       </tab>
     </Tabs>
   </div>
@@ -17,15 +17,13 @@ import Tabs from "../components/Tabs.vue";
 import SubmitButton from "../components/SubmitButton.vue";
 import UserProfileForm from "../components/UserProfileForm.vue";
 import UserProfileReceipt from "../components/UserProfileReceipt.vue";
-import UsProfileReceipt from "../components/UsProfileReceipt.vue";
-// import ReceiptProfile from "../components/ReceiptProfile.vue"
+
 export default {
   name: "UserProfile",
   components: {
     SubmitButton,
     UserProfileForm,
     UserProfileReceipt,
-    UsProfileReceipt,
     Tabs,
     Tab,
   },
