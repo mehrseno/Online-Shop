@@ -5,17 +5,34 @@
         <a href="#" class="main-header__item main-header__contact-us">تماس با ما </a>
         <a href="#" class="main-header__item main-header__support">پشتیبانی</a>
         <a href="#" class="main-header__item main-header__products">محصولات</a>
+        <dropdown class="dropdown" title="هادی" :items="user_items"/>
         <RoundButton text="ورود / ثبت‌نام" class="main-header__button"/>
     </header>
 </template>
 
 <script>
 import RoundButton from './RoundButton'
+import Dropdown from './Dropdown.vue'
 
 export default {
     name: 'Header',
+    data() {
+        return {
+            user_items : [
+                {
+                    title: 'پروفایل',
+                    link : '/user_profile'
+                },
+                {
+                    title: 'خروج از حساب',
+                    link : '/logout'
+                }
+            ]
+        }
+    },
     components: {
-        RoundButton
+        RoundButton,
+        Dropdown,
     }
 }
 </script>
@@ -37,6 +54,11 @@ export default {
 .main-header__item {
     color: var(--subtext-dark-color);
     margin: 25px;
+}
+
+.dropdown {
+    margin-right: auto;
+    margin-left: 25px
 }
 
 .main-header__button {
