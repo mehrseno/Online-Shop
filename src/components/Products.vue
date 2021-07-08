@@ -1,6 +1,6 @@
 <template>
-  <div :key="product.id" v-for="product in products">
-      <product :product="product" />
+  <div :key="product.id" v-for="product in products" >
+      <product :product="product" text="خرید محصول" />
   </div>
 </template>
 
