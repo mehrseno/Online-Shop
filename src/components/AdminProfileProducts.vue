@@ -1,23 +1,28 @@
 <template>
-  <div class="page">
-    <div class="page__aside">
-      <filter-box />
-      <slider-box />
-    </div>
-    <div class="page_content">
-      <products :products="products" />
+  <div class="product_con">
+    <div class="is_active button">+ ایجاد محصول جدید</div>
+    <div class="products">
+      <product
+        :key="product.id"
+        v-for="product in products"
+        :product="product"
+        text="ویرایش محصول"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import FilterBox from "./FilterBox.vue";
-import SliderBox from "./SliderBox.vue";
-import Products from "./Products.vue";
+import Product from "./Product.vue";
 
 export default {
-  components: { FilterBox, SliderBox, Products },
-  name: "Maincontainer",
+  name: "AdminProfileProducts",
+  components: {
+    Product,
+  },
+  props: {
+    products: Array,
+  },
   data() {
     return {
       products: [],
@@ -27,6 +32,8 @@ export default {
     this.products = [
       {
         id: 1,
+        has_count: true,
+        count: 3,
         image: "products/pet-shop.png",
         title: "کیف سگی",
         category: "سگ",
@@ -34,6 +41,8 @@ export default {
       },
       {
         id: 2,
+        has_count: true,
+        count: 3,
         image: "products/cigarette.png",
         title: "سیگار صورتی",
         category: "سیگار",
@@ -41,6 +50,8 @@ export default {
       },
       {
         id: 3,
+        has_count: true,
+        count: 4,
         image: "products/bag.jpg",
         title: "کیف پسرکش",
         category: "کیف",
@@ -48,6 +59,8 @@ export default {
       },
       {
         id: 4,
+        has_count: true,
+        count: 4,
         image: "products/dad.png",
         title: "بابا پلاستیکی",
         category: "بابا",
@@ -59,23 +72,26 @@ export default {
 </script>
 
 <style scoped>
-.page {
+.button {
+  width: 200px !important;
+  height: 3rem;
+  line-height: 3rem;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+.product_con {
   display: flex;
-  width: 98%;
-  justify-content: space-between;
-  align-items: flex-start; /* for diffrent size of childrens*/
-  margin-bottom: 79px;
+  flex-direction: column;
+  
 }
-
-.page__aside {
-  flex-basis: 25%;
-}
-
-.page_content {
-  flex-basis: 75%;
-  margin: 15px;
+.products {
+  margin-top: 10px;
   display: grid;
+  width: 1000px;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 15px;
+  grid-gap: 30px;
+  margin-bottom: 100px;
 }
 </style>
