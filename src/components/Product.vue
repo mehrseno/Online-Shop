@@ -1,5 +1,8 @@
 <template>
   <div class="product">
+    <div :class="[product.has_count ? 'product__count' : '', product]">
+      {{ product.count }}
+    </div>
     <img
       class="product__image"
       :src="require(`@/assets/images/${product.image}`)"
@@ -9,7 +12,7 @@
     <span class="sprator"></span>
     <div class="down-side">
       <h6 class="product__price">{{ product.price }} تومان</h6>
-      <button class="buy-button is_active">خرید محصول</button>
+      <button class="buy-button is_active">{{text}}</button>
     </div>
   </div>
 </template>
@@ -20,6 +23,7 @@ export default {
   name: "Product",
   props: {
     product: Object,
+    text: String,
   },
   components: {
     RoundButton,
@@ -29,8 +33,10 @@ export default {
 
 <style scoped>
 .product {
+  z-index: 0;
+  position: relative;
   padding: 20px;
-  border: 0.3rem solid #bbb;
+  border: 0.1rem solid #bbb;
   display: flex;
   flex-direction: column;
   background: white;
@@ -65,11 +71,26 @@ export default {
   gap: 10px;
 }
 
-
 .buy-button {
-    border: none;
+  border: none;
 }
 .product__price {
   align-self: center;
+}
+
+.product__count {
+  position: absolute;
+  z-index: 10;
+  left: -10px;
+  top: -10px;
+  background: 0;
+  border-radius: 50%;
+  width: 35px;
+  box-shadow: 2px 2px 0px #ccc;
+  background: white;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  color: var(--simple-button-background);
 }
 </style>

@@ -46,6 +46,11 @@ input {
   height: 4.6rem;
   width: 41rem;
 }
+
+.long__input {
+  height: 2.6rem;
+  width: 30rem;
+}
 .medium__input {
   height: 2.6rem;
   width: 41rem;
@@ -59,11 +64,11 @@ input {
   direction: ltr;
 }
 
-input:invalid:hover {
+/* input:invalid:hover {
   border: 2px solid red;
-}
+} */
 ::placeholder {
-  color: rgb(181, 183, 189);
+  color: rgb(123, 139, 189);
   font-size: 15px;
   padding-right: 10px;
   width: 100%;
@@ -92,6 +97,11 @@ label {
 
 .extra__padding {
   padding-top: 11px;
+}
+
+.long__label {
+  width: 15rem;
+  height: 2.6rem;
 }
 </style>
 
