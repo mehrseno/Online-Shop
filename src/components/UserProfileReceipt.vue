@@ -1,5 +1,5 @@
 
-  <template>
+  /*<template>
   <div class="Receipt__container">
     <table class="Receipt">
       <thead>
@@ -28,30 +28,35 @@ export default {
     return {
       items: [
         {
+          id:1,
           code: "SHOP102030",
           name: "موس گیمینگ ریز",
           price: "10/000",
           address: "تهران، تهران، امیرکبیر",
         },
         {
+          id:2,
           code: "SHOP102030",
           name: "موس گیمینگ ریز",
           price: "10/000",
           address: "تهران، تهران، امیرکبیر",
         },
         {
+          id:3,
           code: "SHOP102030",
           name: "موس گیمینگ ریز",
           price: "10/000",
           address: "تهران، تهران، امیرکبیر",
         },
         {
+          id:4,
           code: "SHOP102030",
           name: "موس گیمینگ ریز",
           price: "10/000",
           address: "تهران، تهران، امیرکبیر",
         },
         {
+          id:5,
           code: "SHOP102030",
           name: "موس گیمینگ ریز",
           price: "10/000",
