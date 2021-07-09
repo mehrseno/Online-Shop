@@ -2,7 +2,14 @@
   <div class="login-container">
     <h2>فروشگاه - ورود</h2>
     <LoginForm />
-    <SubmitButton type="button" class="search-wrapper__submit" submit="ورود" />
+    <SubmitButton
+      type="button"
+      class="search-wrapper__submit btn"
+      submit="ورود"
+    />
+    <button type="button" class="btn" @click="showModal"> ورود</button>
+
+    <modal v-show="isModalVisible" @close="closeModal" />
     <router-link to="/register" class="register_now"
       >اگر حسابی ثبت نکرده‌اید در اینجا ثبت کنید.</router-link
     >
@@ -12,11 +19,27 @@
 <script>
 import SubmitButton from "../components/SubmitButton.vue";
 import LoginForm from "../components/LoginForm.vue";
+import Modal from "../components/Modal.vue";
+
 export default {
   name: "Login",
   components: {
     SubmitButton,
     LoginForm,
+    Modal,
+  },
+  data() {
+    return {
+      isModalVisible: false,
+    };
+  },
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    },
   },
 };
 </script>
@@ -43,3 +66,6 @@ h2 {
   align-items: center;
 }
 </style>
+
+
+
