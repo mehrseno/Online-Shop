@@ -53,7 +53,6 @@ input {
 }
 .medium__input {
   height: 2.6rem;
-  width: 41rem;
 }
 .small__input {
   height: 2.6rem;
@@ -78,7 +77,6 @@ input {
 
 label {
   background-color: rgb(14, 186, 197);
-  line-height: 2.8rem;
   font-size: 1rem;
   color: #fff;
   text-align: center;
