@@ -90,18 +90,16 @@ export default {
         lastname: "taba",
         address: "تهران، تهران، امیرکبیر",
       },
+      error : {
+
+      }
     };
   },
-  // setup() {
-  //   const { validateNameField, errors } = useFormValidation();
-  //   const validateName = (text) => {
-  //     validateNameField("نام", text);
-  //   };
-  // }, // because cant use this with arrow function
   methods: {
     validateName(text) {
       const { validateNameField, errors } = useFormValidation();
       validateNameField("نام", text);
+      this.error["نام"] = errors["نام"];
       return errors["نام"];
     },
     validatePass(text) {
