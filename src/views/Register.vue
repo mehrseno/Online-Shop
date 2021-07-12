@@ -2,9 +2,14 @@
   <div class="register__container">
     <h2>فروشگاه - ثبت‌نام</h2>
     <RegisterForm />
-    <SubmitButton type="submit" class="search-wrapper__submit" submit="ثبت‌نام" />
+    <SubmitButton
+      type="submit"
+      class="search-wrapper__submit"
+      submit="ثبت‌نام"
+    />
   </div>
 </template>
+
 <script>
 import SubmitButton from "../components/SubmitButton.vue";
 import RegisterForm from "../components/RegisterForm.vue";
@@ -13,9 +18,9 @@ export default {
   components: {
     SubmitButton,
     RegisterForm,
-  },
+  }
 };
-</script> 
+</script>
 
 <style scoped>
 h2 {
@@ -39,4 +44,3 @@ h2 {
   /* margin-top: 30px; */
 }
 </style>
-
