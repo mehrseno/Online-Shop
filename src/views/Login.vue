@@ -6,9 +6,8 @@
       type="button"
       class="search-wrapper__submit btn"
       submit="ورود"
+      @show="showModal()"
     />
-    <button type="button" class="btn" @click="showModal"> ورود</button>
-
     <modal v-show="isModalVisible" @close="closeModal" />
     <router-link to="/register" class="register_now"
       >اگر حسابی ثبت نکرده‌اید در اینجا ثبت کنید.</router-link

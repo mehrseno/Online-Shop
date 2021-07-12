@@ -1,9 +1,14 @@
 
 <template>
-  <div class="modal-backdrop">
+  <div class="modal__backdrop" @click="close">
     <div class="modal">
       <button type="button" class="btn-close" @click="close">x</button>
-      <div class="modal-body">hi ziri</div>
+      <p class="modal__massage">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+        eligendi sequi dignissimos eaque qui, nulla earum libero dolorum ipsum
+        assumenda fugiat incidunt facilis, ducimus quibusdam necessitatibus ut
+        magni. Quas, accusantium.
+      </p>
     </div>
   </div>
 </template>
@@ -20,7 +25,7 @@ export default {
 </script>
 
 <style>
-.modal-backdrop {
+.modal__backdrop {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -33,18 +38,13 @@ export default {
 }
 
 .modal {
-  background: var(--element-background);
+  display: flex;
+  flex-direction: column;
   border-radius: 24px 24px;
-  width: 400px;
   max-height: 80vh;
-}
-
-.modal-body {
-  padding: 20px 10px;
-  color: blue;
-  border-radius: 0px 0px 24px 24px;
-  text-align: center;
-  font-size: 20px;
+  width: 400px;
+  background-color: var(--element-background);
+  margin-top: 20px;
 }
 
 .btn-close {
@@ -55,5 +55,16 @@ export default {
   font-weight: bold;
   color: rgb(14, 186, 197);
   background: transparent;
+  text-align: right;
+}
+
+.modal__massage {
+  text-align: center;
+  padding: 20px 10px;
+  color: rgb(14, 186, 197);
+  font-size: 20px;
+  border-radius: 0px 0px 20px 24px;
+  direction: rtl;
+  overflow-y: auto;
 }
 </style>
