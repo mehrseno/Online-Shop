@@ -78,6 +78,7 @@
 <script>
 import Subform from "./Subform.vue";
 import CustomField from "./CustomField.vue";
+import useFormValidation from "@/modules/useFormValidation";
 
 export default {
   name: "UserProfileForm",
@@ -91,27 +92,27 @@ export default {
       },
     };
   },
+  // setup() {
+  //   const { validateNameField, errors } = useFormValidation();
+  //   const validateName = (text) => {
+  //     validateNameField("نام", text);
+  //   };
+  // }, // because cant use this with arrow function
   methods: {
     validateName(text) {
-      text = text.trim();
-      return text === "" || text == undefined
-        ? "لطفاْ این فیلد را پرکنید"
-        : text.length > 256
-        ? "حداکثر نام برابر با ۲۵۶ کاراکتر است"
-        : "";
+      const { validateNameField, errors } = useFormValidation();
+      validateNameField("نام", text);
+      return errors["نام"];
     },
     validatePass(text) {
-      const regex = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=\S+$).{8,}$/g;
-      return text.match(regex)
-        ? ""
-        : "رمز باید حداقل ۸ کاراکتر و شامل حرف و عدد باشد";
+      const { validatePass, errors } = useFormValidation();
+      validatePass("رمز عبور", text);
+      return errors["رمز عبور"];
     },
     validateAddress(text) {
-      return text === "" || text == undefined
-        ? "لطفاْ این فیلد را پرکنید"
-        : text.length > 1000
-        ? "حداکثر طول آدرس ۱۰۰۰ کاراکتر است"
-        : "";
+      const { validAddress, errors } = useFormValidation();
+      validAddress("آدرس", text);
+      return errors["آدرس"];
     },
   },
 };
