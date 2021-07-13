@@ -1,19 +1,20 @@
 <template>
   <div class="product">
-    <div :class="[product.has_count ? 'product__count' : '', product]">
+    <div
+      v-show="product.has_count"
+      :class="[product.has_count ? 'product__count' : '', product]"
+    >
       {{ product.count }}
     </div>
-    <img
-      class="product__image"
-      :src="require(`@/assets/images/${product.image}`)"
-    />
+    <img class="product__image" :src="product.image" />
     <h1 class="product__name">{{ product.title }}</h1>
     <h3 class="product__category">{{ product.category }}</h3>
-    <span class="sprator"></span>
-    <div class="down-side">
-      <h6 class="product__price">{{ product.price }} تومان</h6>
-      <button class="buy-button is_active">{{text}}</button>
-    </div>
+    <!-- <span class="sprator"> -->
+      <div class="down-side">
+        <h6 class="product__price">{{ product.price }} تومان</h6>
+        <button class="buy-button is_active">{{ text }}</button>
+      </div>
+    <!-- </span> -->
   </div>
 </template>
 
@@ -40,23 +41,11 @@ export default {
   display: flex;
   flex-direction: column;
   background: white;
+  min-height: 500px;
+  height: 500px;
   gap: 10px;
 }
 
-.product__category {
-  color: #bbb;
-}
-
-.product__name {
-  font-weight: bold;
-  font-size: 2rem;
-}
-
-.sprator {
-  width: 100%;
-  height: 2px;
-  background: #bbb;
-}
 .product__image {
   width: 150px;
   height: 150px;
@@ -64,11 +53,29 @@ export default {
   margin-top: 20px;
 }
 
+
+.product__name {
+  font-weight: bold;
+  font-size: 25px;
+  margin-top: 10px;
+}
+.product__category {
+  color: #bbb;
+  font-size: 15px;
+}
+
 .down-side {
   justify-content: space-around;
-  width: 100%;
+  margin-top:  10px ;
+  width: 90%;
   display: flex;
   gap: 10px;
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  margin-left: 5%;
+  border-top: #bbb 2px solid;
+  padding-top: 10px;
 }
 
 .buy-button {
@@ -85,11 +92,11 @@ export default {
   top: -10px;
   background: 0;
   border-radius: 50%;
-  width: 35px;
+  width: 50px;
   box-shadow: 2px 2px 0px #ccc;
   background: white;
-  height: 35px;
-  line-height: 35px;
+  height: 50px;
+  line-height: 50px;
   text-align: center;
   color: var(--simple-button-background);
 }

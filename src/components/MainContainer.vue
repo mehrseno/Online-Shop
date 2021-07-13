@@ -5,7 +5,21 @@
       <slider-box />
     </div>
     <div class="page_content">
-      <products :products="products" />
+      <data-loader style="width:100%"
+        endpoint="https://60ed9597a78dc700178adfea.mockapi.io/api/v1/products"
+      >
+        <template #loaded="{data}" style="width:100%;"> 
+          <div class="products">
+            <product
+              :key="product.id"
+              v-for="product in data.products"
+              :product="product"
+              text="خرید محصول"
+            />
+          </div>
+          <!-- <products :products="data.products" /> -->
+        </template>
+      </data-loader>
     </div>
   </div>
 </template>
@@ -14,9 +28,11 @@
 import FilterBox from "./FilterBox.vue";
 import SliderBox from "./SliderBox.vue";
 import Products from "./Products.vue";
+import Product from "./Product.vue";
+import DataLoader from "./DataLoader.vue";
 
 export default {
-  components: { FilterBox, SliderBox, Products },
+  components: { FilterBox, SliderBox, Products, Product, DataLoader },
   name: "Maincontainer",
   data() {
     return {
@@ -59,6 +75,15 @@ export default {
 </script>
 
 <style scoped>
+.products {
+  margin-top: 10px;
+  display: grid;
+  width: 140%;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 30px;
+  margin-bottom: 100px;
+}
+
 .page {
   display: flex;
   width: 98%;
