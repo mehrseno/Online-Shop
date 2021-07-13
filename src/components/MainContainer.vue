@@ -5,7 +5,35 @@
       <slider-box />
     </div>
     <div class="page_content">
-      <products :products="products" />
+      <data-loader 
+        endpoint="https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount"
+      >
+        <template #loaded="{data}">
+          <PaginationBar
+            :totalItems="data.count"
+            :items="
+              (data.products &&
+                data.products.map(function(a) {
+                  a.has_count = false;
+                  return a;
+                })) ||
+                []
+            "
+          >
+            <template #data="{paginatedItems}">
+              <div class="products">
+                <product
+                  :key="product.id"
+                  v-for="product in paginatedItems"
+                  :product="product"
+                  text="خرید محصول"
+                />
+              </div>
+              <!-- <products :products="data.products" /> -->
+            </template>
+          </PaginationBar>
+        </template>
+      </data-loader>
     </div>
   </div>
 </template>
@@ -14,9 +42,19 @@
 import FilterBox from "./FilterBox.vue";
 import SliderBox from "./SliderBox.vue";
 import Products from "./Products.vue";
+import Product from "./Product.vue";
+import DataLoader from "./DataLoader.vue";
+import PaginationBar from "@/components/PaginationBar.vue";
 
 export default {
-  components: { FilterBox, SliderBox, Products },
+  components: {
+    PaginationBar,
+    FilterBox,
+    SliderBox,
+    Products,
+    Product,
+    DataLoader,
+  },
   name: "Maincontainer",
   data() {
     return {
@@ -59,6 +97,15 @@ export default {
 </script>
 
 <style scoped>
+.products {
+  margin-top: 10px;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 30px;
+  margin-bottom: 100px;
+}
+
 .page {
   display: flex;
   width: 98%;
@@ -75,7 +122,6 @@ export default {
   flex-basis: 75%;
   margin: 15px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 15px;
 }
 </style>
