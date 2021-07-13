@@ -5,19 +5,33 @@
       <slider-box />
     </div>
     <div class="page_content">
-      <data-loader style="width:100%"
-        endpoint="https://60ed9597a78dc700178adfea.mockapi.io/api/v1/products"
+      <data-loader 
+        endpoint="https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount"
       >
-        <template #loaded="{data}" style="width:100%;"> 
-          <div class="products">
-            <product
-              :key="product.id"
-              v-for="product in data.products"
-              :product="product"
-              text="خرید محصول"
-            />
-          </div>
-          <!-- <products :products="data.products" /> -->
+        <template #loaded="{data}">
+          <PaginationBar
+            :totalItems="data.count"
+            :items="
+              (data.products &&
+                data.products.map(function(a) {
+                  a.has_count = false;
+                  return a;
+                })) ||
+                []
+            "
+          >
+            <template #data="{paginatedItems}">
+              <div class="products">
+                <product
+                  :key="product.id"
+                  v-for="product in paginatedItems"
+                  :product="product"
+                  text="خرید محصول"
+                />
+              </div>
+              <!-- <products :products="data.products" /> -->
+            </template>
+          </PaginationBar>
         </template>
       </data-loader>
     </div>
@@ -30,9 +44,17 @@ import SliderBox from "./SliderBox.vue";
 import Products from "./Products.vue";
 import Product from "./Product.vue";
 import DataLoader from "./DataLoader.vue";
+import PaginationBar from "@/components/PaginationBar.vue";
 
 export default {
-  components: { FilterBox, SliderBox, Products, Product, DataLoader },
+  components: {
+    PaginationBar,
+    FilterBox,
+    SliderBox,
+    Products,
+    Product,
+    DataLoader,
+  },
   name: "Maincontainer",
   data() {
     return {
@@ -78,7 +100,7 @@ export default {
 .products {
   margin-top: 10px;
   display: grid;
-  width: 140%;
+  width: 100%;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 30px;
   margin-bottom: 100px;
@@ -100,7 +122,6 @@ export default {
   flex-basis: 75%;
   margin: 15px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 15px;
 }
 </style>

@@ -58,6 +58,7 @@ export default {
   font-weight: bold;
   font-size: 25px;
   margin-top: 10px;
+  width: 100%;
 }
 .product__category {
   color: #bbb;
