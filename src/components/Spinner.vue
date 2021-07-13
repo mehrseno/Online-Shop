@@ -13,7 +13,7 @@
 </script>
 
 <style scoped>
-/* @-webkit-keyframes load1 {
+@-webkit-keyframes load1 {
   0%,
   80%,
   100% {
@@ -35,8 +35,8 @@
   40% {
     box-shadow: 0 -2em;
     height: 5em;
-  } */
-/* } */
+  }
+}
 .loading-spinner,
 .loading-spinner:before,
 .loading-spinner:after {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="loading">
-      <slot name="loading">
+      <slot style="margin: auto 0 ;" name="loading">
         <Spinner />
       </slot>
       <slot name="loading-message">Loading your data...</slot>
