@@ -1,14 +1,52 @@
 <template>
   <div class="login-container">
     <h2>فروشگاه - ورود</h2>
-    <LoginForm />
+    <div class="login-form__container">
+      <custom-field
+        class="mail"
+        type="email"
+        label="ایمیل"
+        placeholder="ایمیل خود را وارد کنید..."
+        :require="true"
+        :validate="validateEmail"
+      />
+      <custom-field
+        class="name"
+        type="password"
+        label="رمزعبور"
+        placeholder="رمز عبور خود را وارد کنید..."
+        :require="true"
+        :validate="validatePass"
+      />
+      <!-- <Subform
+      class="mail"
+      name="ایمیل"
+      input__type="email"
+      input__class="small__input ltr__input"
+      label__class="small__label"
+      input__placeholder="...ایمیل خود را وارد کنید"
+    /> -->
+      <!-- <Subform
+      class="name"
+      name="رمز عبور"
+      input__type="password"
+      input__placeholder="...رمز عبور خود را وارد کنید"
+      input__class="small__input ltr__input"
+      label__class="small__label"
+      input__pattern=".{6,}"
+    /> -->
+    </div>
     <SubmitButton
       type="button"
       class="search-wrapper__submit btn"
       submit="ورود"
       @show="showModal()"
     />
-    <modal v-show="isModalVisible" @close="closeModal" />
+    <modal
+      v-show="isModalVisible"
+      @close="closeModal"
+      :modalMassage="modalMassage"
+    />
     <router-link to="/register" class="register_now"
       >اگر حسابی ثبت نکرده‌اید در اینجا ثبت کنید.</router-link
     >
@@ -19,6 +57,9 @@
 import SubmitButton from "../components/SubmitButton.vue";
 import LoginForm from "../components/LoginForm.vue";
 import Modal from "../components/Modal.vue";
+import useFormValidation from "../modules/useFormValidation";
+import CustomField from "../components/CustomField.vue";
+import Subform from "../components/Subform.vue";
 
 export default {
   name: "Login",
@@ -26,18 +67,69 @@ export default {
     SubmitButton,
     LoginForm,
     Modal,
+    Subform,
+    CustomField,
+  },
+  props: {
+    modalMassage: String,
   },
   data() {
     return {
       isModalVisible: false,
+      modalMassage: "",
+      errors: {},
+      secondaryErrors: {},
+      pastUser: {
+        email: "mehr.seno@gmail.com",
+        password: "mehrnaz123",
+      },
     };
   },
   methods: {
     showModal() {
       this.isModalVisible = true;
+      this.modalMassage = finalValidate();
     },
+
     closeModal() {
       this.isModalVisible = false;
+    },
+
+    validatePass(text) {
+      const { validatePass, errors } = useFormValidation();
+      console.log(validatePass);
+      validatePass("رمز عبور", text);
+      console.log(text);
+      if (text == this.past_user.password) {
+        console.log("matched");
+        delete this.secondary__errors["رمزعبور"];
+      } else {
+        this.secondary__errors["رمزعبور"] = "unmatched";
+        console.log(this.secondary__errors);
+      }
+      return errors["رمز عبور"];
+    },
+
+    validateEmail(text) {
+      const { validateEmailField, errors } = useFormValidation();
+      validateEmailField("ایمیل", text);
+      if (text == this.past_user.email) {
+        console.log("matched");
+        delete this.secondary__errors["ایمیل"];
+      } else {
+        this.secondary__errors["ایمیل"] = "unmatched";
+        console.log(this.secondary__errors);
+      }
+      return errors["ایمیل"];
+    },
+
+    finalValidate() {
+      console.log("bib bib");
+      if (this.errors || this.secondary__errors) {
+        return "not succesful";
+      } else if (!this.error && !this.secondary_error) {
+        return "succesfull";
+      }
     },
   },
 };
@@ -64,7 +156,10 @@ h2 {
   height: 100vh;
   align-items: center;
 }
+.login-form__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3em;
+  justify-content: center;
+}
 </style>
-
-
-
