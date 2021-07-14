@@ -4,10 +4,7 @@
     <div class="modal">
       <button type="button" class="btn-close" @click="close">x</button>
       <p class="modal__massage">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-        eligendi sequi dignissimos eaque qui, nulla earum libero dolorum ipsum
-        assumenda fugiat incidunt facilis, ducimus quibusdam necessitatibus ut
-        magni. Quas, accusantium.
+        {{ modalMassage }}
       </p>
     </div>
   </div>
@@ -16,10 +13,16 @@
 <script>
 export default {
   name: "modal",
+  props: {
+    modalMassage: String,
+  },
   methods: {
     close() {
       this.$emit("close");
     },
+    // changeMassage(){
+    //   this.Modal_massage = this.
+    // }
   },
 };
 </script>
