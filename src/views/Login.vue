@@ -79,6 +79,8 @@ export default {
       modalMassage: "",
       errors: {},
       secondaryErrors: {},
+      hasPassword: "",
+      hasEmail: "",
       pastUser: {
         email: "mehr.seno@gmail.com",
         password: "mehrnaz123",
@@ -88,7 +90,7 @@ export default {
   methods: {
     showModal() {
       this.isModalVisible = true;
-      this.modalMassage = finalValidate();
+      this.modalMassage = this.finalValidate();
     },
 
     closeModal() {
@@ -99,13 +101,15 @@ export default {
       const { validatePass, errors } = useFormValidation();
       console.log(validatePass);
       validatePass("رمز عبور", text);
-      console.log(text);
-      if (text == this.past_user.password) {
+      if (text) {
+        this.hasPassword = text;
+      }
+      if (text == this.pastUser.password) {
         console.log("matched");
-        delete this.secondary__errors["رمزعبور"];
+        delete this.secondaryErrors["رمزعبور"];
       } else {
-        this.secondary__errors["رمزعبور"] = "unmatched";
-        console.log(this.secondary__errors);
+        this.secondaryErrors["رمزعبور"] = "unmatched";
+        console.log(this.secondaryErrors);
       }
       return errors["رمز عبور"];
     },
@@ -113,22 +117,33 @@ export default {
     validateEmail(text) {
       const { validateEmailField, errors } = useFormValidation();
       validateEmailField("ایمیل", text);
-      if (text == this.past_user.email) {
+      if (text) {
+        this.hasEmail = text;
+      }
+      if (text == this.pastUser.email) {
         console.log("matched");
-        delete this.secondary__errors["ایمیل"];
+        delete this.secondaryErrors["ایمیل"];
       } else {
-        this.secondary__errors["ایمیل"] = "unmatched";
-        console.log(this.secondary__errors);
+        this.secondaryErrors["ایمیل"] = "unmatched";
+        console.log(this.secondaryErrors);
       }
       return errors["ایمیل"];
     },
 
     finalValidate() {
-      console.log("bib bib");
-      if (this.errors || this.secondary__errors) {
-        return "not succesful";
-      } else if (!this.error && !this.secondary_error) {
-        return "succesfull";
+      console.log(this.hasPassword);
+      console.log(this.hasEmail);
+
+      console.log(this.errors);
+      console.log(this.secondaryErrors);
+      if (
+        JSON.stringify(this.errors) === "{}" &&
+        JSON.stringify(this.secondaryErrors) === "{}"
+        &&  this.hasPassword !== "" &&   this.hasEmail!== ""
+      ) {
+        return "succesful";
+      } else {
+        return " not succesfull";
       }
     },
   },
