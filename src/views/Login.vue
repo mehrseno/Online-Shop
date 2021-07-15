@@ -77,13 +77,17 @@ export default {
     return {
       isModalVisible: false,
       modalMassage: "",
+      isMatched: "",
       errors: {},
-      secondaryErrors: {},
-      hasPassword: "",
-      hasEmail: "",
-      pastUser: {
-        email: "mehr.seno@gmail.com",
-        password: "mehrnaz123",
+      values: {},
+      full: { ایمیل: "", رمزعبور: "" },
+      pastUser: [
+        { email: "mehr.seno@gmail.com", password: "mehrnaz123" },
+        { email: "m.seno@gmail.com", password: "mehr321" },
+      ],
+      user: {
+        email: "",
+        password: "",
       },
     };
   },
@@ -101,50 +105,40 @@ export default {
       const { validatePass, errors } = useFormValidation();
       console.log(validatePass);
       validatePass("رمز عبور", text);
-      if (text) {
-        this.hasPassword = text;
-      }
-      if (text == this.pastUser.password) {
-        console.log("matched");
-        delete this.secondaryErrors["رمزعبور"];
-      } else {
-        this.secondaryErrors["رمزعبور"] = "unmatched";
-        console.log(this.secondaryErrors);
-      }
+
+      text ? (this.full["رمزعبور"] = text) : (this.full["رمزعبور"] = "");
+      this.user.password = text;
       return errors["رمز عبور"];
     },
 
     validateEmail(text) {
       const { validateEmailField, errors } = useFormValidation();
       validateEmailField("ایمیل", text);
-      if (text) {
-        this.hasEmail = text;
-      }
-      if (text == this.pastUser.email) {
-        console.log("matched");
-        delete this.secondaryErrors["ایمیل"];
-      } else {
-        this.secondaryErrors["ایمیل"] = "unmatched";
-        console.log(this.secondaryErrors);
-      }
+      text ? (this.full["ایمیل"] = text) : (this.full["ایمیل"] = "");
+      this.user.email = text;
       return errors["ایمیل"];
     },
 
     finalValidate() {
-      console.log(this.hasPassword);
-      console.log(this.hasEmail);
-
       console.log(this.errors);
-      console.log(this.secondaryErrors);
+      console.log(this.currentUser);
+      this.values = Object.values(this.full);
+      this.isMatched = this.matched(this.user);
+      console.log(this.values);
       if (
         JSON.stringify(this.errors) === "{}" &&
-        JSON.stringify(this.secondaryErrors) === "{}"
-        &&  this.hasPassword !== "" &&   this.hasEmail!== ""
+        this.isMatched &&
+        !this.values.includes("")
       ) {
-        return "succesful";
+        return ".شما با موفقیت وارد شدید";
       } else {
-        return " not succesfull";
+        return ".ایمیل و یا نام کاربری شما صحیح نمی‌باشد";
       }
+    },
+    matched(obj) {
+      return this.pastUser.some(function (el) {
+        return el.password === obj.password && el.email === obj.email;
+      });
     },
   },
 };
