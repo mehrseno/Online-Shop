@@ -42,11 +42,13 @@
       submit="ورود"
       @show="showModal()"
     />
-    <modal
-      v-show="isModalVisible"
-      @close="closeModal"
-      :modalMassage="modalMassage"
-    />
+    <transition name="fade"
+      ><modal
+        v-show="isModalVisible"
+        @close="closeModal"
+        :modalMassage="modalMassage"
+    /></transition>
+
     <router-link to="/register" class="register_now"
       >اگر حسابی ثبت نکرده‌اید در اینجا ثبت کنید.</router-link
     >
@@ -132,7 +134,7 @@ export default {
       ) {
         return ".شما با موفقیت وارد شدید";
       } else {
-        return ".ایمیل و یا نام کاربری شما صحیح نمی‌باشد";
+        return ".ایمیل و یا رمز عبور شما صحیح نمی‌باشد";
       }
     },
     matched(obj) {

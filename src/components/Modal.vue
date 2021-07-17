@@ -1,13 +1,15 @@
 
 <template>
-  <div class="modal__backdrop" @click="close">
-    <div class="modal">
-      <button type="button" class="btn-close" @click="close">x</button>
-      <p class="modal__massage">
-        {{ modalMassage }}
-      </p>
+  <transition name="fade">
+    <div class="modal__backdrop" @click="close">
+      <div class="modal">
+        <button type="button" class="btn-close" @click="close">x</button>
+        <p class="modal__massage">
+          {{ modalMassage }}
+        </p>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -69,5 +71,15 @@ export default {
   border-radius: 0px 0px 20px 24px;
   direction: rtl;
   overflow-y: auto;
+}
+.fade-leave-active,
+.fade-enter-active {
+  transition: all 0.5s ease-in;
+}
+
+.fade-leave-to,
+.fade-enter-from {
+  transform: translateY(25px);
+  opacity: 0;
 }
 </style>
