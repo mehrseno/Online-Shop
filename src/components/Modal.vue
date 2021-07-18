@@ -2,7 +2,7 @@
 <template>
   <transition name="fade">
     <div class="modal__backdrop" @click="close">
-      <div class="modal">
+      <div class="modal" v-on:click.stop>
         <button type="button" class="btn-close" @click="close">x</button>
         <p class="modal__massage">
           {{ modalMassage }}
