@@ -8,7 +8,6 @@
       :class="error_outline"
       :placeholder="placeholder"
       :required="require"
-      ref="ref"
       @keyup="validateInput"
       @blur="removeerror"
       v-model="input"
@@ -20,9 +19,8 @@
 </template>
 
 <script>
-import { ref } from "vue";
 export default {
-  namme: "CustomField",
+  name: "CustomField",
   props: {
     require: Boolean,
     label: String,

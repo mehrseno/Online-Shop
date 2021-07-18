@@ -72,17 +72,31 @@
       label__class="large__label"
       input__placeholder=""
     /> -->
+
+    <SubmitButton
+      type="submit"
+      class="submit"
+      submit="ویرایش اطلاعات"
+      @show="showModal()"
+    />
+    <modal
+      v-show="isModalVisible"
+      @close="closeModal"
+      :modalMassage="modalMassage"
+    />
   </div>
 </template>
 
 <script>
+import SubmitButton from "../components/SubmitButton.vue";
 import Subform from "./Subform.vue";
 import CustomField from "./CustomField.vue";
 import useFormValidation from "@/modules/useFormValidation";
+import Modal from "../components/Modal.vue";
 
 export default {
   name: "UserProfileForm",
-  components: { Subform, CustomField },
+  components: { SubmitButton, Subform, CustomField, Modal },
   data() {
     return {
       user: {
@@ -90,14 +104,10 @@ export default {
         lastname: "taba",
         address: "تهران، تهران، امیرکبیر",
       },
+      isModalVisible: false,
+      modalMassage: "",
     };
   },
-  // setup() {
-  //   const { validateNameField, errors } = useFormValidation();
-  //   const validateName = (text) => {
-  //     validateNameField("نام", text);
-  //   };
-  // }, // because cant use this with arrow function
   methods: {
     validateName(text) {
       const { validateNameField, errors } = useFormValidation();
@@ -113,6 +123,25 @@ export default {
       const { validAddress, errors } = useFormValidation();
       validAddress("آدرس", text);
       return errors["آدرس"];
+    },
+    showModal() {
+      this.isModalVisible = true;
+      this.modalMassage = this.finalValidate();
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    },
+    finalValidate() {
+      const { errors } = useFormValidation();
+      let message = "";
+      for (var key in errors) {
+        var value = errors[key];
+        message += `\n${value}`;
+      }
+      if (message === "") {
+        message = "اطلاعات بروز شد";
+      }
+      return message;
     },
   },
 };
@@ -132,6 +161,10 @@ export default {
   grid-area: fourth;
 }
 
+.submit {
+  grid-area: fifth;
+}
+
 .UserProfile-form__container {
   justify-items: center;
   align-content: center;
@@ -141,6 +174,7 @@ export default {
   grid-template-areas:
     "first second"
     "third third"
-    "fourth fourth";
+    "fourth fourth"
+    "fifth fifth";
 }
 </style>

@@ -3,7 +3,7 @@
     <custom-field
       class="name"
       type="text"
-      placeholder="user.name"
+      placeholder="نام را وارد کنید..."
       :require="true"
       label="نام"
       :validate="validateName"
@@ -11,7 +11,7 @@
     <custom-field
       class="familyName"
       :type="text"
-      placeholder="user.lastname"
+      placeholder="نام خانوادگی را وارد کنید... "
       :require="true"
       label="نام خانوادگی"
       :validate="validateName"
@@ -36,7 +36,7 @@
     <custom-field
       class="address"
       :type="text"
-      placeholder="user.address"
+      placeholder="آدرس را وارد کنید..."
       :require="true"
       label="آدرس"
       input_widht="41rem"

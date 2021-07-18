@@ -1,11 +1,14 @@
 <template>
-  <HeroNav />
+  <slider />
+  <!-- <HeroNav /> -->
+  <!-- For first phase -->
   <sort-box />
   <maincontainer />
 </template>
 
 <script>
-import HeroNav from "../components/HeroNav";
+import HeroNav from "@/components/HeroNav";
+import Slider from "@/components/Slider";
 import SortBox from "../components/SortBox.vue";
 import Maincontainer from "../components/MainContainer.vue";
 
@@ -14,6 +17,7 @@ export default {
   components: {
     HeroNav,
     SortBox,
+    Slider,
     Maincontainer,
   },
 };
