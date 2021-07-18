@@ -103,6 +103,18 @@ export default {
       },
     },
   },
+  watch : {
+    items(newValue) {
+      console.log(newValue);
+      console.log("new");
+      this.paginatedItems;
+    },
+    totalItems (newValue){
+      console.log(newValue);
+      console.log("neee");
+      this.numberPages;
+    }
+  }
 };
 </script>
 
