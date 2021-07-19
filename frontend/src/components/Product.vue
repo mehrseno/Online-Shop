@@ -4,10 +4,10 @@
       v-show="product.has_count"
       :class="[product.has_count ? 'product__count' : '', product]"
     >
-      {{ product.count }}
+      {{ product.sold_count }}
     </div>
     <img class="product__image" :src="product.image" />
-    <h1 class="product__name">{{ product.title }}</h1>
+    <h1 class="product__name">{{ product.name }}</h1>
     <h3 class="product__category">{{ product.category }}</h3>
     <!-- <span class="sprator"> -->
       <div class="down-side">

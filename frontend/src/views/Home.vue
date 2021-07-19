@@ -47,15 +47,14 @@
     <div class="page__aside">
       <filter-box />
       <slider-box />
-      <!-- <button ">CLick</button> -->
-      <!-- <button @click="sortbyCount()">CLick</button> -->
       <!-- <button @click="sortbyprice()">CLick</button> -->
     </div>
     <div class="page_content">
       <data-loader :endpoint="url" @recieveData="getdata">
+        {{ Products }}
         <pagination-bar
-          :items="products.products"
-          :totalItems="products.products.length"
+          :items="products"
+          :totalItems="products.length"
           @pagecreated="pagationItems"
         >
           <template #data="{ paginatedItems }">
@@ -103,7 +102,8 @@ export default {
   data() {
     return {
       products: [],
-      url: "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount",
+      // url: "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount",
+      url: "http://localhost:8000/api/products/",
       p: [],
       srt: [],
       price_active: false,
@@ -125,8 +125,8 @@ export default {
       this.updatedActive();
 
       this.count_active = true;
-      this.products.products.sort((a, b) => {
-        return a.sell_count > b.sell_count ? -1 : 1;
+      this.products.sort((a, b) => {
+        return a.sold_count > b.sold_count ? -1 : 1;
       });
     },
     sortbyPrice(priceDirection) {
@@ -139,7 +139,7 @@ export default {
       if (priceDirection === "desc") {
         modifier = -1;
       }
-      this.products.products.sort((a, b) => {
+      this.products.sort((a, b) => {
         return a.price > b.price ? 1 * modifier : -1 * modifier;
       });
     },
@@ -147,7 +147,7 @@ export default {
       this.updatedActive();
       this.date_active = true;
 
-      this.products.products.sort((a, b) => b.date - a.date);
+      this.products.sort((a, b) => b.date - a.date);
     },
 
     updatedActive() {
