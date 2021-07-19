@@ -19,7 +19,7 @@ export default createStore({
             console.log(userCredentials);
             return new Promise((resolve, reject) => {
                 getAPI.post('/api/api-token/', {
-                    email: userCredentials.email,
+                    username: userCredentials.email,
                     password: userCredentials.password
                 }).then(response => {
                     context.commit('updateStorage', { access: response.data.access, refresh: response.data.refresh })
