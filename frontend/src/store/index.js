@@ -12,8 +12,22 @@ export default createStore({
             state.accessToken = access
             state.refreshToken = refresh
         },
+        destroyToken(state) {
+            state.accessToken = null
+            state.refreshToken = null
+        }
+    },
+    getters: {
+        loggedIn(state) {
+            return state.accessToken != null;
+        }
     },
     actions: {
+        userLogout(context) {
+            if (context.getters.loggedIn) {
+                context.commit('destroyToken')
+            }
+        },
         userLogin(context, userCredentials) {
             console.log("in login");
             console.log(userCredentials);
