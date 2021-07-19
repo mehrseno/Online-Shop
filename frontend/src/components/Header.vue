@@ -20,11 +20,6 @@ import Dropdown from "./Dropdown.vue";
 
 export default {
   name: "Header",
-  computed() {
-    this.isLogin = this.$store.getters.loggedIn;
-    console.log("in header and user");
-    console.log(`logged in : ${this.isLogin}`);
-  },
   data() {
     return {
       user_items: [

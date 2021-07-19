@@ -28,7 +28,7 @@ const routes = [
         path: '/user_profile',
         name: 'UserProfile',
         component: UserProfile,
-        mata: {
+        meta: {
             requiresLogin: true
         }
     },
@@ -36,7 +36,7 @@ const routes = [
         path: '/admin_profile',
         name: 'AdminProfile',
         component: AdminProfile,
-        mata: {
+        meta: {
             requiresLogin: true
         }
     },
