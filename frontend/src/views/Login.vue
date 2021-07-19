@@ -6,6 +6,7 @@
         class="mail"
         type="email"
         label="ایمیل"
+        v-model="user.email"
         placeholder="ایمیل خود را وارد کنید..."
         :require="true"
         :validate="validateEmail"
@@ -14,6 +15,7 @@
         class="name"
         type="password"
         label="رمزعبور"
+        v-model="user.password"
         placeholder="رمز عبور خود را وارد کنید..."
         :require="true"
         :validate="validatePass"
@@ -36,11 +38,21 @@
       input__pattern=".{6,}"
     /> -->
     </div>
-    <SubmitButton
+
+    <!-- phase 2 - fake validation  -->
+    <!-- <SubmitButton
       type="button"
       class="search-wrapper__submit btn"
       submit="ورود"
       @show="showModal()"
+    />
+     -->
+    <!-- phase 3 - login -->
+    <SubmitButton
+      type="button"
+      class="search-wrapper__submit btn"
+      submit="ورود"
+      @show="login()"
     />
     <transition name="fade"
       ><modal
@@ -62,6 +74,9 @@ import Modal from "../components/Modal.vue";
 import useFormValidation from "../modules/useFormValidation";
 import CustomField from "../components/CustomField.vue";
 import Subform from "../components/Subform.vue";
+
+
+import {useStore} from "vuex";
 
 export default {
   name: "Login",
@@ -138,9 +153,33 @@ export default {
       }
     },
     matched(obj) {
-      return this.pastUser.some(function (el) {
+      return this.pastUser.some(function(el) {
         return el.password === obj.password && el.email === obj.email;
       });
+    },
+
+    login() {
+      const { errors } = useFormValidation();
+      console.log(`in login email is ${this.user.email}`);
+      // if (errors["ایمیل"] !== "" || errors["رمز عبور"] !== "") {
+      //   this.isModalVisible = true;
+      //   this.modalMassage = "ایمیل و یا رمز عبور شما صحیح نمی‌باشد.";
+      //   return;
+      // }
+      this.$store
+        .dispatch("userLogin", {
+          email: this.user.email,
+          password: this.user.password,
+        })
+        .then(() => {
+          this.$router.push({ name: "UserProfile" });
+        })
+        .catch((err) => {
+          console.log("error in login");
+          console.log(err);
+          this.isModalVisible = true;
+          this.modalMassage = "ورود شما مجاز نیست";
+        });
     },
   },
 };
