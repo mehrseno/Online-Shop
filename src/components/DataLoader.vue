@@ -7,7 +7,7 @@
       <slot name="loading-message">Loading your data...</slot>
     </div>
     <slot name="error" v-else-if="error">{{ error }}</slot>
-    <slot name="loaded" v-else :data="data" />
+    <slot v-else :data="data" />
   </div>
 </template>
 
@@ -17,7 +17,6 @@ import Spinner from "@/components/Spinner.vue";
 export default {
   data() {
     return {
-      data: null,
       loading: false,
       error: null,
       isDebouncing: true,
@@ -47,7 +46,7 @@ export default {
             Authorization: `token ${this.authToken}`,
           },
         });
-        this.data = results.data;
+        this.$emit('recieveData', results.data)
       } catch (e) {
         console.log(e);
         this.error = "This resource is not loading";
