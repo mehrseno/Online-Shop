@@ -21,6 +21,7 @@
     <!-- <Subform
       class="mail"
       name="ایمیل"
+      input__vModel="email"
       input__type="email"
       input__class="small__input ltr__input"
       label__class="small__label"
@@ -29,6 +30,7 @@
     <!-- <Subform
       class="name"
       name="رمز عبور"
+      input__vModel="password"
       input__type="password"
       input__placeholder="...رمز عبور خود را وارد کنید"
       input__class="small__input ltr__input"

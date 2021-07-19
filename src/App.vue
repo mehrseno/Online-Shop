@@ -66,7 +66,7 @@ a {
 /* global styles */
 
 .is_active {
-  background: var(--simple-button-background);
+  background: var(--simple-button-background) !important;
   color: white !important;
   padding: 5px 10px 5px 10px;
   border-radius: 30px;

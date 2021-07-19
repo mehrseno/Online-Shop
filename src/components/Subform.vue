@@ -4,18 +4,56 @@
     <input
       required
       class="subformInput"
+      :v-model="input__vModel"
       :pattern="input__pattern"
       :class="input__class"
       :type="input__type"
       :placeholder="input__placeholder"
     />
+    <span v-if="msg.email">{{ msg.email }}</span>
+    <span v-if="msg.password">{{ msg.password }}</span>
+    <span v-if="msg.firstName">{{ msg.firstName }}</span>
+    <span v-if="msg.familyName">{{ msg.familyName }}</span>
+    <span v-if="msg.address">{{ msg.address }}</span>
   </div>
 </template>
 
 <script>
 export default {
   name: "Subform",
-
+  data() {
+    return {
+      firstName: "",
+      familyName: "",
+      password: "",
+      email: "",
+      address: "",
+      msg: [],
+    };
+  },
+  watch: {
+    name(value) {
+      // binding this to the data value in the email input
+      this.name = value;
+      this.validateName(value);
+    },
+    familyName(value) {
+      this.familyName = value;
+      this.validateFamilyName(value);
+    },
+    password(value) {
+      this.password = value;
+      this.validatePassword(value);
+    },
+    email(value) {
+      this.email = value;
+      this.validateEmail(value);
+    },
+    address(value) {
+      this.address = value;
+      this.validateAddress(value);
+    },
+  },
   props: {
     name: String,
     input__type: String,
@@ -23,7 +61,24 @@ export default {
     input__class: String,
     input__pattern: String,
     input__direction: String,
+    input__vModel: String,
     label__class: String,
+  },
+  methods: {
+    validateEmail(value) {
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+        this.msg["email"] = "";
+      } else {
+        this.msg["email"] = "Invalid Email Address";
+      }
+    },
+    validatePassword(value) {
+      if (value.length < 8) {
+        this.msg["password"] = "Must be at least 8 characters";
+      } else {
+        this.msg["password"] = "";
+      }
+    },
   },
 };
 </script>
@@ -32,6 +87,12 @@ export default {
 div {
   display: flex;
   flex-direction: row;
+}
+span {
+  padding-top: 0px;
+  margin-top: 0px;
+  font-size: 12px;
+  color: red;
 }
 
 input {
@@ -63,9 +124,9 @@ input {
   direction: ltr;
 }
 
-/* input:invalid:hover {
+input:invalid:hover {
   border: 2px solid red;
-} */
+}
 ::placeholder {
   color: rgb(123, 139, 189);
   font-size: 15px;
@@ -102,4 +163,3 @@ label {
   height: 2.6rem;
 }
 </style>
-
