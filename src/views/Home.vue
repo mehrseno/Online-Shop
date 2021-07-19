@@ -74,11 +74,6 @@
   </div>
 </template>
 
-
-
-
-
-
 <script>
 import HeroNav from "@/components/HeroNav";
 import Slider from "@/components/Slider";
@@ -124,14 +119,8 @@ export default {
   methods: {
     getdata(data) {
       this.products = data;
-      console.log(`kfmj ${this.products}`);
+      this.sortbyCount();
     },
-    pagationItems(data) {
-      console.log("paaaaaaaaaaaaaaage");
-      console.log(data);
-      this.p = data;
-    },
-
     sortbyCount() {
       this.updatedActive();
 
@@ -145,7 +134,6 @@ export default {
 
       this.price_active = true;
 
-      console.log("ey baba");
       console.log(priceDirection);
       let modifier = 1;
       if (priceDirection === "desc") {
