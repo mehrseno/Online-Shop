@@ -16,7 +16,9 @@
             <input type="number" class="input" min="1" v-model="quantity" />
           </div>
           <div class="control">
-            <a href="" class="button is-dark"> افزودن به کارت</a>
+            <a href="" class="button is-dark" @click="addToCart">
+              افزودن به کارت</a
+            >
           </div>
         </div>
       </div>
@@ -26,6 +28,7 @@
 
 <script>
 import { getAPI } from "./../axios-api";
+import { toast } from "bulma-toast";
 
 export default {
   name: "Product",
@@ -48,6 +51,18 @@ export default {
           this.product = response.data;
         })
         .catch((error) => console.log(error));
+    },
+    addToCart(e) {
+      e.preventDefault();
+      console.log("add to cart");
+      if (isNaN(this.quantity) || this.quantity < 1) {
+        this.quantity = 1;
+      }
+      const item = {
+        product: this.product,
+        quantity: this.quantity,
+      };
+      this.$store.commit("addToCart", item);
     },
   },
 };
@@ -100,13 +115,15 @@ img {
   display: flex;
 }
 
-a {
-  line-height: 3rem;
+.is-dark {
   padding: 0.8rem;
+  line-height: 3rem;
   height: 3rem;
   background: black;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  cursor: pointer;
+  color: white;
 }
 .control {
 }

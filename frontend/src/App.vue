@@ -6,7 +6,7 @@
   />
 
   <div class="container">
-    <!-- <Header /> -->
+    <Header :total="cartTotalLength" />
       <router-view ></router-view>
     <Footer />
   </div>
@@ -21,6 +21,33 @@ export default {
   components: {
     Header,
     Footer,
+  },
+  data() {
+    return {
+      cart: {
+        items: []
+      },
+      cartTotalLength: Number,
+    }
+  },
+  beforeCreate() {
+    console.log("beforeCreate")
+    this.$store.commit('initializeStore')
+  }, 
+  computed: {
+    cartTotalLength() {
+      console.log('cartTotalLength')
+      let totalLength = 0
+      for (let i = 0; i< this.cart.items.length; i++){
+        totalLength += this.cart.items[i].quantity
+      }
+      console.log(`totalLength`)
+      return totalLength
+    }
+  },
+  mounted() {
+    console.log("in mounteed")
+    this.cart = this.$store.state.cart
   },
 };
 </script>

@@ -4,6 +4,9 @@ import { getAPI } from './../axios-api'
 
 export default createStore({
     state: {
+        cart: {
+            items: [],
+        },
         accessToken: null,
         refreshToken: null,
         user: {
@@ -14,6 +17,23 @@ export default createStore({
         }
     },
     mutations: {
+        initializeStore(state) {
+            if (localStorage.getItem('cart')) {
+                state.cart = JSON.parse(localStorage.getItem('cart'))
+            } else {
+                localStorage.setItem('cart', JSON.stringify(state.cart))
+            }
+        },
+        addToCart(state, item) {
+            const exists = state.cart.items.filter(i => i.product.id === item.product.id)
+            if (exists.length) {
+                exists[0].quantity = parseInt(exists[0].quantity) + parseInt(item.quantity)
+            } else {
+                state.cart.items.push(item)
+            }
+
+            localStorage.setItem('cart', JSON.stringify(state.cart))
+        },
         updateStorage(state, { access, refresh }) {
             state.accessToken = access
             state.refreshToken = refresh
@@ -22,7 +42,7 @@ export default createStore({
             state.accessToken = null
             state.refreshToken = null
         },
-        updateUser(state, {user}) {
+        updateUser(state, { user }) {
             state.user = user
         }
     },
@@ -58,7 +78,7 @@ export default createStore({
                     lastname: user.lastname,
                     password: user.password,
                     address: user.address,
-                    email: user.email 
+                    email: user.email
                 }).then(response => {
                 })
             })
