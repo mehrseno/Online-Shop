@@ -63,6 +63,14 @@ export default {
         quantity: this.quantity,
       };
       this.$store.commit("addToCart", item);
+      toast({
+        message: "محصول به کارت اضافه شد",
+        type: "is-warning",
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 2000,
+        position: "top-right",
+      });
     },
   },
 };
