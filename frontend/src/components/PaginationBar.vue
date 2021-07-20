@@ -63,6 +63,12 @@ export default {
       let end = this.perPage * this.pageNumber;
       return this.items.slice(end - this.perPage, end);
     },
+    fixPage(){
+      let end = this.pageNumber * this.perPage;
+      if (end > this.totalItems){
+        this.changePageNumber(1);
+      }
+    }
   },
   methods: {
     changePageNumber(newPageNumber) {
@@ -81,6 +87,7 @@ export default {
       if (newNumberPages <= this.pageNumber) {
         this.pageNumber = newNumberPages;
       }
+      console.log(`pagenumber ${this.$router.query}`)
       this.$router.push({
         path: this.$route.path,
         query: {
@@ -108,10 +115,9 @@ export default {
       console.log(newValue);
       console.log("new");
       this.paginatedItems;
+      this.fixPage;
     },
     totalItems (newValue){
-      console.log(newValue);
-      console.log("neee");
       this.numberPages;
     }
   }
