@@ -7,7 +7,7 @@
 
   <div class="container">
     <Header />
-    <router-view></router-view>
+      <router-view ></router-view>
     <Footer />
   </div>
 </template>
@@ -50,7 +50,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
- }
+}
 
 a {
   text-decoration: none;

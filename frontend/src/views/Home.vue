@@ -79,7 +79,7 @@
       </div>
       <slider-box />
     </div>
-    <div class="page_content">
+    <div class="page_content" id="page_content">
       <data-loader :endpoint="url" @recieveData="getdata">
         {{ Products }}
         <pagination-bar
@@ -372,7 +372,9 @@ export default {
 }
 
 .page_content {
-  flex-basis: 75%;
+
+  scroll-margin-top: 100px;
+    flex-basis: 75%;
   margin: 15px;
   display: grid;
   grid-gap: 15px;

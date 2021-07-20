@@ -8,9 +8,25 @@
       >تماس با ما
     </a>
     <a href="#" class="main-header__item main-header__support">پشتیبانی</a>
-    <a href="#" class="main-header__item main-header__products">محصولات</a>
-    <dropdown v-if="$store.getters.loggedIn" class="dropdown" title="هادی" :items="user_items" />
-    <RoundButton v-if="!$store.getters.loggedIn" text="ورود / ثبت‌نام" class="main-header__button" />
+    <router-link
+      :to="{
+        name: 'Home',
+        hash:'#page_content',
+      }"
+      class="main-header__item main-header__products"
+      >محصولات</router-link
+    >
+    <dropdown
+      v-if="$store.getters.loggedIn"
+      class="dropdown"
+      title="هادی"
+      :items="user_items"
+    />
+    <RoundButton
+      v-if="!$store.getters.loggedIn"
+      text="ورود / ثبت‌نام"
+      class="main-header__button"
+    />
   </header>
 </template>
 
@@ -38,6 +54,19 @@ export default {
   components: {
     RoundButton,
     Dropdown,
+  },
+  methods: {
+    goto(refName) {
+      // var element = this.$refs[refName];
+      console.log(refName);
+      // console.log(element)
+      // var top = element.offsetTop;
+      console.log("clicked on go to ");
+      // window.scrollTo(0, top);
+        //  document.getElementById(refName).scrollIntoView({
+        // behavior: "smooth"
+      // });
+    },
   },
 };
 </script>

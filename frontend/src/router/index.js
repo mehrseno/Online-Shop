@@ -47,9 +47,33 @@ const routes = [
     }
 ]
 
+function wait(duration) {
+    return new Promise((resolve) => setTimeout(resolve, duration));
+}
+
+async function tryScrollToAnchor(hash, timeout = 1000, delay = 1000) {
+    while (timeout > 0) {
+        const el = document.querySelector(hash);
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+            break;
+        }
+        await wait(delay);
+        timeout = timeout - delay;
+    }
+}
+
 const router = createRouter({
-    history: createWebHistory(process.env.BASE_URL),
     routes,
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition;
+        }
+        if (to.hash) {
+            tryScrollToAnchor(to.hash, 2000, 100);
+        }
+    },
+    history: createWebHistory(process.env.BASE_URL),
 })
 
 export default router
