@@ -6,7 +6,8 @@
       <custom-field
         class="name"
         type="text"
-        placeholder="user.name"
+        v-model="user.name"
+        placeholder="نام خود را وارد کنید..."
         :require="true"
         label="نام"
         :validate="validateName"
@@ -14,7 +15,8 @@
       <custom-field
         class="familyName"
         :type="text"
-        placeholder="user.lastname"
+        v-model="user.lastname"
+        placeholder="نام خانوادگی خود را وارد کنید..."
         :require="true"
         label="نام خانوادگی"
         :validate="validateFamilyName"
@@ -22,6 +24,7 @@
       <custom-field
         class="mail"
         type="email"
+        v-model="user.email"
         placeholder="ایمیل خود را وارد کنید..."
         :require="true"
         label="ایمیل"
@@ -30,6 +33,7 @@
       <custom-field
         class="pass"
         type="password"
+        v-model="user.password"
         placeholder="رمز عبور خود را وارد کنید..."
         :require="true"
         label="رمز عبور"
@@ -39,7 +43,8 @@
       <custom-field
         class="address"
         :type="text"
-        placeholder="user.address"
+        v-model="user.address"
+        placeholder="آدرس خود را وارد کنید..."
         :require="true"
         label="آدرس"
         input_widht="41rem"
@@ -91,12 +96,19 @@
       input__placeholder="آدرس خود را وارد کنید..."
     /> -->
     </div>
+    <!-- phase 2 - fake register  -->
 
-    <SubmitButton
+    <!-- <SubmitButton
       type="submit"
       class="search-wrapper__submit"
       submit="ثبت‌نام"
       @show="showModal()"
+    /> -->
+    <SubmitButton
+      type="submit"
+      class="search-wrapper__submit"
+      submit="ثبت‌نام"
+      @show="register()"
     />
     <modal
       v-show="isModalVisible"
@@ -139,8 +151,11 @@ export default {
         { email: "m.seno@gmail.com", password: "mehr321" },
       ],
       user: {
+        name: "",
+        lastname: "",
         email: "",
         password: "",
+        address: ""
       },
     };
   },
@@ -216,6 +231,10 @@ export default {
         return el.email === obj.email;
       });
     },
+    register() {
+        // check the validation
+        
+    }
   },
 };
 </script>

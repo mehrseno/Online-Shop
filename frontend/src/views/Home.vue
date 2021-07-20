@@ -35,6 +35,7 @@
     <button
       class="sort-box__item sort-box__option sort-box__date"
       :class="{ is_active: date_active }"
+      @click="sortbyDate()"
     >
       تاریخ ایجاد
     </button>
@@ -194,8 +195,9 @@ export default {
     sortbyDate() {
       this.updatedActive();
       this.date_active = true;
-      this.products.sort((a, b) => b.date - a.date);
-      this.mainProduct.sort((a, b) => b.date - a.date);
+      this.products.sort((a, b) => {
+        return a.created_date > b.created_date? -1 : 1;}
+        );
     },
 
     updatedActive() {
