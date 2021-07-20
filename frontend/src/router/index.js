@@ -1,10 +1,11 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 import Login from '../views/Login.vue'
 import Home from '../views/Home.vue'
 import Register from '../views/Register.vue'
 import UserProfile from '../views/UserProfile.vue'
 import AdminProfile from '../views/AdminProfile.vue'
+import Logout from '../views/Logout.vue'
 
 const routes = [
     {
@@ -26,12 +27,23 @@ const routes = [
     {
         path: '/user_profile',
         name: 'UserProfile',
-        component: UserProfile
+        component: UserProfile,
+        meta: {
+            requiresLogin: true
+        }
     },
     {
         path: '/admin_profile',
         name: 'AdminProfile',
-        component: AdminProfile
+        component: AdminProfile,
+        meta: {
+            requiresLogin: true
+        }
+    },
+    {
+        path: '/logout',
+        name: 'Logout',
+        component: Logout,
     }
 ]
 
@@ -40,4 +52,4 @@ const router = createRouter({
     routes,
 })
 
-export default router 
+export default router
