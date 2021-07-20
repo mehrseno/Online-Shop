@@ -143,6 +143,7 @@ export default {
       // url: "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount",
       filter_url:
         "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/categories",
+        // "http://localhost:8000/api/filters-categories/",
       p: [],
       srt: [],
       price_active: false,

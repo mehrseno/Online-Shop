@@ -7,6 +7,7 @@ import UserProfile from '../views/UserProfile.vue'
 import AdminProfile from '../views/AdminProfile.vue'
 import Logout from '../views/Logout.vue'
 import Product from '../views/Product.vue'
+import Cart from '../views/Cart.vue'
 
 const routes = [
     {
@@ -50,6 +51,11 @@ const routes = [
         path: '/:category_slug/:product_slug/',
         name: 'Product',
         component: Product,
+    },
+    {
+        path: '/cart',
+        name: 'Cart',
+        component: Cart,
     }
 ]
 
