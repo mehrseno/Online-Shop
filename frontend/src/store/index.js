@@ -6,6 +6,12 @@ export default createStore({
     state: {
         accessToken: null,
         refreshToken: null,
+        user: {
+            name: "",
+            lastname: "",
+            address: "",
+            email: ""
+        }
     },
     mutations: {
         updateStorage(state, { access, refresh }) {
@@ -15,6 +21,9 @@ export default createStore({
         destroyToken(state) {
             state.accessToken = null
             state.refreshToken = null
+        },
+        updateUser(state, {user}) {
+            state.user = user
         }
     },
     getters: {
@@ -38,6 +47,19 @@ export default createStore({
                 }).then(response => {
                     context.commit('updateStorage', { access: response.data.access, refresh: response.data.refresh })
                     resolve()
+                })
+            })
+        },
+        userRegister(context, user) {
+            console.log("In register");
+            return new Promise((resolve, reject) => {
+                getAPI.post('/api/register', {
+                    name: user.name,
+                    lastname: user.lastname,
+                    password: user.password,
+                    address: user.address,
+                    email: user.email 
+                }).then(response => {
                 })
             })
         }
