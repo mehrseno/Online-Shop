@@ -6,6 +6,7 @@ import Register from '../views/Register.vue'
 import UserProfile from '../views/UserProfile.vue'
 import AdminProfile from '../views/AdminProfile.vue'
 import Logout from '../views/Logout.vue'
+import Product from '../views/Product.vue'
 
 const routes = [
     {
@@ -44,6 +45,11 @@ const routes = [
         path: '/logout',
         name: 'Logout',
         component: Logout,
+    },
+    {
+        path: '/:category_slug/:product_slug/',
+        name: 'Product',
+        component: Product,
     }
 ]
 

@@ -6,7 +6,7 @@
   />
 
   <div class="container">
-    <Header />
+    <!-- <Header /> -->
       <router-view ></router-view>
     <Footer />
   </div>

@@ -6,16 +6,15 @@
     >
       {{ product.sold_count }}
     </div>
-    <!-- <img class="product__image" :src="`http://localhost:8000${product.image}`" /> -->
-    <img class="product__image" :src="`${product.image}`" />
+    <img class="product__image" :src="`${product.get_image}`" />
     <h1 class="product__name">{{ product.name }}</h1>
-    <h3 class="product__category">{{ product.category }}</h3>
-    <!-- <span class="sprator"> -->
-      <div class="down-side">
-        <h6 class="product__price">{{ product.price }} تومان</h6>
-        <button class="buy-button is_active">{{ text }}</button>
-      </div>
-    <!-- </span> -->
+    <h3 class="product__category">{{ product.get_category }}</h3>
+    <div class="down-side">
+      <h6 class="product__price">{{ product.price }} تومان</h6>
+      <button class="buy-button is_active" @click="emitCallback">
+        {{ text }}
+      </button>
+    </div>
   </div>
 </template>
 
@@ -29,6 +28,13 @@ export default {
   },
   components: {
     RoundButton,
+  },
+  methods: {
+    emitCallback() {
+      console.log("emit in product vue");
+      console.log(this.product);
+      this.$emit("click-product", this.product);
+    },
   },
 };
 </script>
@@ -54,7 +60,6 @@ export default {
   margin-top: 20px;
 }
 
-
 .product__name {
   font-weight: bold;
   font-size: 25px;
@@ -68,7 +73,7 @@ export default {
 
 .down-side {
   justify-content: space-around;
-  margin-top:  10px ;
+  margin-top: 10px;
   width: 90%;
   display: flex;
   gap: 10px;

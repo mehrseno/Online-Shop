@@ -94,6 +94,7 @@
                 :product="product"
                 v-for="product in paginatedItems"
                 text="خرید محصول"
+                @click-product="showDetail"
               />
             </div>
           </template>
@@ -138,10 +139,10 @@ export default {
       count: 0,
       oldProduct: [],
       activeId: [],
-      url: "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount",
+      url: "http://localhost:8000/api/products/",
+      // url: "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount",
       filter_url:
         "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/categories",
-      // url: "http://localhost:8000/api/products/",
       p: [],
       srt: [],
       price_active: false,
@@ -155,6 +156,11 @@ export default {
     },
   },
   methods: {
+    showDetail(product) {
+      console.log("show data");
+      console.log(product);
+      this.$router.push(product.get_absolute_url)
+    },
     getdata(data) {
       this.products = data;
       this.mainProduct = data;
@@ -162,7 +168,7 @@ export default {
     },
     getFilter(data) {
       this.filters = data;
-      this.filters.forEach(function (element) {
+      this.filters.forEach(function(element) {
         element.active = "false";
       });
       console.log(this.filters);
@@ -196,8 +202,8 @@ export default {
       this.updatedActive();
       this.date_active = true;
       this.products.sort((a, b) => {
-        return a.created_date > b.created_date? -1 : 1;}
-        );
+        return a.created_date > b.created_date ? -1 : 1;
+      });
     },
 
     updatedActive() {
@@ -207,7 +213,7 @@ export default {
     },
 
     setFilter(c_id) {
-      this.filters.forEach(function (element) {
+      this.filters.forEach(function(element) {
         if (element.id === c_id) {
           element.active === "false"
             ? (element.active = "true")
@@ -229,8 +235,8 @@ export default {
         }
       }
       console.log(activeId);
-      var output = this.mainProduct.filter(function (s) {
-        return activeId.some(function (t) {
+      var output = this.mainProduct.filter(function(s) {
+        return activeId.some(function(t) {
           return s.category === t;
         });
       });
@@ -372,9 +378,8 @@ export default {
 }
 
 .page_content {
-
   scroll-margin-top: 100px;
-    flex-basis: 75%;
+  flex-basis: 75%;
   margin: 15px;
   display: grid;
   grid-gap: 15px;
