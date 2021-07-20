@@ -45,9 +45,33 @@
   </div>
   <div class="page">
     <div class="page__aside">
-      <filter-box />
+      <!-- <filter-box /> -->
+      <div class="categories card">
+        <data-loader :endpoint="filter_url" @recieveData="getFilter">
+          <div class="card__header categories__header">دسته‌بندی‌ها</div>
+            <div class="categories__option" :key="category.id" v-for="category in filters">
+              <input
+                type="checkbox"
+                name="category"
+                value="category.id"
+                id="category.id"
+              />
+              <label for="id">{{ category.title }}</label>
+            </div>
+          
+          <!-- <div class="categories__option">
+            <input
+              type="checkbox"
+              name="category"
+              value="1"
+              checked="checked"
+              id="category_id_1"
+            /> -->
+          <!-- <label for="category_id_1">گزینه‌ی اول</label> -->
+          <!-- </div> -->
+        </data-loader>
+      </div>
       <slider-box />
-      <!-- <button @click="sortbyprice()">CLick</button> -->
     </div>
     <div class="page_content">
       <data-loader :endpoint="url" @recieveData="getdata">
@@ -102,8 +126,11 @@ export default {
   data() {
     return {
       products: [],
-      // url: "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount",
-      url: "http://localhost:8000/api/products/",
+      filters: [],
+      url: "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount",
+      filter_url:
+        "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/categories",
+      // url: "http://localhost:8000/api/products/",
       p: [],
       srt: [],
       price_active: false,
@@ -120,6 +147,11 @@ export default {
     getdata(data) {
       this.products = data;
       this.sortbyCount();
+    },
+    getFilter(data) {
+      // console.log(`pis${data}`)
+      this.filters = data;
+      console.log(this.filters);
     },
     sortbyCount() {
       this.updatedActive();
@@ -195,6 +227,76 @@ export default {
 }
 
 /*___________________________________________________________________________ */
+
+.card {
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 0.1em solid #b7b8b7;
+  box-shadow: -1px -1px 5px 0px #fff, 7px 7px 20px 0px #0003,
+    4px 4px 5px 0px #0002;
+  overflow-y: auto; /* for automatic scrollbar */
+  margin-top: 15px;
+}
+
+.card__header {
+  font-weight: bold;
+  border-bottom: 0.1em solid #b7b8b7;
+  padding: 10px;
+}
+</style>
+
+<style scoped>
+.categories {
+  height: 26vh;
+}
+
+.categories__option {
+  margin: 10px;
+  margin-top: 5px;
+  margin-bottom: 3px;
+}
+
+.categories__option label {
+  cursor: pointer;
+  height: 28px;
+  top: 0;
+}
+
+.categories__option input[type="checkbox"] {
+  display: none;
+}
+
+.categories__option input[type="checkbox"] + label::before {
+  content: "\2714"; /* for tick */
+  border: 0.1em solid #e7e9e8;
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  padding-right: 0.2em;
+  padding-left: 0.2em;
+  padding-bottom: 0.4em;
+  margin-left: 0.2em;
+  text-align: center;
+  vertical-align: bottom;
+  color: transparent;
+}
+
+.categories__option input[type="checkbox"]:checked + label:before {
+  /* for select */
+  background-color: #009fff;
+  color: white;
+}
+
+.categories__option input[type="checkbox"]:checked + label {
+  color: #009fff;
+  font-weight: bold;
+}
+
+/*__________________________________________________________________________________ */
 
 .products {
   margin-top: 10px;

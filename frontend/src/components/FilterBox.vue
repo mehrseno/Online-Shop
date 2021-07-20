@@ -8,7 +8,6 @@
         type="checkbox"
         name="category"
         value="1"
-        checked="checked"
         id="category_id_1"
       />
       <label for="category_id_1">گزینه‌ی اول</label>
