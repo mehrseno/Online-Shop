@@ -1,5 +1,5 @@
 <template>
-  <slider @Submit="search" />
+  <slider @Submit="searchFilter" />
   <!-- <HeroNav /> -->
   <!-- For first phase -->
   <!-- <sort-box /> -->
@@ -15,7 +15,7 @@
     </button>
 
     <a
-      class="sort-box__item sort-box__option sort-box__price"
+      class="sort-box__item  sort-box__price"
       :class="{ is_active: price_active }"
       >قیمت</a
     >
@@ -56,13 +56,16 @@
               type="checkbox"
               :name="category"
               :id="category.id"
-              @click="setFilter(category.id)"
+              @click="categoryFilter(category.id)"
             />
             <label :for="category.id">{{ category.title }}</label>
           </div>
         </data-loader>
       </div>
-      <slider-box />
+      <slider-box @change="getPrice" />
+      <button @click="priceFilter()" class="price-range__button">
+        اعمال محدوده قیمت
+      </button>
     </div>
     <div v-if="!hasContent" class="page-empty__content">
       <p>{{ notFound.title }}</p>
@@ -131,10 +134,8 @@ export default {
       products: [],
       filters: [],
       mainProduct: [],
-      filterProduct: [],
-      count: 0,
-      oldProduct: [],
       activeId: [],
+      priceRange: [],
       name: "",
       notFound: [{ title: "" }],
       url: "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount",
@@ -158,21 +159,7 @@ export default {
     back() {
       this.hasContent = true;
     },
-    search(input) {
-      this.searchInput = input;
-      var output = this.mainProduct.filter(function (s) {
-        return s.name === input;
-      });
 
-      if (output.length === 0) {
-        this.hasContent = false;
-        this.products = this.notFound.title = `
-        جستجو برای عبارت « ${input} » با هیچ کالایی هم‌خوانی نداشت
-        `;
-      } else {
-        this.products = output;
-      }
-    },
     getdata(data) {
       this.products = data;
       this.mainProduct = data;
@@ -185,6 +172,9 @@ export default {
         element.active = "false";
       });
       console.log(this.filters);
+    },
+    getPrice(data) {
+      this.priceRange = data;
     },
     sortbyCount() {
       this.updatedActive();
@@ -199,7 +189,6 @@ export default {
     sortbyPrice(priceDirection) {
       this.updatedActive();
       this.price_active = true;
-      console.log(priceDirection);
       let modifier = 1;
       if (priceDirection === "desc") {
         modifier = -1;
@@ -225,7 +214,7 @@ export default {
       this.date_active = false;
     },
 
-    setFilter(c_id) {
+    categoryFilter(c_id) {
       this.filters.forEach(function (element) {
         if (element.id === c_id) {
           element.active === "false"
@@ -257,6 +246,37 @@ export default {
       activeId.length === 0
         ? (this.products = this.mainProduct)
         : (this.products = output);
+    },
+
+    searchFilter(input) {
+      this.searchInput = input;
+      var output = this.mainProduct.filter(function (s) {
+        return s.name === input;
+      });
+
+      if (output.length === 0) {
+        this.hasContent = false;
+        this.products = this.notFound.title = `
+        جستجو برای عبارت « ${input} » با هیچ کالایی هم‌خوانی نداشت
+        `;
+      } else {
+        this.products = output;
+      }
+    },
+    priceFilter() {
+      console.log(this.priceRange);
+      let min, max;
+      min = this.priceRange[0];
+      max = this.priceRange[1];
+      let output = this.mainProduct.filter(function (x) {
+        return x.price >= min && x.price <= max;
+      });
+      if (output.length === 0) {
+        this.hasContent = false;
+        this.products = this.notFound.title = " کالایی با این محدوده قیمت موجود نمی‌باشد";
+      } else {
+        this.products = output;
+      }
     },
   },
 };
@@ -418,5 +438,17 @@ export default {
   font-size: 20px;
   border: none;
   cursor: pointer;
+}
+/* ________________________________________________ */
+.price-range__button {
+  width:300px;
+  height: 50px;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  color: rgb(65,184,131);
+  font-weight: bold;
+
+
 }
 </style>

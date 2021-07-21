@@ -1,11 +1,10 @@
 <template>
   <div class="card price-box">
-    <div class="card__header price-box__header">
-      تنظیم قیمت کالا
-    </div>
+    <div class="card__header price-box__header">تنظیم قیمت کالا</div>
 
     <div class="price-box__slider">
-      <Slider dir="ltr" v-model="value" :min="min" :max="max"> </Slider>
+      <Slider dir="ltr" v-model="value" :min="min" :max="max" @change="change()">
+      </Slider>
     </div>
   </div>
 </template>
@@ -23,6 +22,12 @@ export default {
       min: 0,
       max: 500,
     };
+  },
+  methods: {
+    change() {
+      // console.log(this.value)
+      this.$emit("change", this.value);
+    },
   },
 };
 </script>
@@ -49,7 +54,6 @@ export default {
   width: 80%;
   margin: auto;
 }
-
 </style>
 
 <style src="@vueform/slider/themes/default.css"></style>
