@@ -15,7 +15,7 @@
     </button>
 
     <a
-      class="sort-box__item  sort-box__price"
+      class="sort-box__item sort-box__price"
       :class="{ is_active: price_active }"
       >قیمت</a
     >
@@ -156,6 +156,7 @@ export default {
     },
   },
   methods: {
+    
     back() {
       this.hasContent = true;
     },
@@ -166,6 +167,8 @@ export default {
       this.sortbyCount();
       console.log(this.mainProduct);
     },
+
+    //set filter list and "active" property for each object
     getFilter(data) {
       this.filters = data;
       this.filters.forEach(function (element) {
@@ -173,9 +176,13 @@ export default {
       });
       console.log(this.filters);
     },
+
+    //set price range, Default Range is [0,500]
     getPrice(data) {
       this.priceRange = data;
     },
+
+    //Sort products with "Most sales" filter, Product display is in descending order
     sortbyCount() {
       this.updatedActive();
       this.count_active = true;
@@ -186,6 +193,8 @@ export default {
         return a.sold_count > b.sold_count ? -1 : 1;
       });
     },
+
+    //Sort products with "Price" filter, Product display is in descending  and Ascending order
     sortbyPrice(priceDirection) {
       this.updatedActive();
       this.price_active = true;
@@ -200,6 +209,8 @@ export default {
         return a.price > b.price ? 1 * modifier : -1 * modifier;
       });
     },
+
+    //Sort products with "Creat date" filter, Product display is in Ascending order
     sortbyDate() {
       this.updatedActive();
       this.date_active = true;
@@ -214,6 +225,7 @@ export default {
       this.date_active = false;
     },
 
+    //Filter products with "Category" filters
     categoryFilter(c_id) {
       this.filters.forEach(function (element) {
         if (element.id === c_id) {
@@ -248,6 +260,7 @@ export default {
         : (this.products = output);
     },
 
+    //filter products with "Serch box" filter
     searchFilter(input) {
       this.searchInput = input;
       var output = this.mainProduct.filter(function (s) {
@@ -263,6 +276,8 @@ export default {
         this.products = output;
       }
     },
+
+    //Filter products with "Price range" filter, Product display is in Ascending order
     priceFilter() {
       console.log(this.priceRange);
       let min, max;
@@ -273,7 +288,8 @@ export default {
       });
       if (output.length === 0) {
         this.hasContent = false;
-        this.products = this.notFound.title = " کالایی با این محدوده قیمت موجود نمی‌باشد";
+        this.products = this.notFound.title =
+          " کالایی با این محدوده قیمت موجود نمی‌باشد";
       } else {
         this.products = output;
       }
@@ -441,14 +457,12 @@ export default {
 }
 /* ________________________________________________ */
 .price-range__button {
-  width:300px;
+  width: 300px;
   height: 50px;
   font-size: 15px;
   border: none;
   cursor: pointer;
-  color: rgb(65,184,131);
+  color: rgb(65, 184, 131);
   font-weight: bold;
-
-
 }
 </style>

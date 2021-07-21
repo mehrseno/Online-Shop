@@ -20,6 +20,7 @@
         :require="true"
         :validate="validatePass"
       />
+    <!--phase 1 html validation-->
       <!-- <Subform
       class="mail"
       name="ایمیل"
@@ -109,6 +110,7 @@ export default {
     };
   },
   methods: {
+
     showModal() {
       this.isModalVisible = true;
       this.modalMassage = this.finalValidate();
@@ -135,7 +137,8 @@ export default {
       this.user.email = text;
       return errors["ایمیل"];
     },
-
+    
+    //Validation to match the (Email,Password) with one of the registered (Email,Password)
     finalValidate() {
       console.log(this.errors);
       console.log(this.currentUser);
