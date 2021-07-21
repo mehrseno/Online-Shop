@@ -1,67 +1,56 @@
 import { createStore } from "vuex";
-import { getAPI } from './../axios-api'
 
 
 export default createStore({
     state: {
-        accessToken: null,
-        refreshToken: null,
-        user: {
-            name: "",
-            lastname: "",
-            address: "",
-            email: ""
-        }
+        cart: {
+            items: [],
+        },
+        token: "",
+        isAuthenticated: false,
+        isLoading: false,
     },
     mutations: {
-        updateStorage(state, { access, refresh }) {
-            state.accessToken = access
-            state.refreshToken = refresh
-        },
-        destroyToken(state) {
-            state.accessToken = null
-            state.refreshToken = null
-        },
-        updateUser(state, {user}) {
-            state.user = user
-        }
-    },
-    getters: {
-        loggedIn(state) {
-            return state.accessToken != null;
-        }
-    },
-    actions: {
-        userLogout(context) {
-            if (context.getters.loggedIn) {
-                context.commit('destroyToken')
+        initializeStore(state) {
+            if (localStorage.getItem('cart')) {
+                state.cart = JSON.parse(localStorage.getItem('cart'))
+            } else {
+                localStorage.setItem('cart', JSON.stringify(state.cart))
             }
         },
-        userLogin(context, userCredentials) {
-            console.log("in login");
-            console.log(userCredentials);
-            return new Promise((resolve, reject) => {
-                getAPI.post('/api/api-token/', {
-                    username: userCredentials.email,
-                    password: userCredentials.password
-                }).then(response => {
-                    context.commit('updateStorage', { access: response.data.access, refresh: response.data.refresh })
-                    resolve()
-                })
-            })
+        initializeToken(state) {
+            if (localStorage.getItem('token')) {
+                state.token = localStorage.getItem('token')
+                state.isAuthenticated = true
+            } else {
+                state.token = ''
+                state.isAuthenticated = false
+            }
         },
-        userRegister(context, user) {
-            console.log("In register");
-            return new Promise((resolve, reject) => {
-                getAPI.post('/api/register', {
-                    name: user.name,
-                    lastname: user.lastname,
-                    password: user.password,
-                    address: user.address,
-                    email: user.email 
-                }).then(response => {
-                })
-            })
+        addToCart(state, item) {
+            const exists = state.cart.items.filter(i => i.product.id === item.product.id)
+            if (exists.length) {
+                exists[0].quantity = parseInt(exists[0].quantity) + parseInt(item.quantity)
+            } else {
+                state.cart.items.push(item)
+            }
+
+            localStorage.setItem('cart', JSON.stringify(state.cart))
+        },
+        setToken(state, token) {
+            state.token = token
+            state.isAuthenticated = true
+        },
+        removeToken(state) {
+            state.token = ""
+            state.isAuthenticated = false
+        },
+        clearCart(state) {
+            state.cart = { items: [] }
+            localStorage.setItem('cart', JSON.stringify(state.cart))
+        },
+        setIsLoading(state, status) {
+            state.isLoading = status;
         }
-    }
+    },
 })

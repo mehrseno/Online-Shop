@@ -125,6 +125,9 @@ import CustomField from "../components/CustomField.vue";
 import useFormValidation from "@/modules/useFormValidation";
 import Subform from "../components/Subform.vue";
 import Modal from "../components/Modal.vue";
+import { toast } from "bulma-toast";
+import axios from "axios";
+
 export default {
   name: "Register",
   components: {
@@ -155,7 +158,7 @@ export default {
         lastname: "",
         email: "",
         password: "",
-        address: ""
+        address: "",
       },
     };
   },
@@ -187,6 +190,7 @@ export default {
       const { validatePass, errors } = useFormValidation();
       validatePass("رمز عبور", text);
       text ? (this.full["رمزعبور"] = text) : (this.full["رمزعبور"] = "");
+      this.user.password = text;
       return errors["رمز عبور"];
     },
     validateAddress(text) {
@@ -227,14 +231,59 @@ export default {
       }
     },
     Exist(obj) {
-      return this.pastUser.some(function (el) {
+      return this.pastUser.some(function(el) {
         return el.email === obj.email;
       });
     },
     register() {
-        // check the validation
-        
-    }
+      // check the validation
+      if (
+        JSON.stringify(this.errors) === "{}" &&
+        !Object.values(this.full).includes("")
+      ) {
+        const formData = {
+          // firstname: this.user.name,
+          // lastname: this.user.lastname,
+          username: this.user.email,
+          password: this.user.password,
+          // address: this.user.address,
+        };
+
+        axios
+          .post("api/v1/users/", formData)
+          .then((response) => {
+            toast({
+              message: "Account created, please log in!",
+              type: "is-success",
+              dismissible: true,
+              pauseOnHover: true,
+              duration: 2000,
+              position: "top-right",
+            });
+            this.$router.push("/login");
+          })
+          .catch((error) => {
+            if (error.response) {
+              for (const prop in error.response.data) {
+                toast({
+                  message: error.response.data[prop],
+                  type: "is-success",
+                  dismissible: true,
+                  pauseOnHover: true,
+                  duration: 2000,
+                  position: "top-right",
+                });
+              }
+            } else if (error.message) {
+              console.log(error.message);
+            }
+          });
+      } else {
+        this.isModalVisible = true;
+        this.modalMassage = " لطفا اطلاعات  را کامل و به درستی تکمیل نمایید.";
+        console.log(this.full);
+      }
+    },
   },
 };
 </script>

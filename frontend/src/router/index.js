@@ -6,6 +6,9 @@ import Register from '../views/Register.vue'
 import UserProfile from '../views/UserProfile.vue'
 import AdminProfile from '../views/AdminProfile.vue'
 import Logout from '../views/Logout.vue'
+import Product from '../views/Product.vue'
+import Cart from '../views/Cart.vue'
+import store from '../store'
 
 const routes = [
     {
@@ -44,6 +47,22 @@ const routes = [
         path: '/logout',
         name: 'Logout',
         component: Logout,
+    },
+    {
+        path: '/:category_slug/:product_slug/',
+        name: 'Product',
+        component: Product,
+        meta: {
+            requiresLogin: true
+        }
+    },
+    {
+        path: '/cart',
+        name: 'Cart',
+        component: Cart,
+        meta: {
+            requiresLogin: true
+        }
     }
 ]
 
@@ -75,5 +94,15 @@ const router = createRouter({
     },
     history: createWebHistory(process.env.BASE_URL),
 })
+
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresLogin) && !store.state.isAuthenticated) {
+        next({ name: 'Login', query: { to: to.path } })
+    } else {
+        next()
+    }
+})
+
 
 export default router

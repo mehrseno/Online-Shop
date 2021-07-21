@@ -11,22 +11,30 @@
     <router-link
       :to="{
         name: 'Home',
-        hash:'#page_content',
+        hash: '#page_content',
       }"
       class="main-header__item main-header__products"
       >محصولات</router-link
     >
-    <dropdown
-      v-if="$store.getters.loggedIn"
-      class="dropdown"
-      title="هادی"
-      :items="user_items"
-    />
-    <RoundButton
-      v-if="!$store.getters.loggedIn"
-      text="ورود / ثبت‌نام"
-      class="main-header__button"
-    />
+
+    <div class="left-side">
+      <router-link to="/cart" class="cart">
+        <span class="icon"> <i class="fas fa-shopping-cart"></i></span>
+        <span> کارت ({{ total }}) </span>
+      </router-link>
+
+      <dropdown
+        v-if="$store.state.isAuthenticated"
+        class="dropdown"
+        :title="getUsername"
+        :items="user_items"
+      />
+      <RoundButton
+        v-if="!$store.state.isAuthenticated"
+        text="ورود / ثبت‌نام"
+        class="main-header__button"
+      />
+    </div>
   </header>
 </template>
 
@@ -36,6 +44,10 @@ import Dropdown from "./Dropdown.vue";
 
 export default {
   name: "Header",
+  props: {
+    total: Number,
+    name: String,
+  },
   data() {
     return {
       user_items: [
@@ -49,11 +61,17 @@ export default {
         },
       ],
       isLogin: true,
+      name: this.name,
     };
   },
   components: {
     RoundButton,
     Dropdown,
+  },
+  computed: {
+    getUsername(){
+      return localStorage.getItem('username').split("@")[0];
+    }
   },
   methods: {
     goto(refName) {
@@ -63,8 +81,8 @@ export default {
       // var top = element.offsetTop;
       console.log("clicked on go to ");
       // window.scrollTo(0, top);
-        //  document.getElementById(refName).scrollIntoView({
-        // behavior: "smooth"
+      //  document.getElementById(refName).scrollIntoView({
+      // behavior: "smooth"
       // });
     },
   },
@@ -91,12 +109,12 @@ export default {
 }
 
 .dropdown {
-  margin-right: auto;
+  /* margin-right: auto; */
   margin-left: 25px;
 }
 
 .main-header__button {
-  margin-right: auto; /* for justify self to right side */
+  /* margin-right: auto; for justify self to right side */
   margin-left: 25px;
 }
 
@@ -109,5 +127,18 @@ export default {
 
 .main-header__item:hover {
   color: var(--text-hover-color);
+}
+
+.left-side {
+  margin-right: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.cart {
+  background: var(--simple-button-background);
+  border-radius: 20px;
+  height: 2.8rem;
+  padding: 10px;
 }
 </style>

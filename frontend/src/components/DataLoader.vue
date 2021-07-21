@@ -14,6 +14,8 @@
 <script>
 import _ from "lodash";
 import Spinner from "@/components/Spinner.vue";
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -37,15 +39,12 @@ export default {
     },
   },
   methods: {
+    
     async findData() {
       try {
         this.error = null;
         this.loading = true;
-        let results = await this.axios.get(this.endpoint, {
-          headers: {
-            Authorization: `token ${this.authToken}`,
-          },
-        });
+        let results = await this.axios.get(this.endpoint);
         this.$emit('recieveData', results.data)
       } catch (e) {
         console.log(e);

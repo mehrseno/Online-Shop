@@ -44,22 +44,22 @@
     <div class="page__aside">
       <!-- <filter-box /> -->
       <div class="categories card">
-        <data-loader :endpoint="filter_url" @recieveData="getFilter">
-          <div class="card__header categories__header">دسته‌بندی‌ها</div>
-          <div
-            class="categories__option"
-            :key="category.id"
-            v-for="category in filters"
-          >
-            <input
-              :v-model="category.title"
-              type="checkbox"
-              :name="category"
-              :id="category.id"
-              @click="categoryFilter(category.id)"
-            />
-            <label :for="category.id">{{ category.title }}</label>
-          </div>
+        <data-loader :endpoint="filter_url" @recieveData="getCategories"> 
+        <div class="card__header categories__header">دسته‌بندی‌ها</div>
+        <div
+          class="categories__option"
+          :key="category.id"
+          v-for="category in filters"
+        >
+          <input
+            :v-model="category.title"
+            type="checkbox"
+            :name="category"
+            :id="category.id"
+            @click="categoryFilter(category.id)"
+          />
+          <label :for="category.id">{{ category.title }}</label>
+        </div>
         </data-loader>
       </div>
       <slider-box @change="getPrice" />
@@ -77,24 +77,24 @@
       />
     </div>
     <div class="page_content" id="page_content" v-if="hasContent">
-      <data-loader :endpoint="url" @recieveData="getdata">
-        {{ Products }}
-        <pagination-bar
-          :items="products"
-          :totalItems="products.length"
-          @pagecreated="pagationItems"
-        >
-          <template #data="{ paginatedItems }">
-            <div class="products">
-              <product
-                :key="product.id"
-                :product="product"
-                v-for="product in paginatedItems"
-                text="خرید محصول"
-              />
-            </div>
-          </template>
-        </pagination-bar>
+      <data-loader :endpoint="url" @recieveData="getproducts" :authToken="$store.state.token">
+      {{ Products }}
+      <pagination-bar
+        :items="products"
+        :totalItems="products.length"
+      >
+        <template #data="{ paginatedItems }">
+          <div class="products">
+            <product
+              :key="product.id"
+              :product="product"
+              v-for="product in paginatedItems"
+              text="خرید محصول"
+              @click-product="showDetail"
+            />
+          </div>
+        </template>
+      </pagination-bar>
       </data-loader>
     </div>
   </div>
@@ -112,6 +112,9 @@ import Product from "../components/Product.vue";
 import DataLoader from "../components/DataLoader.vue";
 import PaginationBar from "../components/PaginationBar.vue";
 import SubmitButton from "../components/SubmitButton.vue";
+import axios from "axios";
+import Spinner from "@/components/Spinner.vue";
+
 export default {
   name: "Home",
   components: {
@@ -122,6 +125,7 @@ export default {
     Product,
     DataLoader,
     s: Function,
+    Spinner,
     HeroNav,
     // SortBox,
     Slider,
@@ -138,10 +142,11 @@ export default {
       priceRange: [],
       name: "",
       notFound: [{ title: "" }],
-      url: "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount",
+      // url: "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount",
+      url: "http://localhost:8000/api/v1/products/",
       filter_url:
-        "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/categories",
-      // url: "http://localhost:8000/api/products/",
+        // "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/categories",
+        "http://localhost:8000/api/v1/filters-categories/",
       p: [],
       srt: [],
       price_active: false,
@@ -155,25 +160,56 @@ export default {
       console.log(`changed in p ${newdata}`);
     },
   },
+  mounted() {
+    // this.getproducts();
+    // this.getCategories();
+  },
   methods: {
+    showDetail(product) {
+      console.log("show data");
+      console.log(product);
+      this.$router.push(product.get_absolute_url);
+    },
     back() {
       this.hasContent = true;
     },
+    async getproducts() {
+      // delete axios.defaults.headers.common["Authorization"];
 
-    getdata(data) {
-      this.products = data;
-      this.mainProduct = data;
-      this.sortbyCount();
-      console.log(this.mainProduct);
+      // this.products = data;
+      // this.mainProduct = data;
+      // this.sortbyCount();
+      // this.$store.commit("setIsLoading", true);
+      await axios
+        .get("/api/v1/products/")
+        .then((response) => {
+          console.log();
+          this.products = response.data;
+          this.mainProduct = response.data;
+          this.sortbyCount();
+          console.log(this.mainProduct);
+        })
+        .catch((error) => {
+          console.log("error in get products");
+        });
+      this.$store.commit("setIsLoading", false);
     },
 
     //set filter list and "active" property for each object
-    getFilter(data) {
-      this.filters = data;
-      this.filters.forEach(function(element) {
-        element.active = "false";
-      });
-      console.log(this.filters);
+    getCategories(data) {
+      // this.filters = data;
+      axios
+        .get("/api/v1/filters-categories/")
+        .then((response) => {
+          this.filters = response.data;
+          this.filters.forEach(function(element) {
+            element.active = "false";
+          });
+          console.log(this.filters);
+        })
+        .catch((error) => {
+          console.log("error in get categories");
+        });
     },
 
     //set price range, Default Range is [0,500]
@@ -250,7 +286,7 @@ export default {
       console.log(activeId);
       var output = this.mainProduct.filter(function(s) {
         return activeId.some(function(t) {
-          return s.category === t;
+          return s.get_category === t;
         });
       });
       console.log(output);

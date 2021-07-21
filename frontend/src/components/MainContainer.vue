@@ -85,8 +85,6 @@ export default {
       console.log(`kfmj ${this.products}`);
     },
     pagationItems(data) {
-      console.log("paaaaaaaaaaaaaaage");
-      console.log(data);
       this.p = data;
     },
 
