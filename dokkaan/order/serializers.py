@@ -5,6 +5,32 @@ from .models import Order, OrderItem
 
 from app.serializers import ProductSerializer
 
+class MyOrderItemSerializer(serializers.ModelSerializer):
+    product  = ProductSerializer()
+    class Meta:
+        model = OrderItem
+        fields = (
+            "product",
+            "quantity",
+        )
+
+class MyOrderSerializer(serializers.ModelSerializer):
+    items = MyOrderItemSerializer(many=True)
+
+    class Meta:
+        model = Order
+        fields = (
+            "id",
+            "first_name",
+            "last_name",
+            "email",
+            "address",
+            "created_at",
+            "items",
+            "paid_amount",
+        )
+
+
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
@@ -30,8 +56,6 @@ class OrderSerializer(serializers.ModelSerializer):
         )
 
     def create(self, validated_data):
-        print('in create order')
-        print('================================================')
         items_data = validated_data.pop('items')
         order = Order.objects.create(**validated_data)
 

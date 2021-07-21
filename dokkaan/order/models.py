@@ -15,7 +15,7 @@ class Order(models.Model):
     address = models.CharField(max_length=1000)
     created_at = models.DateTimeField(auto_now_add=True)
     paid_amount = models.IntegerField()
-    code = models.CharField(max_length=10, blank=True, editable=False, unique=True, default=create_new_ref_number)
+    # code = models.CharField(max_length=10, blank=True, editable=False, unique=True, default=create_new_ref_number)
 
     class Meta:
         ordering = ['created_at', ]
