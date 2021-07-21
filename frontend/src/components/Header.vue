@@ -18,19 +18,19 @@
     >
 
     <div class="left-side">
-      <router-link v-if="!$store.getters.loggedIn" to="/cart" class="cart">
+      <router-link v-if="!$store.state.isAuthenticated" to="/cart" class="cart">
         <span class="icon"> <i class="fas fa-shopping-cart"></i></span>
         <span> کارت ({{ total }}) </span>
       </router-link>
 
       <dropdown
-        v-if="$store.getters.loggedIn"
+        v-if="$store.state.isAuthenticated"
         class="dropdown"
         title="هادی"
         :items="user_items"
       />
       <RoundButton
-        v-if="!$store.getters.loggedIn"
+        v-if="!$store.state.isAuthenticated"
         text="ورود / ثبت‌نام"
         class="main-header__button"
       />

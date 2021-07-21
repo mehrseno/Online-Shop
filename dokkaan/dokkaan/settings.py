@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'app',
     'corsheaders',
-    'rest_framework_simplejwt.token_blacklist',
+    'rest_framework.authtoken',
+    'djoser',
+    # 'rest_framework_simplejwt.token_blacklist',
     'order',
 ]
 
@@ -58,10 +60,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8080',
-    'http://127.0.0.1:8080',
-)
+ALLOWED_HOSTS=['*']
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+# CORS_ALLOWED_ORIGINS = (
+#     'http://localhost:8080',
+#     'http://127.0.0.1:8080',
+# )
 
 ROOT_URLCONF = 'dokkaan.urls'
 
@@ -140,14 +146,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES' : (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     )
 }
 
-from datetime import timedelta
+# from datetime import timedelta
 
-SIMPLE_JTW  = {
-    'ACCESS_TOKEN_LIFETIME' : timedelta(minutes=30),
-    'REFRESH_TOKEN_LIFETIME' : timedelta(days=15),
-    'ROTATE_REFRESH_TOKEN' : True,
-}
+# SIMPLE_JTW  = {
+#     'ACCESS_TOKEN_LIFETIME' : timedelta(minutes=30),
+#     'REFRESH_TOKEN_LIFETIME' : timedelta(days=15),
+#     'ROTATE_REFRESH_TOKEN' : True,
+# }

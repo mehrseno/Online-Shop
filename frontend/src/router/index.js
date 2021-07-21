@@ -8,6 +8,7 @@ import AdminProfile from '../views/AdminProfile.vue'
 import Logout from '../views/Logout.vue'
 import Product from '../views/Product.vue'
 import Cart from '../views/Cart.vue'
+import store from '../store'
 
 const routes = [
     {
@@ -87,5 +88,15 @@ const router = createRouter({
     },
     history: createWebHistory(process.env.BASE_URL),
 })
+
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresLogin) && !store.state.isAuthenticated) {
+        next({ name: 'Login', query: { to: to.path } })
+    } else {
+        next()
+    }
+})
+
 
 export default router

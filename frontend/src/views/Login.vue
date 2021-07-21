@@ -20,7 +20,7 @@
         :require="true"
         :validate="validatePass"
       />
-    <!--phase 1 html validation-->
+      <!--phase 1 html validation-->
       <!-- <Subform
       class="mail"
       name="ایمیل"
@@ -76,8 +76,9 @@ import useFormValidation from "../modules/useFormValidation";
 import CustomField from "../components/CustomField.vue";
 import Subform from "../components/Subform.vue";
 
-
-import {useStore} from "vuex";
+import { useStore } from "vuex";
+import axios from "axios";
+import { getAPI } from "../axios-api";
 
 export default {
   name: "Login",
@@ -110,7 +111,6 @@ export default {
     };
   },
   methods: {
-
     showModal() {
       this.isModalVisible = true;
       this.modalMassage = this.finalValidate();
@@ -137,7 +137,7 @@ export default {
       this.user.email = text;
       return errors["ایمیل"];
     },
-    
+
     //Validation to match the (Email,Password) with one of the registered (Email,Password)
     finalValidate() {
       console.log(this.errors);
@@ -164,26 +164,42 @@ export default {
     login() {
       const { errors } = useFormValidation();
       console.log(`in login email is ${this.user.email}`);
-      // if (errors["ایمیل"] !== "" || errors["رمز عبور"] !== "") {
-      //   this.isModalVisible = true;
-      //   this.modalMassage = "ایمیل و یا رمز عبور شما صحیح نمی‌باشد.";
-      //   return;
-      // }
-      this.$store
-        .dispatch("userLogin", {
-          email: this.user.email,
-          password: this.user.password,
+      if (errors["ایمیل"] !== "" || errors["رمز عبور"] !== "") {
+        this.isModalVisible = true;
+        this.modalMassage = "ایمیل و یا رمز عبور شما صحیح نمی‌باشد.";
+        return;
+      }
+      axios.defaults.headers.common["Authorization"] = "";
+      localStorage.removeItem("token");
+
+      const formData = {
+        username: this.user.email,
+        password: this.user.password,
+      };
+
+      console.log("in login");
+      console.log(formData);
+
+      getAPI
+        .post("api/v1/token/login/", formData)
+        .then((response) => {
+          const token = response.data.auth_token;
+          this.$store.commit("setToken", token);
+          axios.defaults.headers.common["Authorization"] = "Token " + token;
+          localStorage.setItem("token", token);
+          const toPath = this.$route.query.to || "/user_profile";
+          this.$router.push(toPath);
         })
-        .then(() => {
-          this.$router.push({ name: "UserProfile" });
-          console.log(this.$store.state.accessToken)
-          console.log(this.$store.getters.loggedIn)
-        })
-        .catch((err) => {
-          console.log("error in login");
-          console.log(err);
-          this.isModalVisible = true;
-          this.modalMassage = "ورود شما مجاز نیست";
+        .catch((error) => {
+          if (error.response) {
+            for (const prop in error.response.data) {
+              // console.log(prop);
+            }
+          } else {
+            console.log("error in login");
+            this.isModalVisible = true;
+            this.modalMassage = "ورود شما مجاز نیست";
+          }
         });
     },
   },

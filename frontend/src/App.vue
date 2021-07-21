@@ -7,7 +7,7 @@
 
   <div class="container">
     <Header :total="cartTotalLength" />
-      <router-view ></router-view>
+    <router-view></router-view>
     <Footer />
   </div>
 </template>
@@ -15,6 +15,8 @@
 <script>
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import axios from 'axios';
+import store from './store';
 
 export default {
   name: "App",
@@ -27,6 +29,7 @@ export default {
       cart: {
         items: []
       },
+      token: '',
       cartTotalLength: Number,
     }
   },
@@ -34,7 +37,13 @@ export default {
     console.log("beforeCreate")
     this.$store.commit('initializeStore')
     this.$store.commit('initializeToken')
-  }, 
+    const token = this.$store.state.token
+    if(token) {
+      axios.defaults.headers.common['Authoization'] = 'Token ' + token
+    } else {
+      axios.defaults.headers.common['Authoization'] = ''
+    }
+  },
   computed: {
     cartTotalLength() {
       console.log('cartTotalLength')

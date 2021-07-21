@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createStore } from "vuex";
 import { getAPI } from './../axios-api'
 
@@ -7,16 +8,8 @@ export default createStore({
         cart: {
             items: [],
         },
-        token: {
-            accessToken: null,
-            refreshToken: null,
-        },
-        user: {
-            name: "",
-            lastname: "",
-            address: "",
-            email: ""
-        }
+        token: "",
+        isAuthenticated: false,
     },
     mutations: {
         initializeStore(state) {
@@ -28,9 +21,11 @@ export default createStore({
         },
         initializeToken(state) {
             if (localStorage.getItem('token')) {
-                state.token = JSON.parse(localStorage.getItem('token'))
+                state.token = localStorage.getItem('token')
+                state.isAuthenticated = true
             } else {
-                localStorage.setItem('token', JSON.stringify(state.token))
+                state.token = ''
+                state.isAuthenticated = false
             }
         },
         addToCart(state, item) {
@@ -43,64 +38,13 @@ export default createStore({
 
             localStorage.setItem('cart', JSON.stringify(state.cart))
         },
-        updateStorage(state, { access, refresh }) {
-            state.token.accessToken = access
-            state.token.refreshToken = refresh
-            localStorage.setItem('token', JSON.stringify(state.token))
-            // localStorage.setItem('accessToken', state.accessToken)
-            // localStorage.setItem('refreshToken', state.refreshToken)
+        setToken(state, token) {
+            state.token = token
+            state.isAuthenticated = true
         },
-        destroyToken(state) {
-            state.token.accessToken = null
-            state.token.refreshToken = null
-            // localStorage.setItem('accessToken', state.accessToken)
-            // localStorage.setItem('refreshToken', state.refreshToken)
-        },
-        updateUser(state, { user }) {
-            state.user = user
+        removeToken(state) {
+            state.token = ""
+            state.isAuthenticated = false
         }
     },
-    getters: {
-        loggedIn(state) {
-            // state.accessToken = localStorage.getItem('accessToken')
-            // state.token = JSON.parse(localStorage.getItem('token'))
-            // console.log(state.token)
-            // console.log(state.token.accessToken !== null)
-            return state.token.accessToken !== null;
-        }
-    },
-    actions: {
-        userLogout(context) {
-            if (context.getters.loggedIn) {
-                context.commit('destroyToken')
-            }
-        },
-        userLogin(context, userCredentials) {
-            console.log("in login");
-            console.log(userCredentials);
-            return new Promise((resolve, reject) => {
-                getAPI.post('/api/api-token/', {
-                    username: userCredentials.email,
-                    password: userCredentials.password
-                }).then(response => {
-                    context.commit('updateStorage', { access: response.data.access, refresh: response.data.refresh })
-                    console.log('saved the token')
-                    resolve()
-                })
-            })
-        },
-        userRegister(context, user) {
-            console.log("In register");
-            return new Promise((resolve, reject) => {
-                getAPI.post('/api/register', {
-                    name: user.name,
-                    lastname: user.lastname,
-                    password: user.password,
-                    address: user.address,
-                    email: user.email
-                }).then(response => {
-                })
-            })
-        }
-    }
 })

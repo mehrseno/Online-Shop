@@ -41,26 +41,26 @@
     </button>
   </div>
   <div class="page">
-  <div class="page__aside">
+    <div class="page__aside">
       <!-- <filter-box /> -->
       <div class="categories card">
-        <data-loader :endpoint="filter_url" @recieveData="getFilter">
-          <div class="card__header categories__header">دسته‌بندی‌ها</div>
-          <div
-            class="categories__option"
-            :key="category.id"
-            v-for="category in filters"
-          >
-            <input
-              :v-model="category.title"
-              type="checkbox"
-              :name="category"
-              :id="category.id"
-              @click="categoryFilter(category.id)"
-            />
-            <label :for="category.id">{{ category.title }}</label>
-          </div>
-        </data-loader>
+        <!-- <data-loader :endpoint="filter_url" @recieveData="getFilter"> -->
+        <div class="card__header categories__header">دسته‌بندی‌ها</div>
+        <div
+          class="categories__option"
+          :key="category.id"
+          v-for="category in filters"
+        >
+          <input
+            :v-model="category.title"
+            type="checkbox"
+            :name="category"
+            :id="category.id"
+            @click="categoryFilter(category.id)"
+          />
+          <label :for="category.id">{{ category.title }}</label>
+        </div>
+        <!-- </data-loader> -->
       </div>
       <slider-box @change="getPrice" />
       <button @click="priceFilter()" class="price-range__button">
@@ -77,28 +77,27 @@
       />
     </div>
     <div class="page_content" id="page_content" v-if="hasContent">
-      <data-loader :endpoint="url" @recieveData="getdata">
-        {{ Products }}
-        <pagination-bar
-          :items="products"
-          :totalItems="products.length"
-          @pagecreated="pagationItems"
-        >
-          <template #data="{ paginatedItems }">
-            <div class="products">
-              <product
-                :key="product.id"
-                :product="product"
-                v-for="product in paginatedItems"
-                text="خرید محصول"
-                @click-product="showDetail"
-              />
-            </div>
-          </template>
-        </pagination-bar>
-      </data-loader>
+      <!-- <data-loader :endpoint="url" @recieveData="getdata"> -->
+      {{ Products }}
+      <pagination-bar
+        :items="products"
+        :totalItems="products.length"
+        @pagecreated="pagationItems"
+      >
+        <template #data="{ paginatedItems }">
+          <div class="products">
+            <product
+              :key="product.id"
+              :product="product"
+              v-for="product in paginatedItems"
+              text="خرید محصول"
+              @click-product="showDetail"
+            />
+          </div>
+        </template>
+      </pagination-bar>
+      <!-- </data-loader> -->
     </div>
-  
   </div>
 </template>
 
@@ -114,6 +113,7 @@ import Product from "../components/Product.vue";
 import DataLoader from "../components/DataLoader.vue";
 import PaginationBar from "../components/PaginationBar.vue";
 import SubmitButton from "../components/SubmitButton.vue";
+import axios from "axios";
 export default {
   name: "Home",
   components: {
@@ -140,10 +140,11 @@ export default {
       priceRange: [],
       name: "",
       notFound: [{ title: "" }],
-      url: "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount",
+      // url: "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount",
+      url: "http://localhost:8000/api/v1/products/",
       filter_url:
         "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/categories",
-      // "http://localhost:8000/api/filters-categories/",
+      // "http://localhost:8000/api/v1/filters-categories/",
       p: [],
       srt: [],
       price_active: false,
@@ -157,6 +158,9 @@ export default {
       console.log(`changed in p ${newdata}`);
     },
   },
+  mounted() {
+    this.getproducts();
+  },
   methods: {
     showDetail(product) {
       console.log("show data");
@@ -166,21 +170,41 @@ export default {
     back() {
       this.hasContent = true;
     },
+    getproducts() {
+      delete axios.defaults.headers.common["Authoization"];
 
-    getdata(data) {
-      this.products = data;
-      this.mainProduct = data;
-      this.sortbyCount();
-      console.log(this.mainProduct);
+      // this.products = data;
+      // this.mainProduct = data;
+      // this.sortbyCount();
+      axios
+        .get("/api/v1/products/")
+        .then((response) => {
+          console.log();
+          this.products = response.data;
+          this.mainProduct = response.data;
+          this.sortbyCount();
+          console.log(this.mainProduct);
+        })
+        .catch((error) => {
+          console.log("error in get products");
+        });
     },
 
     //set filter list and "active" property for each object
-    getFilter(data) {
-      this.filters = data;
-      this.filters.forEach(function(element) {
-        element.active = "false";
-      });
-      console.log(this.filters);
+    getCategories(data) {
+      // this.filters = data;
+      axios
+        .get("/api/v1/filterd-list/")
+        .then((response) => {
+          this.filters = response.data;
+          this.filters.forEach(function(element) {
+            element.active = "false";
+          });
+          console.log(this.filters);
+        })
+        .catch((error) => {
+          console.log("error in get categories");
+        });
     },
 
     //set price range, Default Range is [0,500]

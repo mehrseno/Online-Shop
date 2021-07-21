@@ -46,7 +46,7 @@ export default {
       const category_slug = this.$route.params.category_slug;
       const product_slug = this.$route.params.product_slug;
       getAPI
-        .get(`/api/products/${category_slug}/${product_slug}/`)
+        .get(`/api/v1/products/${category_slug}/${product_slug}/`)
         .then((response) => {
           this.product = response.data;
         })

@@ -125,6 +125,9 @@ import CustomField from "../components/CustomField.vue";
 import useFormValidation from "@/modules/useFormValidation";
 import Subform from "../components/Subform.vue";
 import Modal from "../components/Modal.vue";
+import { getAPI } from "./../axios-api";
+import { toast } from "bulma-toast";
+
 export default {
   name: "Register",
   components: {
@@ -155,7 +158,7 @@ export default {
         lastname: "",
         email: "",
         password: "",
-        address: ""
+        address: "",
       },
     };
   },
@@ -187,6 +190,7 @@ export default {
       const { validatePass, errors } = useFormValidation();
       validatePass("رمز عبور", text);
       text ? (this.full["رمزعبور"] = text) : (this.full["رمزعبور"] = "");
+      this.user.password = text;
       return errors["رمز عبور"];
     },
     validateAddress(text) {
@@ -227,14 +231,58 @@ export default {
       }
     },
     Exist(obj) {
-      return this.pastUser.some(function (el) {
+      return this.pastUser.some(function(el) {
         return el.email === obj.email;
       });
     },
     register() {
-        // check the validation
-        
-    }
+      // check the validation
+      if (
+        JSON.stringify(this.errors) === "{}" &&
+        !Object.values(this.full).includes("")
+      ) {
+        console.log("register");
+        if (this.user.password == "!Q2w3e4r") {
+          console.log("ramz lo raft");
+        }
+        const formData = {
+          // firstname: this.user.name,
+          // lastname: this.user.lastname,
+          username: this.user.email,
+          password: this.user.password,
+          // address: this.user.address,
+        };
+        console.log(formData);
+        getAPI
+          .post("api/v1/users/", formData)
+          .then((response) => {
+            toast({
+              message: "Account created, please log in!",
+              type: "is-success",
+              dismissible: true,
+              pauseOnHover: true,
+              duration: 2000,
+              position: "top-left",
+            });
+            this.$router.push("/login");
+          })
+          .catch((error) => {
+            console.log("error in register");
+            error = [];
+            if (error.response) {
+              for (const prop in error.response.data) {
+                console.log(prop);
+              }
+            } else if (error.message) {
+              console.log(error.message);
+            }
+          });
+      } else {
+        this.isModalVisible = true;
+        this.modalMassage = " لطفا اطلاعات  را کامل و به درستی تکمیل نمایید.";
+        console.log(this.full);
+      }
+    },
   },
 };
 </script>
