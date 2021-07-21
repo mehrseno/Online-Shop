@@ -143,8 +143,8 @@ export default {
       // url: "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount",
       url: "http://localhost:8000/api/v1/products/",
       filter_url:
-        "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/categories",
-      // "http://localhost:8000/api/v1/filters-categories/",
+        // "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/categories",
+      "http://localhost:8000/api/v1/filters-categories/",
       p: [],
       srt: [],
       price_active: false,
@@ -160,6 +160,7 @@ export default {
   },
   mounted() {
     this.getproducts();
+    this.getCategories();
   },
   methods: {
     showDetail(product) {
@@ -194,7 +195,7 @@ export default {
     getCategories(data) {
       // this.filters = data;
       axios
-        .get("/api/v1/filterd-list/")
+        .get("/api/v1/filters-categories/")
         .then((response) => {
           this.filters = response.data;
           this.filters.forEach(function(element) {
