@@ -156,7 +156,6 @@ export default {
     },
   },
   methods: {
-    
     back() {
       this.hasContent = true;
     },
@@ -171,7 +170,7 @@ export default {
     //set filter list and "active" property for each object
     getFilter(data) {
       this.filters = data;
-      this.filters.forEach(function (element) {
+      this.filters.forEach(function(element) {
         element.active = "false";
       });
       console.log(this.filters);
@@ -227,7 +226,7 @@ export default {
 
     //Filter products with "Category" filters
     categoryFilter(c_id) {
-      this.filters.forEach(function (element) {
+      this.filters.forEach(function(element) {
         if (element.id === c_id) {
           element.active === "false"
             ? (element.active = "true")
@@ -249,8 +248,8 @@ export default {
         }
       }
       console.log(activeId);
-      var output = this.mainProduct.filter(function (s) {
-        return activeId.some(function (t) {
+      var output = this.mainProduct.filter(function(s) {
+        return activeId.some(function(t) {
           return s.category === t;
         });
       });
@@ -263,8 +262,8 @@ export default {
     //filter products with "Serch box" filter
     searchFilter(input) {
       this.searchInput = input;
-      var output = this.mainProduct.filter(function (s) {
-        return s.name === input;
+      var output = this.mainProduct.filter(function(s) {
+        return s.name.includes(input);
       });
 
       if (output.length === 0) {
@@ -283,7 +282,7 @@ export default {
       let min, max;
       min = this.priceRange[0];
       max = this.priceRange[1];
-      let output = this.mainProduct.filter(function (x) {
+      let output = this.mainProduct.filter(function(x) {
         return x.price >= min && x.price <= max;
       });
       if (output.length === 0) {
