@@ -3,22 +3,22 @@
     <div class="is_active button">+ ایجاد محصول جدید</div>
 
     <data-loader
-      endpoint="https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount"
+      endpoint="http://localhost:8000/api/v1/products/"
+      :authToken="$store.state.token"
+      @recieveData="getData"
     >
-      <template #loaded="{data}">
-        <PaginationBar :totalItems="data.count" :items="data.products || []">
-          <template #data="{paginatedItems}">
-            <div class="products">
-              <product
-                :key="product.id"
-                v-for="product in paginatedItems"
-                :product="product"
-                text="ویرایش محصول"
-              />
-            </div>
-          </template>
-        </PaginationBar>
-      </template>
+      <PaginationBar :totalItems="products.length" :items="products || []">
+        <template #data="{paginatedItems}">
+          <div class="products">
+            <product
+              :key="product.id"
+              v-for="product in paginatedItems"
+              :product="product"
+              text="ویرایش محصول"
+            />
+          </div>
+        </template>
+      </PaginationBar>
     </data-loader>
   </div>
 </template>
@@ -38,13 +38,18 @@ export default {
   props: {
     products: Array,
   },
+  methods: {
+    getData(data) {
+      console.log("getData");
+      this.products = data;
+    },
+  },
   data() {
     return {
       products: [],
     };
   },
-  created() {
-  },
+  created() {},
 };
 </script>
 
