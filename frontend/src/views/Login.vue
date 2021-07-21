@@ -76,9 +76,7 @@ import useFormValidation from "../modules/useFormValidation";
 import CustomField from "../components/CustomField.vue";
 import Subform from "../components/Subform.vue";
 
-import { useStore } from "vuex";
 import axios from "axios";
-import { getAPI } from "../axios-api";
 
 export default {
   name: "Login",
@@ -177,10 +175,7 @@ export default {
         password: this.user.password,
       };
 
-      console.log("in login");
-      console.log(formData);
-
-      getAPI
+      axios
         .post("api/v1/token/login/", formData)
         .then((response) => {
           const token = response.data.auth_token;

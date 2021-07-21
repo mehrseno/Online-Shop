@@ -2,7 +2,6 @@
 
 <script>
 import axios from "axios";
-import { getAPI } from "../axios-api";
 export default {
   created() {
     axios.defaults.headers.common["Authorization"] = "";
@@ -10,6 +9,7 @@ export default {
     localStorage.removeItem("username");
     localStorage.removeItem("userid");
     this.$store.commit("removeToken");
+    this.$store.commit("clearCart");
     this.$router.push("/");
   },
 };

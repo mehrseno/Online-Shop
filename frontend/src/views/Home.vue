@@ -171,7 +171,7 @@ export default {
       this.hasContent = true;
     },
     getproducts() {
-      delete axios.defaults.headers.common["Authoization"];
+      // delete axios.defaults.headers.common["Authorization"];
 
       // this.products = data;
       // this.mainProduct = data;

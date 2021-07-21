@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import { getAPI } from "./../axios-api";
 import { toast } from "bulma-toast";
+import axios from "axios";
 
 export default {
   name: "Product",
@@ -45,7 +45,7 @@ export default {
     getProduct() {
       const category_slug = this.$route.params.category_slug;
       const product_slug = this.$route.params.product_slug;
-      getAPI
+      axios
         .get(`/api/v1/products/${category_slug}/${product_slug}/`)
         .then((response) => {
           this.product = response.data;

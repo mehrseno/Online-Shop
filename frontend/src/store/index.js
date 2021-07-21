@@ -1,6 +1,4 @@
-import axios from "axios";
 import { createStore } from "vuex";
-import { getAPI } from './../axios-api'
 
 
 export default createStore({
@@ -45,6 +43,10 @@ export default createStore({
         removeToken(state) {
             state.token = ""
             state.isAuthenticated = false
+        },
+        clearCart(state) {
+            state.cart = { items: [] }
+            localStorage.setItem('cart', JSON.stringify(state.cart))
         }
     },
 })

@@ -1,24 +1,32 @@
-from django.db.models import query
-from django.views import generic
-import stripe 
+from django.conf import settings
 from django.contrib.auth.models import User
-from rest_framework.response import Response
+from django.http import Http404
 from django.shortcuts import render
 
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework import serializers, status, generics
-from rest_framework import authentication
+from rest_framework import serializers, status, authentication, permissions
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.views import APIView 
+from rest_framework.response import Response
+
 from .models import Order, OrderItem
 from .serializers import OrderSerializer
 
-
-class OrderAPIView(generic.RetrieveAPIView):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
-    permission_classes = (IsAuthenticated)
-
-    def get(self, request):
-        queryset= self.get_queryset()
-        serializers = OrderSerializer(queryset, many=True)
-        return Response(serializers.data)
+@api_view(['POST'])
+@authentication_classes([authentication.TokenAuthentication])
+@permission_classes([permissions.IsAuthenticated])
+def checkout(request):
+    serializer = OrderSerializer(data=request.data)
+    print('in checkout')
+    print('--------------------------------------------------------------')
+    print(request.data)
+    if serializer.is_valid():
+        print('is valid')
+        paid_amount = sum(item.get('quantity') * item.get('product').price for item in serializer.validated_data['items'])
+        try:
+            # charge = 
+            serializer.save(user=request.user, paid_amount=paid_amount)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except Exception: 
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    print('is not valid')
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

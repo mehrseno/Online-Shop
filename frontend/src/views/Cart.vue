@@ -18,8 +18,12 @@
             </tr>
           </thead>
           <tbody>
-            <cart-item v-for="item in cart.items" v-bind:key="item.product.id"
-            v-bind:initialItme="item" v-on:removeFromCart="removeFromCart" />
+            <cart-item
+              v-for="item in cart.items"
+              v-bind:key="item.product.id"
+              v-bind:initialItme="item"
+              v-on:removeFromCart="removeFromCart"
+            />
           </tbody>
         </table>
         <p v-else>You dont have any product in your cart...</p>
@@ -29,16 +33,17 @@
         <strong>{{ cartTotalPrice }}</strong>
         {{ cartTotalLength }} items
         <hr />
-        <router-link to="/cart/checkout" class="is dark"
-          >Proceed to checkout</router-link
-        >
+        <!-- <router-link to="/cart/checkout" class="is dark"
+         >Proceed to checkout</router-link
+        > -->
+        <button @click="checkout">خرید</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { getAPI } from "./../axios-api";
+import axios from 'axios';
 import CartItem from "./../components/CartItem.vue";
 
 export default {
@@ -52,9 +57,42 @@ export default {
     };
   },
   methods: {
-      removeFromCart(item) {
-          this.cart.items = this.cart.items.filter(i => i.product.id !== item.product.id)
+    removeFromCart(item) {
+      this.cart.items = this.cart.items.filter(
+        (i) => i.product.id !== item.product.id
+      );
+    },
+    checkout() {
+      console.log("checkout");
+      const items = [];
+      for (let i = 0; i < this.cart.items.length; i++) {
+        const item = this.cart.items[i];
+        const obj = {
+          product: item.product.id,
+          quantity: item.quantity,
+          price: item.product.price * item.quantity,
+        };
+        items.push(obj);
       }
+      console.log(items)
+      const data = {
+        first_name: "reza2",
+        last_name: "akhgari",
+        email: "mra.akhgari@gmail.com",
+        address: "iran",
+        items: items,
+      };
+
+      console.log(data);
+      axios.post('/api/v1/checkout/', data).then(response => {
+        this.$store.commit('clearCart')
+        this.$router.push('/')
+      }).catch(error => {
+        console.log("error in checkout")
+        console.log(error)
+      })
+
+    },
   },
   mounted() {
     this.cart = this.$store.state.cart;

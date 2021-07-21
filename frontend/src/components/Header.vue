@@ -18,7 +18,7 @@
     >
 
     <div class="left-side">
-      <router-link v-if="!$store.state.isAuthenticated" to="/cart" class="cart">
+      <router-link to="/cart" class="cart">
         <span class="icon"> <i class="fas fa-shopping-cart"></i></span>
         <span> کارت ({{ total }}) </span>
       </router-link>

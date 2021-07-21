@@ -125,8 +125,8 @@ import CustomField from "../components/CustomField.vue";
 import useFormValidation from "@/modules/useFormValidation";
 import Subform from "../components/Subform.vue";
 import Modal from "../components/Modal.vue";
-import { getAPI } from "./../axios-api";
 import { toast } from "bulma-toast";
+import axios from "axios";
 
 export default {
   name: "Register",
@@ -241,10 +241,6 @@ export default {
         JSON.stringify(this.errors) === "{}" &&
         !Object.values(this.full).includes("")
       ) {
-        console.log("register");
-        if (this.user.password == "!Q2w3e4r") {
-          console.log("ramz lo raft");
-        }
         const formData = {
           // firstname: this.user.name,
           // lastname: this.user.lastname,
@@ -252,8 +248,8 @@ export default {
           password: this.user.password,
           // address: this.user.address,
         };
-        console.log(formData);
-        getAPI
+
+        axios
           .post("api/v1/users/", formData)
           .then((response) => {
             toast({
@@ -262,16 +258,21 @@ export default {
               dismissible: true,
               pauseOnHover: true,
               duration: 2000,
-              position: "top-left",
+              position: "top-right",
             });
             this.$router.push("/login");
           })
           .catch((error) => {
-            console.log("error in register");
-            error = [];
             if (error.response) {
               for (const prop in error.response.data) {
-                console.log(prop);
+                toast({
+                  message: error.response.data[prop],
+                  type: "is-success",
+                  dismissible: true,
+                  pauseOnHover: true,
+                  duration: 2000,
+                  position: "top-right",
+                });
               }
             } else if (error.message) {
               console.log(error.message);
