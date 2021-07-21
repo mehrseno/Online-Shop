@@ -286,7 +286,7 @@ export default {
       console.log(activeId);
       var output = this.mainProduct.filter(function(s) {
         return activeId.some(function(t) {
-          return s.category === t;
+          return s.get_category === t;
         });
       });
       console.log(output);
