@@ -26,7 +26,7 @@
       <dropdown
         v-if="$store.state.isAuthenticated"
         class="dropdown"
-        title="هادی"
+        :title="getUsername"
         :items="user_items"
       />
       <RoundButton
@@ -46,6 +46,7 @@ export default {
   name: "Header",
   props: {
     total: Number,
+    name: String,
   },
   data() {
     return {
@@ -60,11 +61,17 @@ export default {
         },
       ],
       isLogin: true,
+      name: this.name,
     };
   },
   components: {
     RoundButton,
     Dropdown,
+  },
+  computed: {
+    getUsername(){
+      return localStorage.getItem('username').split("@")[0];
+    }
   },
   methods: {
     goto(refName) {
