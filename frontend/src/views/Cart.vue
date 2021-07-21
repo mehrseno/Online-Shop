@@ -76,10 +76,10 @@ export default {
       }
       console.log(items)
       const data = {
-        first_name: "reza2",
-        last_name: "akhgari",
-        email: "mra.akhgari@gmail.com",
-        address: "iran",
+        first_name: localStorage.getItem('username').split("@")[0],
+        last_name: localStorage.getItem('username').split("@")[1],
+        email: localStorage.getItem('username'),
+        address: "",
         items: items,
       };
 
