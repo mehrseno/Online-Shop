@@ -44,7 +44,7 @@
     <div class="page__aside">
       <!-- <filter-box /> -->
       <div class="categories card">
-        <data-loader :endpoint="filter_url" @recieveData="getCategories" :authToken="$store.state.token"> 
+        <data-loader :endpoint="filter_url" @recieveData="getCategories"> 
         <div class="card__header categories__header">دسته‌بندی‌ها</div>
         <div
           class="categories__option"
