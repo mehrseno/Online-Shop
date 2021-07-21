@@ -1,5 +1,5 @@
 <template>
-  <slider />
+  <slider @Submit="searchFilter" />
   <!-- <HeroNav /> -->
   <!-- For first phase -->
   <!-- <sort-box /> -->
@@ -15,7 +15,7 @@
     </button>
 
     <a
-      class="sort-box__item sort-box__option sort-box__price"
+      class="sort-box__item sort-box__price"
       :class="{ is_active: price_active }"
       >قیمت</a
     >
@@ -39,13 +39,9 @@
     >
       تاریخ ایجاد
     </button>
-    <!-- <a href="#" class="sort-box__item sort-box__option is_active"
-      >بیشترین فروش</a
-    >
-    <a href="#" class="sort-box__item sort-box__option">قیمت</a> -->
   </div>
   <div class="page">
-    <div class="page__aside">
+  <div class="page__aside">
       <!-- <filter-box /> -->
       <div class="categories card">
         <data-loader :endpoint="filter_url" @recieveData="getFilter">
@@ -60,26 +56,27 @@
               type="checkbox"
               :name="category"
               :id="category.id"
-              @click="setFilter(category.id)"
+              @click="categoryFilter(category.id)"
             />
             <label :for="category.id">{{ category.title }}</label>
           </div>
-
-          <!-- <div class="categories__option">
-            <input
-              type="checkbox"
-              name="category"
-              value="1"
-              checked="checked"
-              id="category_id_1"
-            /> -->
-          <!-- <label for="category_id_1">گزینه‌ی اول</label> -->
-          <!-- </div> -->
         </data-loader>
       </div>
-      <slider-box />
+      <slider-box @change="getPrice" />
+      <button @click="priceFilter()" class="price-range__button">
+        اعمال محدوده قیمت
+      </button>
     </div>
-    <div class="page_content" id="page_content">
+    <div v-if="!hasContent" class="page-empty__content">
+      <p>{{ notFound.title }}</p>
+      <SubmitButton
+        @show="back"
+        submit="بازگشت"
+        type="button"
+        class="search-wrapper__submit"
+      />
+    </div>
+    <div class="page_content" id="page_content" v-if="hasContent">
       <data-loader :endpoint="url" @recieveData="getdata">
         {{ Products }}
         <pagination-bar
@@ -101,6 +98,7 @@
         </pagination-bar>
       </data-loader>
     </div>
+  
   </div>
 </template>
 
@@ -115,6 +113,7 @@ import Products from "../components/Products.vue";
 import Product from "../components/Product.vue";
 import DataLoader from "../components/DataLoader.vue";
 import PaginationBar from "../components/PaginationBar.vue";
+import SubmitButton from "../components/SubmitButton.vue";
 export default {
   name: "Home",
   components: {
@@ -128,27 +127,29 @@ export default {
     HeroNav,
     // SortBox,
     Slider,
+    SubmitButton,
     // Maincontainer,
   },
   data() {
     return {
+      searchInput: "",
       products: [],
       filters: [],
       mainProduct: [],
-      filterProduct: [],
-      count: 0,
-      oldProduct: [],
       activeId: [],
-      url: "http://localhost:8000/api/products/",
-      // url: "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount",
+      priceRange: [],
+      name: "",
+      notFound: [{ title: "" }],
+      url: "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount",
       filter_url:
         "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/categories",
-        // "http://localhost:8000/api/filters-categories/",
+      // "http://localhost:8000/api/filters-categories/",
       p: [],
       srt: [],
       price_active: false,
       count_active: false,
       date_active: false,
+      hasContent: true,
     };
   },
   watch: {
@@ -160,13 +161,20 @@ export default {
     showDetail(product) {
       console.log("show data");
       console.log(product);
-      this.$router.push(product.get_absolute_url)
+      this.$router.push(product.get_absolute_url);
     },
+    back() {
+      this.hasContent = true;
+    },
+
     getdata(data) {
       this.products = data;
       this.mainProduct = data;
       this.sortbyCount();
+      console.log(this.mainProduct);
     },
+
+    //set filter list and "active" property for each object
     getFilter(data) {
       this.filters = data;
       this.filters.forEach(function(element) {
@@ -174,6 +182,13 @@ export default {
       });
       console.log(this.filters);
     },
+
+    //set price range, Default Range is [0,500]
+    getPrice(data) {
+      this.priceRange = data;
+    },
+
+    //Sort products with "Most sales" filter, Product display is in descending order
     sortbyCount() {
       this.updatedActive();
       this.count_active = true;
@@ -184,10 +199,11 @@ export default {
         return a.sold_count > b.sold_count ? -1 : 1;
       });
     },
+
+    //Sort products with "Price" filter, Product display is in descending  and Ascending order
     sortbyPrice(priceDirection) {
       this.updatedActive();
       this.price_active = true;
-      console.log(priceDirection);
       let modifier = 1;
       if (priceDirection === "desc") {
         modifier = -1;
@@ -199,6 +215,8 @@ export default {
         return a.price > b.price ? 1 * modifier : -1 * modifier;
       });
     },
+
+    //Sort products with "Creat date" filter, Product display is in Ascending order
     sortbyDate() {
       this.updatedActive();
       this.date_active = true;
@@ -213,7 +231,8 @@ export default {
       this.date_active = false;
     },
 
-    setFilter(c_id) {
+    //Filter products with "Category" filters
+    categoryFilter(c_id) {
       this.filters.forEach(function(element) {
         if (element.id === c_id) {
           element.active === "false"
@@ -245,6 +264,41 @@ export default {
       activeId.length === 0
         ? (this.products = this.mainProduct)
         : (this.products = output);
+    },
+
+    //filter products with "Serch box" filter
+    searchFilter(input) {
+      this.searchInput = input;
+      var output = this.mainProduct.filter(function(s) {
+        return s.name.includes(input);
+      });
+
+      if (output.length === 0) {
+        this.hasContent = false;
+        this.products = this.notFound.title = `
+        جستجو برای عبارت « ${input} » با هیچ کالایی هم‌خوانی نداشت
+        `;
+      } else {
+        this.products = output;
+      }
+    },
+
+    //Filter products with "Price range" filter, Product display is in Ascending order
+    priceFilter() {
+      console.log(this.priceRange);
+      let min, max;
+      min = this.priceRange[0];
+      max = this.priceRange[1];
+      let output = this.mainProduct.filter(function(x) {
+        return x.price >= min && x.price <= max;
+      });
+      if (output.length === 0) {
+        this.hasContent = false;
+        this.products = this.notFound.title =
+          " کالایی با این محدوده قیمت موجود نمی‌باشد";
+      } else {
+        this.products = output;
+      }
     },
   },
 };
@@ -384,5 +438,37 @@ export default {
   margin: 15px;
   display: grid;
   grid-gap: 15px;
+}
+
+.page-empty__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  gap: 50px;
+}
+.page-empty__content p {
+  font-size: 30px;
+}
+.search-wrapper__submit {
+  border-radius: 24px;
+  width: 150px;
+  height: 50px;
+  align-self: center;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+}
+/* ________________________________________________ */
+.price-range__button {
+  width: 300px;
+  height: 50px;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  color: rgb(65, 184, 131);
+  font-weight: bold;
 }
 </style>

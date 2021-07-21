@@ -17,11 +17,13 @@
           type="text"
           class="search-wrapper__input"
           placeholder="نام محصول خود را وارد کنید..."
+          v-model="input"
         />
         <SubmitButton
           type="button"
           class="search-wrapper__submit"
           submit="جستجو کنید"
+          @show="Submit"
         />
       </form>
     </div>
@@ -35,6 +37,7 @@ export default {
   name: "Slider",
   data() {
     return {
+      input: "",
       images: [
         // "Slideshare1.png",
         // "clock.png",
@@ -48,29 +51,32 @@ export default {
     };
   },
   components: { SubmitButton },
-  mounted: function() {
+  mounted: function () {
     this.startSlide();
   },
 
   methods: {
-    startSlide: function() {
+    startSlide: function () {
       this.timer = setInterval(this.next, 10000);
     },
 
-    next: function() {
+    next: function () {
       this.currentIndex += 1;
       clearInterval(this.timer);
       this.startSlide();
     },
-    prev: function() {
+    prev: function () {
       clearInterval(this.timer);
       this.currentIndex -= 1;
       this.startSlide();
     },
+    Submit() {
+      this.$emit("Submit", this.input);
+    },
   },
 
   computed: {
-    currentImg: function() {
+    currentImg: function () {
       return this.images[Math.abs(this.currentIndex) % this.images.length];
     },
   },
