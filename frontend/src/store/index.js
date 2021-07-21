@@ -7,8 +7,10 @@ export default createStore({
         cart: {
             items: [],
         },
-        accessToken: null,
-        refreshToken: null,
+        token: {
+            accessToken: null,
+            refreshToken: null,
+        },
         user: {
             name: "",
             lastname: "",
@@ -24,6 +26,13 @@ export default createStore({
                 localStorage.setItem('cart', JSON.stringify(state.cart))
             }
         },
+        initializeToken(state) {
+            if (localStorage.getItem('token')) {
+                state.token = JSON.parse(localStorage.getItem('token'))
+            } else {
+                localStorage.setItem('token', JSON.stringify(state.token))
+            }
+        },
         addToCart(state, item) {
             const exists = state.cart.items.filter(i => i.product.id === item.product.id)
             if (exists.length) {
@@ -35,12 +44,17 @@ export default createStore({
             localStorage.setItem('cart', JSON.stringify(state.cart))
         },
         updateStorage(state, { access, refresh }) {
-            state.accessToken = access
-            state.refreshToken = refresh
+            state.token.accessToken = access
+            state.token.refreshToken = refresh
+            localStorage.setItem('token', JSON.stringify(state.token))
+            // localStorage.setItem('accessToken', state.accessToken)
+            // localStorage.setItem('refreshToken', state.refreshToken)
         },
         destroyToken(state) {
-            state.accessToken = null
-            state.refreshToken = null
+            state.token.accessToken = null
+            state.token.refreshToken = null
+            // localStorage.setItem('accessToken', state.accessToken)
+            // localStorage.setItem('refreshToken', state.refreshToken)
         },
         updateUser(state, { user }) {
             state.user = user
@@ -48,7 +62,11 @@ export default createStore({
     },
     getters: {
         loggedIn(state) {
-            return state.accessToken != null;
+            // state.accessToken = localStorage.getItem('accessToken')
+            // state.token = JSON.parse(localStorage.getItem('token'))
+            // console.log(state.token)
+            // console.log(state.token.accessToken !== null)
+            return state.token.accessToken !== null;
         }
     },
     actions: {
@@ -66,6 +84,7 @@ export default createStore({
                     password: userCredentials.password
                 }).then(response => {
                     context.commit('updateStorage', { access: response.data.access, refresh: response.data.refresh })
+                    console.log('saved the token')
                     resolve()
                 })
             })

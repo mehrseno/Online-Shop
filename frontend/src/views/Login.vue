@@ -173,6 +173,8 @@ export default {
         })
         .then(() => {
           this.$router.push({ name: "UserProfile" });
+          console.log(this.$store.state.accessToken)
+          console.log(this.$store.getters.loggedIn)
         })
         .catch((err) => {
           console.log("error in login");

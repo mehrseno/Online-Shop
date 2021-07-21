@@ -33,6 +33,7 @@ export default {
   beforeCreate() {
     console.log("beforeCreate")
     this.$store.commit('initializeStore')
+    this.$store.commit('initializeToken')
   }, 
   computed: {
     cartTotalLength() {
