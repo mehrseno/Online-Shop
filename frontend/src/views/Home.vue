@@ -1,5 +1,5 @@
 <template>
-  <slider />
+  <slider @Submit="search" />
   <!-- <HeroNav /> -->
   <!-- For first phase -->
   <!-- <sort-box /> -->
@@ -39,10 +39,6 @@
     >
       تاریخ ایجاد
     </button>
-    <!-- <a href="#" class="sort-box__item sort-box__option is_active"
-      >بیشترین فروش</a
-    >
-    <a href="#" class="sort-box__item sort-box__option">قیمت</a> -->
   </div>
   <div class="page">
     <div class="page__aside">
@@ -64,22 +60,20 @@
             />
             <label :for="category.id">{{ category.title }}</label>
           </div>
-
-          <!-- <div class="categories__option">
-            <input
-              type="checkbox"
-              name="category"
-              value="1"
-              checked="checked"
-              id="category_id_1"
-            /> -->
-          <!-- <label for="category_id_1">گزینه‌ی اول</label> -->
-          <!-- </div> -->
         </data-loader>
       </div>
       <slider-box />
     </div>
-    <div class="page_content" id="page_content">
+    <div v-if="!hasContent" class="page-empty__content">
+      <p>{{ notFound.title }}</p>
+      <SubmitButton
+        @show="back"
+        submit="بازگشت"
+        type="button"
+        class="search-wrapper__submit"
+      />
+    </div>
+    <div class="page_content" id="page_content" v-if="hasContent">
       <data-loader :endpoint="url" @recieveData="getdata">
         {{ Products }}
         <pagination-bar
@@ -114,6 +108,7 @@ import Products from "../components/Products.vue";
 import Product from "../components/Product.vue";
 import DataLoader from "../components/DataLoader.vue";
 import PaginationBar from "../components/PaginationBar.vue";
+import SubmitButton from "../components/SubmitButton.vue";
 export default {
   name: "Home",
   components: {
@@ -127,10 +122,12 @@ export default {
     HeroNav,
     // SortBox,
     Slider,
+    SubmitButton,
     // Maincontainer,
   },
   data() {
     return {
+      searchInput: "",
       products: [],
       filters: [],
       mainProduct: [],
@@ -138,6 +135,8 @@ export default {
       count: 0,
       oldProduct: [],
       activeId: [],
+      name: "",
+      notFound: [{ title: "" }],
       url: "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/product_amount",
       filter_url:
         "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/categories",
@@ -147,6 +146,7 @@ export default {
       price_active: false,
       count_active: false,
       date_active: false,
+      hasContent: true,
     };
   },
   watch: {
@@ -155,10 +155,29 @@ export default {
     },
   },
   methods: {
+    back() {
+      this.hasContent = true;
+    },
+    search(input) {
+      this.searchInput = input;
+      var output = this.mainProduct.filter(function (s) {
+        return s.name === input;
+      });
+
+      if (output.length === 0) {
+        this.hasContent = false;
+        this.products = this.notFound.title = `
+        جستجو برای عبارت « ${input} » با هیچ کالایی هم‌خوانی نداشت
+        `;
+      } else {
+        this.products = output;
+      }
+    },
     getdata(data) {
       this.products = data;
       this.mainProduct = data;
       this.sortbyCount();
+      console.log(this.mainProduct);
     },
     getFilter(data) {
       this.filters = data;
@@ -196,8 +215,8 @@ export default {
       this.updatedActive();
       this.date_active = true;
       this.products.sort((a, b) => {
-        return a.created_date > b.created_date? -1 : 1;}
-        );
+        return a.created_date > b.created_date ? -1 : 1;
+      });
     },
 
     updatedActive() {
@@ -372,11 +391,32 @@ export default {
 }
 
 .page_content {
-
   scroll-margin-top: 100px;
-    flex-basis: 75%;
+  flex-basis: 75%;
   margin: 15px;
   display: grid;
   grid-gap: 15px;
+}
+
+.page-empty__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  gap: 50px;
+}
+.page-empty__content p {
+  font-size: 30px;
+}
+.search-wrapper__submit {
+  border-radius: 24px;
+  width: 150px;
+  height: 50px;
+  align-self: center;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
 }
 </style>
