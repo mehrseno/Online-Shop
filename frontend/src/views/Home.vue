@@ -44,7 +44,7 @@
     <div class="page__aside">
       <!-- <filter-box /> -->
       <div class="categories card">
-        <!-- <data-loader :endpoint="filter_url" @recieveData="getFilter"> -->
+        <data-loader :endpoint="filter_url" @recieveData="getCategories"> 
         <div class="card__header categories__header">دسته‌بندی‌ها</div>
         <div
           class="categories__option"
@@ -60,7 +60,7 @@
           />
           <label :for="category.id">{{ category.title }}</label>
         </div>
-        <!-- </data-loader> -->
+        </data-loader>
       </div>
       <slider-box @change="getPrice" />
       <button @click="priceFilter()" class="price-range__button">
@@ -77,12 +77,11 @@
       />
     </div>
     <div class="page_content" id="page_content" v-if="hasContent">
-      <!-- <data-loader :endpoint="url" @recieveData="getdata"> -->
+      <data-loader :endpoint="url" @recieveData="getproducts" :authToken="$store.state.token">
       {{ Products }}
       <pagination-bar
         :items="products"
         :totalItems="products.length"
-        @pagecreated="pagationItems"
       >
         <template #data="{ paginatedItems }">
           <div class="products">
@@ -96,7 +95,7 @@
           </div>
         </template>
       </pagination-bar>
-      <!-- </data-loader> -->
+      </data-loader>
     </div>
   </div>
 </template>
@@ -114,6 +113,8 @@ import DataLoader from "../components/DataLoader.vue";
 import PaginationBar from "../components/PaginationBar.vue";
 import SubmitButton from "../components/SubmitButton.vue";
 import axios from "axios";
+import Spinner from "@/components/Spinner.vue";
+
 export default {
   name: "Home",
   components: {
@@ -124,6 +125,7 @@ export default {
     Product,
     DataLoader,
     s: Function,
+    Spinner,
     HeroNav,
     // SortBox,
     Slider,
@@ -144,7 +146,7 @@ export default {
       url: "http://localhost:8000/api/v1/products/",
       filter_url:
         // "https://60ed9597a78dc700178adfea.mockapi.io/api/v1/categories",
-      "http://localhost:8000/api/v1/filters-categories/",
+        "http://localhost:8000/api/v1/filters-categories/",
       p: [],
       srt: [],
       price_active: false,
@@ -159,8 +161,8 @@ export default {
     },
   },
   mounted() {
-    this.getproducts();
-    this.getCategories();
+    // this.getproducts();
+    // this.getCategories();
   },
   methods: {
     showDetail(product) {
@@ -171,13 +173,14 @@ export default {
     back() {
       this.hasContent = true;
     },
-    getproducts() {
+    async getproducts() {
       // delete axios.defaults.headers.common["Authorization"];
 
       // this.products = data;
       // this.mainProduct = data;
       // this.sortbyCount();
-      axios
+      // this.$store.commit("setIsLoading", true);
+      await axios
         .get("/api/v1/products/")
         .then((response) => {
           console.log();
@@ -189,6 +192,7 @@ export default {
         .catch((error) => {
           console.log("error in get products");
         });
+      this.$store.commit("setIsLoading", false);
     },
 
     //set filter list and "active" property for each object
@@ -282,7 +286,7 @@ export default {
       console.log(activeId);
       var output = this.mainProduct.filter(function(s) {
         return activeId.some(function(t) {
-          return s.category === t;
+          return s.get_category === t;
         });
       });
       console.log(output);

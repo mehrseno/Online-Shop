@@ -5,6 +5,13 @@
     type="text/css"
   />
 
+  <div
+    class="is-loading-bar has-text-centered"
+    :class="{ 'is-loading': $store.state.isLoading }"
+  >
+    <div class="lds-dual-ring"></div>
+  </div>
+
   <div class="container">
     <Header :total="cartTotalLength" />
     <router-view></router-view>
@@ -15,8 +22,8 @@
 <script>
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import axios from 'axios';
-import store from './store';
+import axios from "axios";
+import store from "./store";
 
 export default {
   name: "App",
@@ -27,43 +34,81 @@ export default {
   data() {
     return {
       cart: {
-        items: []
+        items: [],
       },
-      token: '',
+      token: "",
       cartTotalLength: Number,
-    }
+    };
   },
   beforeCreate() {
-    console.log("beforeCreate")
-    this.$store.commit('initializeStore')
-    this.$store.commit('initializeToken')
-    const token = this.$store.state.token
-    if(token) {
-      axios.defaults.headers.common['Authorization'] = 'Token ' + token
+    console.log("beforeCreate");
+    this.$store.commit("initializeStore");
+    this.$store.commit("initializeToken");
+    const token = this.$store.state.token;
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = "Token " + token;
     } else {
-      axios.defaults.headers.common['Authorization'] = ''
+      axios.defaults.headers.common["Authorization"] = "";
     }
   },
   computed: {
     cartTotalLength() {
-      console.log('cartTotalLength')
-      let totalLength = 0
-      for (let i = 0; i< this.cart.items.length; i++){
-        totalLength += this.cart.items[i].quantity
+      console.log("cartTotalLength");
+      let totalLength = 0;
+      for (let i = 0; i < this.cart.items.length; i++) {
+        totalLength += this.cart.items[i].quantity;
       }
-      console.log(`totalLength`)
-      return totalLength
-    }
+      console.log(`totalLength`);
+      return totalLength;
+    },
   },
   mounted() {
-    console.log("in mounteed")
-    this.cart = this.$store.state.cart
+    console.log("in mounteed");
+    this.cart = this.$store.state.cart;
   },
 };
 </script>
 
 <style>
 @import "./assets/styles/variable.css";
+
+.lds-dual-ring{
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #ccc;
+  border-color: #ccc transparent #ccc transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100%{
+    transform: rotate(360deg);
+  }
+}
+
+.is-loading-bar {
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  /* &.is-loading {
+    height: 80px;
+  } */
+}
 
 * {
   margin: 0;
