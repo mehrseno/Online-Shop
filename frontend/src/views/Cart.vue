@@ -79,7 +79,7 @@ export default {
         first_name: localStorage.getItem('username').split("@")[0],
         last_name: localStorage.getItem('username').split("@")[1],
         email: localStorage.getItem('username'),
-        address: "",
+        address: "iran",
         items: items,
       };
 

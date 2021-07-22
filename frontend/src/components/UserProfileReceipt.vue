@@ -36,6 +36,7 @@ export default {
   },
   methods: {
     getMyOrders() {
+      console.log("in get my orders");
       // this.rows = [];
       this.items = [];
       axios
@@ -54,7 +55,7 @@ export default {
   },
   data() {
     return {
-      data: Object,
+      items: this.items,
     };
   },
 };
